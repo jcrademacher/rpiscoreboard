@@ -174,37 +174,37 @@ def fancyFlash(path, tags, args, source):
     for i in range(0,5):
         b.on(b.HOME_BOTTOM_LEFT)
         b.on(b.AWAY_BOTTOM_LEFT)
-        time.sleep(100)
+        time.sleep(0.1)
         b.off(b.HOME_BOTTOM_LEFT)
         b.off(b.AWAY_BOTTOM_LEFT)
 
         b.on(b.HOME_TOP_LEFT)
         b.on(b.AWAY_TOP_LEFT)
-        time.sleep(100)
+        time.sleep(0.1)
         b.off(b.HOME_TOP_LEFT)
         b.off(b.AWAY_TOP_LEFT)
 
         b.on(b.HOME_TOP)
         b.on(b.AWAY_TOP)
-        time.sleep(100)
+        time.sleep(0.1)
         b.off(b.HOME_TOP)
         b.off(b.AWAY_TOP)
 
         b.on(b.HOME_TOP_RIGHT)
         b.on(b.AWAY_TOP_RIGHT)
-        time.sleep(100)
+        time.sleep(0.1)
         b.off(b.HOME_TOP_RIGHT)
         b.off(b.AWAY_TOP_RIGHT)
 
         b.on(b.HOME_BOTTOM_RIGHT)
         b.on(b.AWAY_BOTTOM_RIGHT)
-        time.sleep(100)
+        time.sleep(0.1)
         b.off(b.HOME_BOTTOM_RIGHT)
         b.off(b.AWAY_BOTTOM_RIGHT)
 
         b.on(b.HOME_BOTTOM)
         b.on(b.AWAY_BOTTOM)
-        time.sleep(100)
+        time.sleep(0.1)
         b.off(b.HOME_BOTTOM)
         b.off(b.AWAY_BOTTOM)
 
