@@ -208,7 +208,7 @@ while True:
     m = time.localtime()[4]
     
     if h > 12:
-	h = 12 - h	
+	h -= 12	
 
     x += 1
     if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
