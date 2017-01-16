@@ -169,48 +169,51 @@ def blueHandler(path, tags, args, source):
 
 #Fancy display stuff################################################################################
 def fancyFlash(path, tags, args, source):
-    b.homeOff()
-    b.awayOff()
-    for i in range(0,5):
-        b.on(b.HOME_BOTTOM_LEFT)
-        b.on(b.AWAY_BOTTOM_LEFT)
-        time.sleep(0.1)
-        b.off(b.HOME_BOTTOM_LEFT)
-        b.off(b.AWAY_BOTTOM_LEFT)
+    state=int(args[0])
 
-        b.on(b.HOME_TOP_LEFT)
-        b.on(b.AWAY_TOP_LEFT)
-        time.sleep(0.1)
-        b.off(b.HOME_TOP_LEFT)
-        b.off(b.AWAY_TOP_LEFT)
+    if state == 1:
+        b.homeOff()
+        b.awayOff()
+        for i in range(0,5):
+            b.on(b.HOME_BOTTOM_LEFT)
+            b.on(b.AWAY_BOTTOM_LEFT)
+            time.sleep(0.1)
+            b.off(b.HOME_BOTTOM_LEFT)
+            b.off(b.AWAY_BOTTOM_LEFT)
 
-        b.on(b.HOME_TOP)
-        b.on(b.AWAY_TOP)
-        time.sleep(0.1)
-        b.off(b.HOME_TOP)
-        b.off(b.AWAY_TOP)
+            b.on(b.HOME_TOP_LEFT)
+            b.on(b.AWAY_TOP_LEFT)
+            time.sleep(0.1)
+            b.off(b.HOME_TOP_LEFT)
+            b.off(b.AWAY_TOP_LEFT)
 
-        b.on(b.HOME_TOP_RIGHT)
-        b.on(b.AWAY_TOP_RIGHT)
-        time.sleep(0.1)
-        b.off(b.HOME_TOP_RIGHT)
-        b.off(b.AWAY_TOP_RIGHT)
+            b.on(b.HOME_TOP)
+            b.on(b.AWAY_TOP)
+            time.sleep(0.1)
+            b.off(b.HOME_TOP)
+            b.off(b.AWAY_TOP)
 
-        b.on(b.HOME_BOTTOM_RIGHT)
-        b.on(b.AWAY_BOTTOM_RIGHT)
-        time.sleep(0.1)
-        b.off(b.HOME_BOTTOM_RIGHT)
-        b.off(b.AWAY_BOTTOM_RIGHT)
+            b.on(b.HOME_TOP_RIGHT)
+            b.on(b.AWAY_TOP_RIGHT)
+            time.sleep(0.1)
+            b.off(b.HOME_TOP_RIGHT)
+            b.off(b.AWAY_TOP_RIGHT)
 
-        b.on(b.HOME_BOTTOM)
-        b.on(b.AWAY_BOTTOM)
-        time.sleep(0.1)
-        b.off(b.HOME_BOTTOM)
-        b.off(b.AWAY_BOTTOM)
+            b.on(b.HOME_BOTTOM_RIGHT)
+            b.on(b.AWAY_BOTTOM_RIGHT)
+            time.sleep(0.1)
+            b.off(b.HOME_BOTTOM_RIGHT)
+            b.off(b.AWAY_BOTTOM_RIGHT)
 
-    #resets score
-    b.showNum(b.homeScore, 0)
-    b.showNum(b.awayScore, 1)
+            b.on(b.HOME_BOTTOM)
+            b.on(b.AWAY_BOTTOM)
+            time.sleep(0.1)
+            b.off(b.HOME_BOTTOM)
+            b.off(b.AWAY_BOTTOM)
+
+        #resets score
+        b.showNum(b.homeScore, 0)
+        b.showNum(b.awayScore, 1)
 
 #These are all the add-ons that you can name in the TouchOSC layout designer (you can set the values and directories)
 server.addMsgHandler("/homeAdd", homeAddHandler)
