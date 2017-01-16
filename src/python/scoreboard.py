@@ -169,7 +169,7 @@ def blueHandler(path, tags, args, source):
 
 #Fancy display stuff################################################################################
 def fancyFlash():
-    for(i in range(0,10)):
+    for i in range(0,10):
         print i
 
 #These are all the add-ons that you can name in the TouchOSC layout designer (you can set the values and directories)
