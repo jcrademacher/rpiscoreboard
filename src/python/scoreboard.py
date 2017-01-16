@@ -207,6 +207,9 @@ while True:
     h = time.localtime()[3]
     m = time.localtime()[4]
     
+    if h > 12:
+	h = 12 - h	
+
     x += 1
     if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
         b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
