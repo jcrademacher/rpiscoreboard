@@ -19,19 +19,19 @@ b.showNum(0,1)
 serverAddr = ("10.0.1.83",8000)
 #This has to be the IP of the RaspberryPi on the network
 server = OSCServer(serverAddr)
-        
+
 def handle_timeout(self):
     '''print ("I'm IDLE")'''
 
 #This here is just to do something while the script recieves no information....
 server.handle_timeout = types.MethodType(handle_timeout, server)
-        
+
 # BUTTONS
 ########################################################################################################################################
 def homeAddHandler(path, tags, args, source):
     state=int(args[0])
     b.changeHome(state, "add")
-                
+
 def homeMinusHandler(path, tags, args, source):
     state=int(args[0])
     b.changeHome(state, "minus")
@@ -39,7 +39,7 @@ def homeMinusHandler(path, tags, args, source):
 def awayAddHandler(path, tags, args, source):
     state=int(args[0])
     b.changeAway(state, "add")
-                
+
 def awayMinusHandler(path, tags, args, source):
     state=int(args[0])
     b.changeAway(state, "minus")
@@ -155,7 +155,7 @@ def setTimerMode(path,tags,args,source):
     if state == 1:
         b.clockMode = "timer"
         b.serialWrite('C',chr(1));
-    
+
 #FADERS
 #################################################################################
 def redHandler(path, tags, args, source):
@@ -167,7 +167,11 @@ def greenHandler(path, tags, args, source):
 def blueHandler(path, tags, args, source):
     b.blueVal=int(args[0])
 
-################################################################################             
+#Fancy display stuff################################################################################
+def fancyFlash():
+    for(i in range(0,10)):
+        print i
+
 #These are all the add-ons that you can name in the TouchOSC layout designer (you can set the values and directories)
 server.addMsgHandler("/homeAdd", homeAddHandler)
 server.addMsgHandler("/homeMinus", homeMinusHandler)
@@ -194,6 +198,8 @@ server.addMsgHandler("/startstop", startStopTimer)
 server.addMsgHandler("/clock", setClockMode)
 server.addMsgHandler("/timer", setTimerMode)
 
+server.addMsgHandler("/displays/1/1", fancyFlash)
+
 #The way that the MSG Handlers work is by taking the values from set accessory, then it puts them into a function
 #The function then takes the values and separates them according to their class (args, source, path, and tags)
 
@@ -206,9 +212,9 @@ while True:
 
     h = time.localtime()[3]
     m = time.localtime()[4]
-    
+
     if h > 12:
-	h -= 12	
+	h -= 12
 
     x += 1
     if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
