@@ -208,6 +208,9 @@ def fancyFlash(path, tags, args, source):
         b.off(b.HOME_BOTTOM)
         b.off(b.AWAY_BOTTOM)
 
+    #resets score
+    b.showNum(b.homeScore, 0)
+    b.showNum(b.awayScore, 1)
 
 #These are all the add-ons that you can name in the TouchOSC layout designer (you can set the values and directories)
 server.addMsgHandler("/homeAdd", homeAddHandler)
