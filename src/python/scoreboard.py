@@ -170,6 +170,7 @@ def blueHandler(path, tags, args, source):
 #Fancy display stuff################################################################################
 def fancyFlash(path, tags, args, source):
     state=int(args[0])
+    print state
 
     if state == 1:
         b.homeOff()
