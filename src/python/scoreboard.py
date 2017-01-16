@@ -169,6 +169,8 @@ def blueHandler(path, tags, args, source):
 
 #Fancy display stuff################################################################################
 def fancyFlash(path, tags, args, source):
+    b.homeOff()
+    b.awayOff()
     for i in range(0,5):
         b.on(b.HOME_BOTTOM_LEFT)
         b.on(b.AWAY_BOTTOM_LEFT)
