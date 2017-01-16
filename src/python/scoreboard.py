@@ -168,7 +168,7 @@ def blueHandler(path, tags, args, source):
     b.blueVal=int(args[0])
 
 #Fancy display stuff################################################################################
-def fancyFlash():
+def fancyFlash(path, tags, args, source):
     for i in range(0,10):
         print i
 
