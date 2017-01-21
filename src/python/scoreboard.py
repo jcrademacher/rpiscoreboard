@@ -148,7 +148,10 @@ def setClockMode(path,tags,args,source):
         b.timerRunning = False
         b.clockMode = "clock"
         b.serialWrite('C',chr(0))
-        b.serialWrite('H',chr(time.localtime()[3]),'M',chr(time.localtime()[4]),'S',chr(0))
+	h = time.localtime()[3]
+	if h > 12:
+	    h -= 12
+        b.serialWrite('H',chr(h),'M',chr(time.localtime()[4]),'S',chr(0))
 
 def setTimerMode(path,tags,args,source):
     state=int(args[0])
