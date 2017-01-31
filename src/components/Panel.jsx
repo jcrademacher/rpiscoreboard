@@ -45,16 +45,18 @@ const Panel = React.createClass({
     if(this.props.selectedPanel == "control") {
       return (
         <div>
-          <RadioButtonGroup
-            defaultSelected="clock"
-            style={{textAlign: "left", padding: 8}}
-            onChange={this.handleRadioButton}
-            >
-            <RadioButton label="Clock Mode" value="clock"/>
-            <RadioButton label="Timer Mode" value="timer"/>
-          </RadioButtonGroup>
           <div style={{fontSize: 80}}>
-            <span>{curTime}</span>
+            <span>
+              <RadioButtonGroup
+              defaultSelected="clock"
+              style={{textAlign: "left", padding: 8, fontSize: 14}}
+              onChange={this.handleRadioButton}
+              >
+                <RadioButton label="Clock Mode" value="clock"/>
+                <RadioButton label="Timer Mode" value="timer"/>
+              </RadioButtonGroup>
+              {curTime}
+            </span>
             <br/>
             <span style={{marginRight: 600}}>0</span>
             <span>0</span>
