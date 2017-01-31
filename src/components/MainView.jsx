@@ -9,7 +9,7 @@ import Panel from "./Panel.jsx"
 const MainView = React.createClass({
 
   getInitialState: function() {
-    return {tabIndex: 0}
+    return {tabIndex: 1}
   },
 
   render: function() {
@@ -24,7 +24,7 @@ const MainView = React.createClass({
     return (<div style={{textAlign: "center"}}>
       <Paper zDepth={1}>
         <div>
-          <BottomNavigation selectedIndex={this.state.tabIndex}>
+          <BottomNavigation style={{backgroundColor: "#f2f2f2"}} selectedIndex={this.state.tabIndex}>
             <BottomNavigationItem
               label="View Stats"
               icon={<StatsIcon/>}

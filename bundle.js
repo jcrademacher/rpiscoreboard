@@ -19847,9 +19847,13 @@
 	var Title = _react2.default.createClass({
 	  displayName: 'Title',
 	  render: function render() {
+	    var style = {
+	      textAlign: "center"
+	    };
+
 	    return _react2.default.createElement(
 	      'div',
-	      { style: { textAlign: "center" } },
+	      { style: style },
 	      _react2.default.createElement(
 	        'h1',
 	        null,

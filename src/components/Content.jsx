@@ -4,7 +4,7 @@ const Content = React.createClass({
   render() {
     var style = {
       fontFamily: "Roboto",
-      fontWeight: '700',
+      fontWeight: '300',
       color: "#3a3a3a",
     };
 
