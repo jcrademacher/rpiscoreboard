@@ -42,10 +42,27 @@ const Panel = React.createClass({
   render: function() {
     var curTime = this.getTime();
 
+		var styles = {
+			clock: {
+				fontSize: 80,
+				align: "center",
+				width: "100%"
+			},
+
+			table: {
+				textAlign: "center"
+			},
+
+			score: {
+				align: "left",
+				fontSize: 80
+			}
+		}
+
     if(this.props.selectedPanel == "control") {
       return (
         <div>
-          <div style={{fontSize: 80}}>
+          <div>
             <span>
               <RadioButtonGroup
               defaultSelected="clock"
@@ -55,11 +72,18 @@ const Panel = React.createClass({
                 <RadioButton label="Clock Mode" value="clock"/>
                 <RadioButton label="Timer Mode" value="timer"/>
               </RadioButtonGroup>
-              {curTime}
             </span>
-            <br/>
-            <span style={{marginRight: 600}}>0</span>
-            <span>0</span>
+						<div>
+							<table style={styles.table}>
+								<tr>
+									<td style={styles.clock}>{curTime}</td>
+								</tr>
+								<tr>
+									<td style={styles.score}>0</td>
+									<td style={styles.score}>0</td>
+		            </tr>
+							</table>
+						</div>
           </div>
         </div>
       );
