@@ -1,4 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+import socket;
 
 #This class will handles any incoming request from
 #the browser
@@ -30,7 +31,11 @@ class myHandler(BaseHTTPRequestHandler):
 try:
 	#Create a web server and define the handler to manage the
 	#incoming request
-	server = HTTPServer(('10.0.1.83', 8000), myHandler)
+	ip = socket.gethostbyname(socket.gethostname())
+
+	print "ip: " + ip
+
+	server = HTTPServer((ip, 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
