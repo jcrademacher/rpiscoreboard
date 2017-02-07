@@ -222,6 +222,12 @@ class myHandler(BaseHTTPRequestHandler):
 
 		if self.path == "/control/home-up":
 			homeAddHandler();
+		if self.path == "/control/home-down":
+			homeMinusHandler();
+		if self.path == "/control/away-up":
+			awayAddHandler();
+		if self.path == "/control/away-down":
+			awayMinusHandler();
 
 
 try:
