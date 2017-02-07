@@ -6,7 +6,19 @@ import time
 import types
 import os
 import serial
+import require
+
+board = require("./src/python/board.py")
+
 from board import Board
+
+b = Board(0,0)
+
+b.homeOff()
+b.awayOff()
+
+b.showNum(0,0)
+b.showNum(0,1)
 
 # BUTTONS
 ########################################################################################################################################
