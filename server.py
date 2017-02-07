@@ -35,7 +35,7 @@ try:
 
 	print "ip: " + ip
 
-	server = HTTPServer((ip, 8000), myHandler)
+	server = HTTPServer(("10.0.1.83", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
