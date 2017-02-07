@@ -10,9 +10,7 @@ import require
 
 board = require("./src/python/board.py")
 
-from board import Board
-
-b = Board(0,0)
+b = board.Board(0,0)
 
 b.homeOff()
 b.awayOff()
