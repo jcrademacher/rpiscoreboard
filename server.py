@@ -14,7 +14,7 @@ class myHandler(BaseHTTPRequestHandler):
 		if self.path.endswith(".js"):
 			mimetype = 'application/javascript'
 
-		f = open("/Volumes/EXTERNAL/MyStuff/Bowst/rpiscoreboard" + self.path)
+		f = open("." + self.path)
 		self.send_response(200)
 		self.send_header('Content-type',mimetype)
 		self.end_headers()
@@ -30,7 +30,7 @@ class myHandler(BaseHTTPRequestHandler):
 try:
 	#Create a web server and define the handler to manage the
 	#incoming request
-	server = HTTPServer(('10.0.0.248', 8000), myHandler)
+	server = HTTPServer(('10.0.1.83', 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
