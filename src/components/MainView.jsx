@@ -14,6 +14,13 @@ const MainView = React.createClass({
 
   render: function() {
     var panel;
+
+		var styles = {
+			paper: {
+				backgroundColor: "#f5fafa"
+			}
+		};
+
     if(this.state.tabIndex == 0) {
       panel = "stats";
     }
@@ -22,7 +29,7 @@ const MainView = React.createClass({
     }
 
     return (<div style={{textAlign: "center"}}>
-      <Paper zDepth={1}>
+      <Paper zDepth={4} style={styles.paper}>
         <div>
           <BottomNavigation style={{backgroundColor: "#f2f2f2"}} selectedIndex={this.state.tabIndex}>
             <BottomNavigationItem

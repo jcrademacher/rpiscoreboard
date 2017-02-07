@@ -12,7 +12,7 @@ const Title = React.createClass({
 
     return (
       <div style={style}>
-        <p style={{fontSize: 40, fontWeight: "500", height: 30}}>Rad-Cinus Memorial Rink</p>
+        <p style={{fontSize: 50, fontWeight: "bold", height: 30}}>Rad-Cinus Rink</p>
         <p>EST. 2011</p>
       </div>
     );

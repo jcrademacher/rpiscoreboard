@@ -3,8 +3,8 @@ import React from 'react';
 const Content = React.createClass({
   render() {
     var style = {
-      fontFamily: "Roboto",
-      fontWeight: '300',
+      fontFamily: "Raleway, Roboto, sans-serif",
+      fontWeight: "300",
       color: "#3a3a3a",
     };
 
