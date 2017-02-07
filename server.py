@@ -42,7 +42,7 @@ def timeMinusOnesSecHandler():
 	print "Time Minus Ones Sec: "
 	if b.clockMode == "timer" and not b.timerRunning:
 		b.oneSecVal -= 1
-		if(b.oneSecVal == -1):
+		if b.oneSecVal == -1:
 			b.oneSecVal = 9
 		b.changeTime(b.oneSecVal, 1)
 
@@ -89,10 +89,10 @@ def timeAddTensMinHandler():
 def timeMinusTensMinHandler():
 		print "Time Minus Tens Min: "
 		if b.clockMode == "timer" and not b.timerRunning:
-		b.tenMinVal -= 1
-		if(b.tenMinVal == -1):
-			b.tenMinVal = 9
-		b.changeTime(b.tenMinVal, 4)
+			b.tenMinVal -= 1
+			if(b.tenMinVal == -1):
+				b.tenMinVal = 9
+			b.changeTime(b.tenMinVal, 4)
 
 #BASIC TIMER FUNCTIONS######################################################
 def setTimer0():
