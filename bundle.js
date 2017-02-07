@@ -70,12 +70,20 @@
 
 	var _MainView2 = _interopRequireDefault(_MainView);
 
+	var _getMuiTheme = __webpack_require__(291);
+
+	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var muiTheme = (0, _getMuiTheme2.default)({
+	  fontFamily: "Raleway, Roboto, sans-serif"
+	});
 
 	var App = function App() {
 	  return _react2.default.createElement(
 	    _MuiThemeProvider2.default,
-	    null,
+	    { muiTheme: muiTheme },
 	    _react2.default.createElement(
 	      _Content2.default,
 	      null,
@@ -19801,7 +19809,7 @@
 	  displayName: "Content",
 	  render: function render() {
 	    var style = {
-	      fontFamily: "Helvetica, Roboto, sans-serif",
+	      fontFamily: "Raleway, Roboto, sans-serif",
 	      fontWeight: "300",
 	      color: "#3a3a3a"
 	    };
@@ -19856,8 +19864,8 @@
 	      { style: style },
 	      _react2.default.createElement(
 	        'p',
-	        { style: { fontSize: 50, fontWeight: "300", height: 30 } },
-	        'Rad-Cinus Memorial Rink'
+	        { style: { fontSize: 50, fontWeight: "bold", height: 30 } },
+	        'Rad-Cinus Rink'
 	      ),
 	      _react2.default.createElement(
 	        'p',
@@ -30457,6 +30465,13 @@
 	    var _this = this;
 
 	    var panel;
+
+	    var styles = {
+	      paper: {
+	        backgroundColor: "#f5fafa"
+	      }
+	    };
+
 	    if (this.state.tabIndex == 0) {
 	      panel = "stats";
 	    } else {
@@ -30468,7 +30483,7 @@
 	      { style: { textAlign: "center" } },
 	      _react2.default.createElement(
 	        _Paper2.default,
-	        { zDepth: 3 },
+	        { zDepth: 4, style: styles.paper },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -31496,7 +31511,7 @@
 											_FlatButton2.default,
 											{
 												style: styles.gameTimes,
-												backgroundColor: "#f7c956"
+												backgroundColor: "#E8D0A9"
 											},
 											"5:00 Game"
 										),
@@ -31504,7 +31519,7 @@
 											_FlatButton2.default,
 											{
 												style: styles.gameTimes,
-												backgroundColor: "#f7c956"
+												backgroundColor: "#E8D0A9"
 											},
 											"10:00 Game"
 										),
@@ -31513,7 +31528,7 @@
 											_FlatButton2.default,
 											{
 												style: styles.gameTimes,
-												backgroundColor: "#f7c956"
+												backgroundColor: "#E8D0A9"
 											},
 											"15:00 Game"
 										),
@@ -31521,7 +31536,7 @@
 											_FlatButton2.default,
 											{
 												style: styles.gameTimes,
-												backgroundColor: "#f7c956"
+												backgroundColor: "#E8D0A9"
 											},
 											"20:00 Game"
 										)
@@ -31542,21 +31557,21 @@
 										{ style: { border: "1px solid black" } },
 										_react2.default.createElement(_RaisedButton2.default, {
 											style: styles.scoreButton,
-											primary: true,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle }),
+											icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
 											onClick: function onClick() {
 												_this.handleScoreChange("home-up");
-											}
+											},
+											backgroundColor: "#acd1e9"
 										}),
 										_react2.default.createElement("br", null),
 										_react2.default.createElement("br", null),
 										_react2.default.createElement(_RaisedButton2.default, {
 											style: styles.scoreButton,
-											secondary: true,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle }),
+											icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle, color: "white" }),
 											onClick: function onClick() {
 												_this.handleScoreChange("home-down");
-											}
+											},
+											backgroundColor: "#6d929b"
 										})
 									),
 									_react2.default.createElement(
@@ -31578,21 +31593,21 @@
 										{ style: { border: "1px solid black" } },
 										_react2.default.createElement(_RaisedButton2.default, {
 											style: styles.scoreButton,
-											primary: true,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle }),
+											icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
 											onClick: function onClick() {
 												_this.handleScoreChange("away-up");
-											}
+											},
+											backgroundColor: "#acd1e9"
 										}),
 										_react2.default.createElement("br", null),
 										_react2.default.createElement("br", null),
 										_react2.default.createElement(_RaisedButton2.default, {
 											style: styles.scoreButton,
-											secondary: true,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle }),
+											icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle, color: "white" }),
 											onClick: function onClick() {
 												_this.handleScoreChange("away-down");
-											}
+											},
+											backgroundColor: "#6d929b"
 										})
 									),
 									_react2.default.createElement("td", { style: { border: "1px solid black" } })
