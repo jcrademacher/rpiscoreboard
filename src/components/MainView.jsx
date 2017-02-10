@@ -31,7 +31,7 @@ const MainView = React.createClass({
     return (<div style={{textAlign: "center"}}>
       <Paper zDepth={4} style={styles.paper}>
         <div>
-          <BottomNavigation style={{backgroundColor: "#f2f2f2"}} selectedIndex={this.state.tabIndex}>
+          <BottomNavigation style={{backgroundColor: "#e5e5e5"}} selectedIndex={this.state.tabIndex}>
             <BottomNavigationItem
               label="View Stats"
               icon={<StatsIcon/>}

@@ -31384,12 +31384,35 @@
 			}
 		},
 
-		handleTextFieldChange: function handleTextFieldChange(e) {
+		handleTextFieldChange: function handleTextFieldChange(e, newVal) {
 			var str = e.target.value;
+			var enteredChar = str.substring(str.length - 1);
 
-			if (/\D/.test(str)) // regexp tests for any non-digit characters
-				e.target.value = str.substr(0, str.length - 1); // delete last char
-			if (str.length > 4) e.target.value = str.substr(0, str.length - 1);
+			if (/\D/.test(enteredChar)) {
+				// regexp tests for any non-digit characters
+				e.target.value = newVal.substr(0, str.length - 1); // delete last char
+				return;
+			}
+
+			if (newVal.length == 1) str = "00:00" + str;
+
+			str = str.replace(":", "");
+
+			if (str.length == 5) str = str.substring(1);else if (str.length == 3) str = "0" + str;
+
+			console.log("New Val: " + newVal);
+			console.log("Str Val: " + str);
+			console.log("enteredChar: " + enteredChar);
+
+			e.target.value = str.substr(0, 2) + ":" + str.substring(2);
+		},
+
+		textOnFocus: function textOnFocus(event) {
+			event.target.value = "";
+		},
+
+		textOnBlur: function textOnBlur(event) {
+			event.target.value = "00:00";
 		},
 
 		handleScoreChange: function handleScoreChange(method) {
@@ -31583,9 +31606,13 @@
 											"Enter a custom time:"
 										),
 										_react2.default.createElement(_TextField2.default, {
+											id: "textfield",
 											inputStyle: { textAlign: "center" },
+											hintStyle: { textAlign: "center" },
 											defaultValue: "00:00",
-											onChange: this.handleTextFieldChange
+											onChange: this.handleTextFieldChange,
+											onFocus: this.textOnFocus,
+											onBlur: this.textOnBlur
 										})
 									),
 									_react2.default.createElement(

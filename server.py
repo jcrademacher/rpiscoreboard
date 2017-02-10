@@ -5,6 +5,8 @@ from time import sleep
 import time
 import types
 import os
+
+'''
 import serial
 import require
 
@@ -136,7 +138,7 @@ def setTimerMode():
 	b.clockMode = "timer"
 	b.serialWrite('C',chr(1));
 
-'''
+
 #FADERS
 #################################################################################
 def redHandler(path, tags, args, source):
@@ -147,7 +149,7 @@ def greenHandler(path, tags, args, source):
 
 def blueHandler(path, tags, args, source):
     b.blueVal=int(args[0])
-'''
+
 
 #Fancy display stuff################################################################################
 def fancyFlash():
@@ -194,6 +196,8 @@ def fancyFlash():
 	b.showNum(b.homeScore, 0)
 	b.showNum(b.awayScore, 1)
 
+'''
+
 #This class will handles any incoming request from
 #the browser
 class myHandler(BaseHTTPRequestHandler):
@@ -233,11 +237,11 @@ class myHandler(BaseHTTPRequestHandler):
 try:
 	#Create a web server and define the handler to manage the
 	#incoming request
-	ip = socket.gethostbyname(socket.gethostname())
+	#ip = socket.gethostbyname(socket.gethostname())
 
-	print "ip: " + ip
+	print "ip: " #+ ip
 
-	server = HTTPServer(("10.0.1.83", 8000), myHandler)
+	server = HTTPServer(("10.0.0.248", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
