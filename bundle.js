@@ -30447,12 +30447,17 @@
 
 	var _build2 = _interopRequireDefault(_build);
 
-	var _Panel = __webpack_require__(359);
+	var _settings = __webpack_require__(359);
+
+	var _settings2 = _interopRequireDefault(_settings);
+
+	var _Panel = __webpack_require__(360);
 
 	var _Panel2 = _interopRequireDefault(_Panel);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// icons for tabs
 	var MainView = _react2.default.createClass({
 	  displayName: 'MainView',
 
@@ -30472,8 +30477,14 @@
 	      }
 	    };
 
-	    if (this.state.tabIndex == 0) {
+	    var i = this.state.tabIndex;
+
+	    if (i == 0) {
 	      panel = "stats";
+	    } else if (i == 1) {
+	      panel = "control";
+	    } else if (i == 2) {
+	      panel = "settings";
 	    } else {
 	      panel = "control";
 	    }
@@ -30489,7 +30500,7 @@
 	          null,
 	          _react2.default.createElement(
 	            _BottomNavigation.BottomNavigation,
-	            { style: { backgroundColor: "#f2f2f2" }, selectedIndex: this.state.tabIndex },
+	            { style: { backgroundColor: "#e5e5e5" }, selectedIndex: this.state.tabIndex },
 	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
 	              label: 'View Stats',
 	              icon: _react2.default.createElement(_assessment2.default, null),
@@ -30503,19 +30514,26 @@
 	              onClick: function onClick() {
 	                return _this.setState({ tabIndex: 1 });
 	              }
+	            }),
+	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+	              label: 'Settings',
+	              icon: _react2.default.createElement(_settings2.default, null),
+	              onClick: function onClick() {
+	                return _this.setState({ tabIndex: 2 });
+	              }
 	            })
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement(_Panel2.default, { selectedPanel: panel })
+	          _react2.default.createElement(_Panel2.default, { selectedIndex: panel })
 	        )
 	      )
 	    );
 	  }
 	});
-	// icons for tabs
+
 	exports.default = MainView;
 
 /***/ },
@@ -31291,11 +31309,107 @@
 /* 359 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _pure = __webpack_require__(347);
+
+	var _pure2 = _interopRequireDefault(_pure);
+
+	var _SvgIcon = __webpack_require__(356);
+
+	var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ActionSettings = function ActionSettings(props) {
+	  return _react2.default.createElement(
+	    _SvgIcon2.default,
+	    props,
+	    _react2.default.createElement('path', { d: 'M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z' })
+	  );
+	};
+	ActionSettings = (0, _pure2.default)(ActionSettings);
+	ActionSettings.displayName = 'ActionSettings';
+	ActionSettings.muiName = 'SvgIcon';
+
+	exports.default = ActionSettings;
+
+/***/ },
+/* 360 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ControlPanel = __webpack_require__(361);
+
+	var _ControlPanel2 = _interopRequireDefault(_ControlPanel);
+
+	var _StatsPanel = __webpack_require__(421);
+
+	var _StatsPanel2 = _interopRequireDefault(_StatsPanel);
+
+	var _SettingsPanel = __webpack_require__(422);
+
+	var _SettingsPanel2 = _interopRequireDefault(_SettingsPanel);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Panel = function (_React$Component) {
+		_inherits(Panel, _React$Component);
+
+		function Panel(props) {
+			_classCallCheck(this, Panel);
+
+			return _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
+		}
+
+		_createClass(Panel, [{
+			key: "render",
+			value: function render() {
+				if (this.props.selectedIndex == "control") return _react2.default.createElement(_ControlPanel2.default, null);else if (this.props.selectedIndex == "stats") return _react2.default.createElement(_StatsPanel2.default, null);else if (this.props.selectedIndex == "settings") return _react2.default.createElement(_SettingsPanel2.default, null);
+			}
+		}]);
+
+		return Panel;
+	}(_react2.default.Component);
+
+	exports.default = Panel;
+
+/***/ },
+/* 361 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -31305,358 +31419,547 @@
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _FlatButton = __webpack_require__(360);
+	var _FlatButton = __webpack_require__(362);
 
 	var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
-	var _RadioButton = __webpack_require__(363);
+	var _RadioButton = __webpack_require__(365);
 
-	var _navigation = __webpack_require__(374);
+	var _navigation = __webpack_require__(376);
 
 	var _navigation2 = _interopRequireDefault(_navigation);
 
-	var _SelectField = __webpack_require__(375);
+	var _SelectField = __webpack_require__(377);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
-	var _MenuItem = __webpack_require__(411);
+	var _MenuItem = __webpack_require__(413);
 
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 
-	var _TextField = __webpack_require__(377);
+	var _TextField = __webpack_require__(379);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
+	var _Divider = __webpack_require__(414);
+
+	var _Divider2 = _interopRequireDefault(_Divider);
+
+	var _Slider = __webpack_require__(416);
+
+	var _Slider2 = _interopRequireDefault(_Slider);
+
+	var _Clock = __webpack_require__(420);
+
+	var _Clock2 = _interopRequireDefault(_Clock);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Panel = _react2.default.createClass({
-		displayName: "Panel",
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-		getInitialState: function getInitialState() {
-			return {
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ControlPanel = function (_React$Component) {
+		_inherits(ControlPanel, _React$Component);
+
+		function ControlPanel(props) {
+			_classCallCheck(this, ControlPanel);
+
+			var _this = _possibleConstructorReturn(this, (ControlPanel.__proto__ || Object.getPrototypeOf(ControlPanel)).call(this, props));
+
+			_this.parent = _this;
+
+			_this.handleRadioButton = _this.handleRadioButton.bind(_this);
+			_this.getTimerModificationState = _this.getTimerModificationState.bind(_this);
+			_this.handleTextFieldChange = _this.handleTextFieldChange.bind(_this);
+			_this.handleScoreChange = _this.handleScoreChange.bind(_this);
+			_this.handleTimerChange = _this.handleTimerChange.bind(_this);
+			_this.syncTimer = _this.syncTimer.bind(_this);
+
+			_this.state = {
 				clockMode: "clock",
-				tenMinValue: parseInt(this.formatTime().charAt(0)),
-				oneMinValue: parseInt(this.formatTime().charAt(1)),
-				tenSecValue: parseInt(this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
-				oneSecValue: parseInt(this.formatTime().charAt(4))
+				timerRunning: false,
+
+				tenMinValue: parseInt(_this.formatTime().charAt(0)),
+				oneMinValue: parseInt(_this.formatTime().charAt(1)),
+				tenSecValue: parseInt(_this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
+				oneSecValue: parseInt(_this.formatTime().charAt(4)),
+
+				homeScore: 0,
+				awayScore: 0
 			};
-		},
+			return _this;
+		}
 
-		formatTime: function formatTime() {
-			var date = new Date();
+		_createClass(ControlPanel, [{
+			key: "formatTime",
+			value: function formatTime() {
+				var date = new Date();
 
-			var h = date.getHours();
-			var m = date.getMinutes();
+				var h = date.getHours();
+				var m = date.getMinutes();
 
-			if (h > 12) {
-				h -= 12;
-			}
-
-			if (m < 10 && h < 10) {
-				return "0" + h + ":0" + m;
-			} else if (m < 10 && h >= 10) {
-				return h + ":0" + m;
-			} else if (m >= 10 && h < 10) {
-				return "0" + h + ":" + m;
-			} else {
-				return h + ":" + m;
-			}
-		},
-
-		handleRadioButton: function handleRadioButton(e, value) {
-			this.replaceState({ clockMode: value });
-
-			if (value == "clock") {
-				this.replaceState({
-					tenMinValue: parseInt(this.formatTime().charAt(0)),
-					oneMinValue: parseInt(this.formatTime().charAt(1)),
-					tenSecValue: parseInt(this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
-					oneSecValue: parseInt(this.formatTime().charAt(4))
-				});
-			} else {
-				this.replaceState({
-					tenMinValue: 0,
-					oneMinValue: 0,
-					tenSecValue: 0,
-					oneSecValue: 0
-				});
-			}
-		},
-
-		handleTextFieldChange: function handleTextFieldChange(e, newVal) {
-			var str = e.target.value;
-			var enteredChar = str.substring(str.length - 1);
-
-			if (/\D/.test(enteredChar)) {
-				// regexp tests for any non-digit characters
-				e.target.value = newVal.substr(0, str.length - 1); // delete last char
-				return;
-			}
-
-			if (newVal.length == 1) str = "00:00" + str;
-
-			str = str.replace(":", "");
-
-			if (str.length == 5) str = str.substring(1);else if (str.length == 3) str = "0" + str;
-
-			console.log("New Val: " + newVal);
-			console.log("Str Val: " + str);
-			console.log("enteredChar: " + enteredChar);
-
-			e.target.value = str.substr(0, 2) + ":" + str.substring(2);
-		},
-
-		textOnFocus: function textOnFocus(event) {
-			event.target.value = "";
-		},
-
-		textOnBlur: function textOnBlur(event) {
-			event.target.value = "00:00";
-		},
-
-		handleScoreChange: function handleScoreChange(method) {
-			var xhr = new XMLHttpRequest();
-
-			// sends http request over network to server to handle score change
-			xhr.open("POST", "control/" + method, true);
-			xhr.send();
-		},
-
-		render: function render() {
-			var _this = this;
-
-			var curTime = this.state.tenMinValue.toString() + this.state.oneMinValue + ":" + this.state.tenSecValue + this.state.oneSecValue;
-
-			var styles = {
-				clock: {
-					fontSize: 80
-				},
-
-				table: {
-					border: "1px solid black",
-					width: "100%"
-				},
-
-				middle: {
-					fontSize: 20
-				},
-
-				score: {
-					textAlign: "center",
-					fontSize: 80,
-					border: "1px solid black",
-					width: "50"
-				},
-
-				scoreButton: {
-					height: "70",
-					width: "50"
-				},
-
-				upStyle: {
-					height: "50",
-					width: "50"
-				},
-
-				downStyle: {
-					height: "50",
-					width: "50",
-					transform: "rotate(180deg)"
-				},
-
-				center: {
-					width: "600",
-					border: "1px solid black"
-				},
-
-				gameTimes: {
-					margin: 10,
-					width: 200,
-					height: 50,
-					fontSize: 17
+				if (h > 12) {
+					h -= 12;
 				}
-			};
 
-			if (this.props.selectedPanel == "control") {
+				if (m < 10 && h < 10) {
+					return "0" + h + ":0" + m;
+				} else if (m < 10 && h >= 10) {
+					return h + ":0" + m;
+				} else if (m >= 10 && h < 10) {
+					return "0" + h + ":" + m;
+				} else {
+					return h + ":" + m;
+				}
+			}
+		}, {
+			key: "getTimerBtnState",
+			value: function getTimerBtnState(prop) {
+				if (prop == "color") {
+					if (this.state.timerRunning) return "#fc6f6f"; // green
+					else return "#c1dad6"; // red
+				}
+
+				if (prop == "label") {
+					if (this.state.timerRunning) return "Stop Timer";else return "Start Timer";
+				}
+			}
+		}, {
+			key: "getTimerModificationState",
+			value: function getTimerModificationState() {
+				return this.state.clockMode == "clock" || this.state.timerRunning;
+			}
+		}, {
+			key: "handlePresetTime",
+			value: function handlePresetTime(time, event) {
+				if (time == "5:00") {
+					this.setState({
+						tenMinValue: 0,
+						oneMinValue: parseInt(time.charAt(0)),
+						tenSecValue: parseInt(time.charAt(2)), // skip over 1 for the colon in "5:00"
+						oneSecValue: parseInt(time.charAt(3))
+					});
+				} else {
+					this.setState({
+						tenMinValue: parseInt(time.charAt(0)),
+						oneMinValue: parseInt(time.charAt(1)), // skip over 2 for the colon
+						tenSecValue: parseInt(time.charAt(3)),
+						oneSecValue: parseInt(time.charAt(4))
+					});
+				}
+			}
+		}, {
+			key: "handleRadioButton",
+			value: function handleRadioButton(e, value) {
+				this.setState({ clockMode: value });
+
+				if (value == "clock") {
+					this.setState({
+						timerRunning: false,
+
+						clockMode: value,
+
+						tenMinValue: parseInt(this.formatTime().charAt(0)),
+						oneMinValue: parseInt(this.formatTime().charAt(1)),
+						tenSecValue: parseInt(this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
+						oneSecValue: parseInt(this.formatTime().charAt(4))
+					});
+				} else {
+					this.setState({
+						timerRunning: false,
+
+						clockMode: value,
+
+						tenMinValue: 0,
+						oneMinValue: 0,
+						tenSecValue: 0,
+						oneSecValue: 0
+					});
+				}
+			}
+		}, {
+			key: "handleScoreChange",
+			value: function handleScoreChange(method) {
+				var xhr = new XMLHttpRequest();
+
+				// sends http request over network to server to handle score change
+				xhr.open("POST", "control/" + method, true);
+				xhr.send();
+
+				var newScore;
+
+				if (method == "home-up") {
+					if (this.state.homeScore + 1 > 19) newScore = 0;else newScore = this.state.homeScore + 1;
+
+					this.setState({ homeScore: newScore });
+				} else if (method == "home-down") {
+					if (this.state.homeScore - 1 < 0) newScore = 19;else newScore = this.state.homeScore - 1;
+
+					this.setState({ homeScore: newScore });
+				} else if (method == "away-up") {
+					if (this.state.awayScore + 1 > 19) newScore = 0;else newScore = this.state.awayScore + 1;
+
+					this.setState({ awayScore: newScore });
+				} else if (method == "away-down") {
+					if (this.state.awayScore - 1 < 0) newScore = 19;else newScore = this.state.awayScore - 1;
+
+					this.setState({ awayScore: newScore });
+				}
+			}
+		}, {
+			key: "handleTextFieldChange",
+			value: function handleTextFieldChange(e, newVal) {
+				var str = e.target.value;
+				var enteredChar = str.substring(str.length - 1);
+
+				if (/\D/.test(enteredChar)) {
+					// regexp tests for any non-digit characters
+					e.target.value = newVal.substr(0, str.length - 1); // delete last char
+					return;
+				}
+
+				if (newVal.length == 1) str = "00:00" + str;
+
+				str = str.replace(":", "");
+
+				if (str.length == 5) str = str.substring(1);else if (str.length == 3) str = "0" + str;
+
+				e.target.value = str.substr(0, 2) + ":" + str.substring(2);
+
+				this.setState({
+					tenMinValue: parseInt(e.target.value.charAt(0)),
+					oneMinValue: parseInt(e.target.value.charAt(1)),
+					tenSecValue: parseInt(e.target.value.charAt(3)),
+					oneSecValue: parseInt(e.target.value.charAt(4))
+				});
+			}
+		}, {
+			key: "handleTimerChange",
+			value: function handleTimerChange(e) {
+				var btn = this.refs.timer;
+
+				if (btn.props.label == "Start Timer") {
+					this.setState({
+						timerRunning: true
+					});
+				} else {
+					this.setState({
+						timerRunning: false
+					});
+				}
+			}
+
+			// callback for Clock components
+			// called when timer stops, syncs clock values in this.state
+
+		}, {
+			key: "syncTimer",
+			value: function syncTimer(values) {
+				console.log("sync timer");
+
+				this.setState({
+					tenMinValue: values.tenMinValue,
+					oneMinValue: values.oneMinValue,
+					tenSecValue: values.tenSecValue,
+					oneSecValue: values.oneSecValue
+				});
+			}
+		}, {
+			key: "textOnFocus",
+			value: function textOnFocus(event) {
+				event.target.value = "";
+			}
+		}, {
+			key: "textOnBlur",
+			value: function textOnBlur(event) {
+				event.target.value = "00:00";
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _this2 = this;
+
+				console.log(this.state);
+
+				var styles = {
+					clock: {
+						fontSize: 80
+					},
+
+					table: {
+						width: "100%"
+					},
+
+					middle: {
+						fontSize: 20
+					},
+
+					score: {
+						textAlign: "center",
+						fontSize: 100,
+						width: "50"
+					},
+
+					scoreButton: {
+						height: "70",
+						width: "50"
+					},
+
+					upStyle: {
+						height: "50",
+						width: "50"
+					},
+
+					downStyle: {
+						height: "50",
+						width: "50",
+						transform: "rotate(180deg)"
+					},
+
+					center: {
+						width: "600"
+					},
+
+					gameTimes: {
+						margin: 10,
+						width: 200,
+						height: 50,
+						fontSize: 17
+					},
+
+					start: {
+						width: 250,
+						height: 70,
+						margin: 10
+					},
+
+					redSlider: {
+						marginLeft: "33%",
+						height: 200
+					},
+
+					greenSlider: {},
+
+					blueSlider: {}
+				};
+
+				var clockValues = {
+					tenMinValue: this.state.tenMinValue,
+					oneMinValue: this.state.oneMinValue,
+					tenSecValue: this.state.tenSecValue,
+					oneSecValue: this.state.oneSecValue
+				};
+
+				console.log("clock values: " + clockValues.tenMinValue);
+
 				return _react2.default.createElement(
 					"div",
 					null,
 					_react2.default.createElement(
+						"span",
+						null,
+						_react2.default.createElement(
+							_RadioButton.RadioButtonGroup,
+							{
+								defaultSelected: this.state.clockMode == "clock" ? "clock" : "timer",
+								style: { textAlign: "left", padding: 8, fontSize: 14 },
+								onChange: this.handleRadioButton
+							},
+							_react2.default.createElement(_RadioButton.RadioButton, { label: "Clock Mode", value: "clock" }),
+							_react2.default.createElement(_RadioButton.RadioButton, { label: "Timer Mode", value: "timer" })
+						)
+					),
+					_react2.default.createElement(
 						"div",
 						null,
 						_react2.default.createElement(
-							"span",
-							null,
+							"table",
+							{ style: styles.table },
 							_react2.default.createElement(
-								_RadioButton.RadioButtonGroup,
-								{
-									defaultSelected: "clock",
-									style: { textAlign: "left", padding: 8, fontSize: 14 },
-									onChange: this.handleRadioButton
-								},
-								_react2.default.createElement(_RadioButton.RadioButton, { label: "Clock Mode", value: "clock" }),
-								_react2.default.createElement(_RadioButton.RadioButton, { label: "Timer Mode", value: "timer" })
-							)
-						),
-						_react2.default.createElement(
-							"div",
-							null,
-							_react2.default.createElement(
-								"table",
-								{ style: styles.table },
+								"tr",
+								{ style: styles.clock },
+								_react2.default.createElement("td", null),
 								_react2.default.createElement(
-									"tr",
-									{ style: styles.clock },
-									_react2.default.createElement("td", { style: { border: "1px solid black" } }),
-									_react2.default.createElement("td", { style: { border: "1px solid black" } }),
-									_react2.default.createElement(
-										"td",
-										null,
-										curTime
-									),
-									_react2.default.createElement("td", { style: { border: "1px solid black" } }),
-									_react2.default.createElement("td", { style: { border: "1px solid black" } })
+									"td",
+									{ style: { fontSize: 40, fontWeight: "bold" } },
+									"Home"
 								),
 								_react2.default.createElement(
-									"tr",
+									"td",
 									null,
-									_react2.default.createElement("td", { style: { border: "1px solid black" } }),
-									_react2.default.createElement(
-										"td",
-										{ style: styles.score },
-										"0"
-									),
-									_react2.default.createElement(
-										"td",
-										{ style: styles.center },
-										_react2.default.createElement(
-											_FlatButton2.default,
-											{
-												style: styles.gameTimes,
-												backgroundColor: "#E8D0A9"
-											},
-											"5:00 Game"
-										),
-										_react2.default.createElement(
-											_FlatButton2.default,
-											{
-												style: styles.gameTimes,
-												backgroundColor: "#E8D0A9"
-											},
-											"10:00 Game"
-										),
-										_react2.default.createElement("br", null),
-										_react2.default.createElement(
-											_FlatButton2.default,
-											{
-												style: styles.gameTimes,
-												backgroundColor: "#E8D0A9"
-											},
-											"15:00 Game"
-										),
-										_react2.default.createElement(
-											_FlatButton2.default,
-											{
-												style: styles.gameTimes,
-												backgroundColor: "#E8D0A9"
-											},
-											"20:00 Game"
-										)
-									),
-									_react2.default.createElement(
-										"td",
-										{ style: styles.score },
-										"0"
-									),
-									_react2.default.createElement("td", { style: { border: "1px solid black" } })
+									_react2.default.createElement(_Clock2.default, {
+										running: this.state.timerRunning,
+										values: clockValues,
+										mode: this.state.clockMode,
+										onStop: this.syncTimer
+									})
 								),
 								_react2.default.createElement(
-									"tr",
+									"td",
+									{ style: { fontSize: 40, fontWeight: "bold" } },
+									"Away"
+								),
+								_react2.default.createElement("td", null)
+							),
+							_react2.default.createElement(
+								"tr",
+								null,
+								_react2.default.createElement("td", null),
+								_react2.default.createElement(
+									"td",
+									{ style: styles.score },
+									this.state.homeScore
+								),
+								_react2.default.createElement(
+									"td",
+									{ style: styles.center },
+									_react2.default.createElement(_FlatButton2.default, {
+										style: styles.gameTimes,
+										backgroundColor: "#E8D0A9",
+										disabled: this.getTimerModificationState(),
+										onClick: this.handlePresetTime.bind(this, "5:00"),
+										labelStyle: styles.gameTimes,
+										label: "5:00 Game"
+									}),
+									_react2.default.createElement(_FlatButton2.default, {
+										style: styles.gameTimes,
+										backgroundColor: "#E8D0A9",
+										disabled: this.getTimerModificationState(),
+										onClick: this.handlePresetTime.bind(this, "10:00"),
+										label: "10:00 Game",
+										labelStyle: styles.gameTimes
+									}),
+									_react2.default.createElement("br", null),
+									_react2.default.createElement(_FlatButton2.default, {
+										style: styles.gameTimes,
+										backgroundColor: "#E8D0A9",
+										disabled: this.getTimerModificationState(),
+										onClick: this.handlePresetTime.bind(this, "15:00"),
+										label: "15:00 Game",
+										labelStyle: styles.gameTimes
+									}),
+									_react2.default.createElement(_FlatButton2.default, {
+										style: styles.gameTimes,
+										backgroundColor: "#E8D0A9",
+										disabled: this.getTimerModificationState(),
+										onClick: this.handlePresetTime.bind(this, "20:00"),
+										label: "20:00 Game",
+										labelStyle: styles.gameTimes
+									})
+								),
+								_react2.default.createElement(
+									"td",
+									{ style: styles.score },
+									this.state.awayScore
+								),
+								_react2.default.createElement("td", null)
+							),
+							_react2.default.createElement(
+								"tr",
+								null,
+								_react2.default.createElement("td", null),
+								_react2.default.createElement(
+									"td",
 									null,
-									_react2.default.createElement("td", { style: { border: "1px solid black" } }),
+									_react2.default.createElement(_RaisedButton2.default, {
+										style: styles.scoreButton,
+										icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
+										onClick: function onClick() {
+											_this2.handleScoreChange("home-up");
+										},
+										backgroundColor: "#acd1e9"
+									}),
+									_react2.default.createElement("br", null),
+									_react2.default.createElement("br", null),
+									_react2.default.createElement(_RaisedButton2.default, {
+										style: styles.scoreButton,
+										icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle, color: "white" }),
+										onClick: function onClick() {
+											_this2.handleScoreChange("home-down");
+										},
+										backgroundColor: "#6d929b"
+									})
+								),
+								_react2.default.createElement(
+									"td",
+									{ style: styles.middle },
 									_react2.default.createElement(
-										"td",
-										{ style: { border: "1px solid black" } },
-										_react2.default.createElement(_RaisedButton2.default, {
-											style: styles.scoreButton,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
-											onClick: function onClick() {
-												_this.handleScoreChange("home-up");
-											},
-											backgroundColor: "#acd1e9"
-										}),
-										_react2.default.createElement("br", null),
-										_react2.default.createElement("br", null),
-										_react2.default.createElement(_RaisedButton2.default, {
-											style: styles.scoreButton,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle, color: "white" }),
-											onClick: function onClick() {
-												_this.handleScoreChange("home-down");
-											},
-											backgroundColor: "#6d929b"
-										})
+										"span",
+										{ style: { margin: "10" } },
+										"Enter a custom time:"
 									),
-									_react2.default.createElement(
-										"td",
-										{ style: styles.middle },
-										_react2.default.createElement(
-											"span",
-											{ style: { margin: "10" } },
-											"Enter a custom time:"
-										),
-										_react2.default.createElement(_TextField2.default, {
-											id: "textfield",
-											inputStyle: { textAlign: "center" },
-											hintStyle: { textAlign: "center" },
-											defaultValue: "00:00",
-											onChange: this.handleTextFieldChange,
-											onFocus: this.textOnFocus,
-											onBlur: this.textOnBlur
-										})
-									),
-									_react2.default.createElement(
-										"td",
-										{ style: { border: "1px solid black" } },
-										_react2.default.createElement(_RaisedButton2.default, {
-											style: styles.scoreButton,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
-											onClick: function onClick() {
-												_this.handleScoreChange("away-up");
-											},
-											backgroundColor: "#acd1e9"
-										}),
-										_react2.default.createElement("br", null),
-										_react2.default.createElement("br", null),
-										_react2.default.createElement(_RaisedButton2.default, {
-											style: styles.scoreButton,
-											icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle, color: "white" }),
-											onClick: function onClick() {
-												_this.handleScoreChange("away-down");
-											},
-											backgroundColor: "#6d929b"
-										})
-									),
-									_react2.default.createElement("td", { style: { border: "1px solid black" } })
+									_react2.default.createElement(_TextField2.default, {
+										id: "textfield",
+										inputStyle: { textAlign: "center", fontSize: 20 },
+										hintStyle: { textAlign: "center" },
+										defaultValue: "00:00",
+										onChange: this.handleTextFieldChange,
+										onFocus: this.textOnFocus,
+										onBlur: this.textOnBlur,
+										disabled: this.getTimerModificationState()
+									})
+								),
+								_react2.default.createElement(
+									"td",
+									null,
+									_react2.default.createElement(_RaisedButton2.default, {
+										style: styles.scoreButton,
+										icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
+										onClick: function onClick() {
+											_this2.handleScoreChange("away-up");
+										},
+										backgroundColor: "#acd1e9"
+									}),
+									_react2.default.createElement("br", null),
+									_react2.default.createElement("br", null),
+									_react2.default.createElement(_RaisedButton2.default, {
+										style: styles.scoreButton,
+										icon: _react2.default.createElement(_navigation2.default, { style: styles.downStyle, color: "white" }),
+										onClick: function onClick() {
+											_this2.handleScoreChange("away-down");
+										},
+										backgroundColor: "#6d929b"
+									})
+								),
+								_react2.default.createElement("td", null)
+							),
+							_react2.default.createElement(
+								"tr",
+								null,
+								_react2.default.createElement("td", null),
+								_react2.default.createElement("td", null),
+								_react2.default.createElement(
+									"td",
+									null,
+									_react2.default.createElement(_FlatButton2.default, {
+										ref: "timer",
+										label: this.getTimerBtnState("label"),
+										disabled: this.state.clockMode == "clock",
+										backgroundColor: this.getTimerBtnState("color"),
+										style: styles.start,
+										labelStyle: { fontSize: 20 },
+										onClick: this.handleTimerChange
+									}),
+									_react2.default.createElement("br", null),
+									_react2.default.createElement("br", null)
 								)
 							)
 						)
 					)
 				);
-			} else if (this.props.selectedPanel == "stats") {
-				return _react2.default.createElement(
-					"div",
-					null,
-					"stats panel"
-				);
 			}
-		}
-	});
+		}]);
 
-	exports.default = Panel;
+		return ControlPanel;
+	}(_react2.default.Component);
+
+	exports.default = ControlPanel;
 
 /***/ },
-/* 360 */
+/* 362 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31666,7 +31969,7 @@
 	});
 	exports.default = undefined;
 
-	var _FlatButton = __webpack_require__(361);
+	var _FlatButton = __webpack_require__(363);
 
 	var _FlatButton2 = _interopRequireDefault(_FlatButton);
 
@@ -31675,7 +31978,7 @@
 	exports.default = _FlatButton2.default;
 
 /***/ },
-/* 361 */
+/* 363 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31732,7 +32035,7 @@
 
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-	var _FlatButtonLabel = __webpack_require__(362);
+	var _FlatButtonLabel = __webpack_require__(364);
 
 	var _FlatButtonLabel2 = _interopRequireDefault(_FlatButtonLabel);
 
@@ -32005,7 +32308,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 362 */
+/* 364 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32097,7 +32400,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 363 */
+/* 365 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32107,11 +32410,11 @@
 	});
 	exports.default = exports.RadioButtonGroup = exports.RadioButton = undefined;
 
-	var _RadioButton2 = __webpack_require__(364);
+	var _RadioButton2 = __webpack_require__(366);
 
 	var _RadioButton3 = _interopRequireDefault(_RadioButton2);
 
-	var _RadioButtonGroup2 = __webpack_require__(373);
+	var _RadioButtonGroup2 = __webpack_require__(375);
 
 	var _RadioButtonGroup3 = _interopRequireDefault(_RadioButtonGroup2);
 
@@ -32122,7 +32425,7 @@
 	exports.default = _RadioButton3.default;
 
 /***/ },
-/* 364 */
+/* 366 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32171,15 +32474,15 @@
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _EnhancedSwitch = __webpack_require__(365);
+	var _EnhancedSwitch = __webpack_require__(367);
 
 	var _EnhancedSwitch2 = _interopRequireDefault(_EnhancedSwitch);
 
-	var _radioButtonUnchecked = __webpack_require__(371);
+	var _radioButtonUnchecked = __webpack_require__(373);
 
 	var _radioButtonUnchecked2 = _interopRequireDefault(_radioButtonUnchecked);
 
-	var _radioButtonChecked = __webpack_require__(372);
+	var _radioButtonChecked = __webpack_require__(374);
 
 	var _radioButtonChecked2 = _interopRequireDefault(_radioButtonChecked);
 
@@ -32399,7 +32702,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 365 */
+/* 367 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32444,7 +32747,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactEventListener = __webpack_require__(366);
+	var _reactEventListener = __webpack_require__(368);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
@@ -32856,7 +33159,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 366 */
+/* 368 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32903,7 +33206,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactAddonsShallowCompare = __webpack_require__(367);
+	var _reactAddonsShallowCompare = __webpack_require__(369);
 
 	var _reactAddonsShallowCompare2 = _interopRequireDefault(_reactAddonsShallowCompare);
 
@@ -32911,7 +33214,7 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _supports = __webpack_require__(369);
+	var _supports = __webpack_require__(371);
 
 	var supports = _interopRequireWildcard(_supports);
 
@@ -33079,13 +33382,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 367 */
+/* 369 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(368);
+	module.exports = __webpack_require__(370);
 
 /***/ },
-/* 368 */
+/* 370 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -33114,7 +33417,7 @@
 	module.exports = shallowCompare;
 
 /***/ },
-/* 369 */
+/* 371 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33124,7 +33427,7 @@
 	});
 	exports.passiveOption = exports.detachEvent = exports.attachEvent = exports.removeEventListener = exports.addEventListener = exports.canUseDOM = undefined;
 
-	var _defineProperty = __webpack_require__(370);
+	var _defineProperty = __webpack_require__(372);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -33167,7 +33470,7 @@
 	}();
 
 /***/ },
-/* 370 */
+/* 372 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33191,7 +33494,7 @@
 	}
 
 /***/ },
-/* 371 */
+/* 373 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33228,7 +33531,7 @@
 	exports.default = ToggleRadioButtonUnchecked;
 
 /***/ },
-/* 372 */
+/* 374 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33265,7 +33568,7 @@
 	exports.default = ToggleRadioButtonChecked;
 
 /***/ },
-/* 373 */
+/* 375 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -33310,7 +33613,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _RadioButton = __webpack_require__(363);
+	var _RadioButton = __webpack_require__(365);
 
 	var _RadioButton2 = _interopRequireDefault(_RadioButton);
 
@@ -33506,7 +33809,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 374 */
+/* 376 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33543,7 +33846,7 @@
 	exports.default = MapsNavigation;
 
 /***/ },
-/* 375 */
+/* 377 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33553,7 +33856,7 @@
 	});
 	exports.default = undefined;
 
-	var _SelectField = __webpack_require__(376);
+	var _SelectField = __webpack_require__(378);
 
 	var _SelectField2 = _interopRequireDefault(_SelectField);
 
@@ -33562,7 +33865,7 @@
 	exports.default = _SelectField2.default;
 
 /***/ },
-/* 376 */
+/* 378 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -33607,11 +33910,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _TextField = __webpack_require__(377);
+	var _TextField = __webpack_require__(379);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
-	var _DropDownMenu = __webpack_require__(383);
+	var _DropDownMenu = __webpack_require__(385);
 
 	var _DropDownMenu2 = _interopRequireDefault(_DropDownMenu);
 
@@ -33853,7 +34156,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 377 */
+/* 379 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33863,7 +34166,7 @@
 	});
 	exports.default = undefined;
 
-	var _TextField = __webpack_require__(378);
+	var _TextField = __webpack_require__(380);
 
 	var _TextField2 = _interopRequireDefault(_TextField);
 
@@ -33872,7 +34175,7 @@
 	exports.default = _TextField2.default;
 
 /***/ },
-/* 378 */
+/* 380 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -33929,19 +34232,19 @@
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _EnhancedTextarea = __webpack_require__(379);
+	var _EnhancedTextarea = __webpack_require__(381);
 
 	var _EnhancedTextarea2 = _interopRequireDefault(_EnhancedTextarea);
 
-	var _TextFieldHint = __webpack_require__(380);
+	var _TextFieldHint = __webpack_require__(382);
 
 	var _TextFieldHint2 = _interopRequireDefault(_TextFieldHint);
 
-	var _TextFieldLabel = __webpack_require__(381);
+	var _TextFieldLabel = __webpack_require__(383);
 
 	var _TextFieldLabel2 = _interopRequireDefault(_TextFieldLabel);
 
-	var _TextFieldUnderline = __webpack_require__(382);
+	var _TextFieldUnderline = __webpack_require__(384);
 
 	var _TextFieldUnderline2 = _interopRequireDefault(_TextFieldUnderline);
 
@@ -34453,7 +34756,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 379 */
+/* 381 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -34498,7 +34801,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactEventListener = __webpack_require__(366);
+	var _reactEventListener = __webpack_require__(368);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
@@ -34699,7 +35002,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 380 */
+/* 382 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -34781,7 +35084,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 381 */
+/* 383 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -34900,7 +35203,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 382 */
+/* 384 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -35038,7 +35341,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 383 */
+/* 385 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35048,11 +35351,11 @@
 	});
 	exports.default = exports.MenuItem = exports.DropDownMenu = undefined;
 
-	var _DropDownMenu2 = __webpack_require__(384);
+	var _DropDownMenu2 = __webpack_require__(386);
 
 	var _DropDownMenu3 = _interopRequireDefault(_DropDownMenu2);
 
-	var _MenuItem2 = __webpack_require__(405);
+	var _MenuItem2 = __webpack_require__(407);
 
 	var _MenuItem3 = _interopRequireDefault(_MenuItem2);
 
@@ -35063,7 +35366,7 @@
 	exports.default = _DropDownMenu3.default;
 
 /***/ },
-/* 384 */
+/* 386 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -35116,23 +35419,23 @@
 
 	var _transitions2 = _interopRequireDefault(_transitions);
 
-	var _arrowDropDown = __webpack_require__(385);
+	var _arrowDropDown = __webpack_require__(387);
 
 	var _arrowDropDown2 = _interopRequireDefault(_arrowDropDown);
 
-	var _Menu = __webpack_require__(386);
+	var _Menu = __webpack_require__(388);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
-	var _ClearFix = __webpack_require__(392);
+	var _ClearFix = __webpack_require__(394);
 
 	var _ClearFix2 = _interopRequireDefault(_ClearFix);
 
-	var _Popover = __webpack_require__(394);
+	var _Popover = __webpack_require__(396);
 
 	var _Popover2 = _interopRequireDefault(_Popover);
 
-	var _PopoverAnimationVertical = __webpack_require__(399);
+	var _PopoverAnimationVertical = __webpack_require__(401);
 
 	var _PopoverAnimationVertical2 = _interopRequireDefault(_PopoverAnimationVertical);
 
@@ -35144,7 +35447,7 @@
 
 	var _events2 = _interopRequireDefault(_events);
 
-	var _IconButton = __webpack_require__(400);
+	var _IconButton = __webpack_require__(402);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
@@ -35563,7 +35866,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 385 */
+/* 387 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35600,7 +35903,7 @@
 	exports.default = NavigationArrowDropDown;
 
 /***/ },
-/* 386 */
+/* 388 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -35657,7 +35960,7 @@
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _ClickAwayListener = __webpack_require__(387);
+	var _ClickAwayListener = __webpack_require__(389);
 
 	var _ClickAwayListener2 = _interopRequireDefault(_ClickAwayListener);
 
@@ -35669,11 +35972,11 @@
 
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 
-	var _List = __webpack_require__(388);
+	var _List = __webpack_require__(390);
 
 	var _List2 = _interopRequireDefault(_List);
 
-	var _menuUtils = __webpack_require__(391);
+	var _menuUtils = __webpack_require__(393);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36286,7 +36589,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 387 */
+/* 389 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36417,7 +36720,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 388 */
+/* 390 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36462,7 +36765,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Subheader = __webpack_require__(389);
+	var _Subheader = __webpack_require__(391);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 
@@ -36527,7 +36830,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 389 */
+/* 391 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36537,7 +36840,7 @@
 	});
 	exports.default = undefined;
 
-	var _Subheader = __webpack_require__(390);
+	var _Subheader = __webpack_require__(392);
 
 	var _Subheader2 = _interopRequireDefault(_Subheader);
 
@@ -36546,7 +36849,7 @@
 	exports.default = _Subheader2.default;
 
 /***/ },
-/* 390 */
+/* 392 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36631,7 +36934,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 391 */
+/* 393 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36675,7 +36978,7 @@
 	}();
 
 /***/ },
-/* 392 */
+/* 394 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36696,7 +36999,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _BeforeAfterWrapper = __webpack_require__(393);
+	var _BeforeAfterWrapper = __webpack_require__(395);
 
 	var _BeforeAfterWrapper2 = _interopRequireDefault(_BeforeAfterWrapper);
 
@@ -36743,7 +37046,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 393 */
+/* 395 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36899,7 +37202,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 394 */
+/* 396 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -36948,11 +37251,11 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _reactEventListener = __webpack_require__(366);
+	var _reactEventListener = __webpack_require__(368);
 
 	var _reactEventListener2 = _interopRequireDefault(_reactEventListener);
 
-	var _RenderToLayer = __webpack_require__(395);
+	var _RenderToLayer = __webpack_require__(397);
 
 	var _RenderToLayer2 = _interopRequireDefault(_RenderToLayer);
 
@@ -36964,15 +37267,15 @@
 
 	var _Paper2 = _interopRequireDefault(_Paper);
 
-	var _lodash = __webpack_require__(396);
+	var _lodash = __webpack_require__(398);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
-	var _PopoverAnimationDefault = __webpack_require__(397);
+	var _PopoverAnimationDefault = __webpack_require__(399);
 
 	var _PopoverAnimationDefault2 = _interopRequireDefault(_PopoverAnimationDefault);
 
-	var _iOSHelpers = __webpack_require__(398);
+	var _iOSHelpers = __webpack_require__(400);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37413,7 +37716,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 395 */
+/* 397 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -37598,7 +37901,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 396 */
+/* 398 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -38044,7 +38347,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 397 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38218,7 +38521,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 398 */
+/* 400 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -38250,7 +38553,7 @@
 	};
 
 /***/ },
-/* 399 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38399,7 +38702,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 400 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38409,7 +38712,7 @@
 	});
 	exports.default = undefined;
 
-	var _IconButton = __webpack_require__(401);
+	var _IconButton = __webpack_require__(403);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
@@ -38418,7 +38721,7 @@
 	exports.default = _IconButton2.default;
 
 /***/ },
-/* 401 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38475,11 +38778,11 @@
 
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-	var _FontIcon = __webpack_require__(402);
+	var _FontIcon = __webpack_require__(404);
 
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
 
-	var _Tooltip = __webpack_require__(404);
+	var _Tooltip = __webpack_require__(406);
 
 	var _Tooltip2 = _interopRequireDefault(_Tooltip);
 
@@ -38798,7 +39101,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 402 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38808,7 +39111,7 @@
 	});
 	exports.default = undefined;
 
-	var _FontIcon = __webpack_require__(403);
+	var _FontIcon = __webpack_require__(405);
 
 	var _FontIcon2 = _interopRequireDefault(_FontIcon);
 
@@ -38817,7 +39120,7 @@
 	exports.default = _FontIcon2.default;
 
 /***/ },
-/* 403 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38977,7 +39280,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 404 */
+/* 406 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39206,7 +39509,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 405 */
+/* 407 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39259,19 +39562,19 @@
 
 	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
-	var _Popover = __webpack_require__(394);
+	var _Popover = __webpack_require__(396);
 
 	var _Popover2 = _interopRequireDefault(_Popover);
 
-	var _check = __webpack_require__(406);
+	var _check = __webpack_require__(408);
 
 	var _check2 = _interopRequireDefault(_check);
 
-	var _ListItem = __webpack_require__(407);
+	var _ListItem = __webpack_require__(409);
 
 	var _ListItem2 = _interopRequireDefault(_ListItem);
 
-	var _Menu = __webpack_require__(386);
+	var _Menu = __webpack_require__(388);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
@@ -39588,7 +39891,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 406 */
+/* 408 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39625,7 +39928,7 @@
 	exports.default = NavigationCheck;
 
 /***/ },
-/* 407 */
+/* 409 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39688,19 +39991,19 @@
 
 	var _EnhancedButton2 = _interopRequireDefault(_EnhancedButton);
 
-	var _IconButton = __webpack_require__(400);
+	var _IconButton = __webpack_require__(402);
 
 	var _IconButton2 = _interopRequireDefault(_IconButton);
 
-	var _expandLess = __webpack_require__(408);
+	var _expandLess = __webpack_require__(410);
 
 	var _expandLess2 = _interopRequireDefault(_expandLess);
 
-	var _expandMore = __webpack_require__(409);
+	var _expandMore = __webpack_require__(411);
 
 	var _expandMore2 = _interopRequireDefault(_expandMore);
 
-	var _NestedList = __webpack_require__(410);
+	var _NestedList = __webpack_require__(412);
 
 	var _NestedList2 = _interopRequireDefault(_NestedList);
 
@@ -40342,7 +40645,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 408 */
+/* 410 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40379,7 +40682,7 @@
 	exports.default = NavigationExpandLess;
 
 /***/ },
-/* 409 */
+/* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40416,7 +40719,7 @@
 	exports.default = NavigationExpandMore;
 
 /***/ },
-/* 410 */
+/* 412 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -40429,7 +40732,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _List = __webpack_require__(388);
+	var _List = __webpack_require__(390);
 
 	var _List2 = _interopRequireDefault(_List);
 
@@ -40471,7 +40774,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 411 */
+/* 413 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40481,13 +40784,1261 @@
 	});
 	exports.default = undefined;
 
-	var _MenuItem = __webpack_require__(405);
+	var _MenuItem = __webpack_require__(407);
 
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _MenuItem2.default;
+
+/***/ },
+/* 414 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _Divider = __webpack_require__(415);
+
+	var _Divider2 = _interopRequireDefault(_Divider);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Divider2.default;
+
+/***/ },
+/* 415 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(163);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(201);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _simpleAssign = __webpack_require__(255);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Divider = function Divider(props, context) {
+	  var inset = props.inset,
+	      style = props.style,
+	      other = (0, _objectWithoutProperties3.default)(props, ['inset', 'style']);
+	  var _context$muiTheme = context.muiTheme,
+	      baseTheme = _context$muiTheme.baseTheme,
+	      prepareStyles = _context$muiTheme.prepareStyles;
+
+
+	  var styles = {
+	    root: {
+	      margin: 0,
+	      marginTop: -1,
+	      marginLeft: inset ? 72 : 0,
+	      height: 1,
+	      border: 'none',
+	      backgroundColor: baseTheme.palette.borderColor
+	    }
+	  };
+
+	  return _react2.default.createElement('hr', (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }));
+	};
+
+	Divider.muiName = 'Divider';
+
+	process.env.NODE_ENV !== "production" ? Divider.propTypes = {
+	  /**
+	   * If true, the `Divider` will be indented.
+	   */
+	  inset: _react.PropTypes.bool,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object
+	} : void 0;
+
+	Divider.defaultProps = {
+	  inset: false
+	};
+
+	Divider.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+
+	exports.default = Divider;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 416 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _Slider = __webpack_require__(417);
+
+	var _Slider2 = _interopRequireDefault(_Slider);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _Slider2.default;
+
+/***/ },
+/* 417 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(163);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(201);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(202);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(207);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(208);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(212);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(247);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _defineProperty2 = __webpack_require__(418);
+
+	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+	var _simpleAssign = __webpack_require__(255);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _keycode = __webpack_require__(263);
+
+	var _keycode2 = _interopRequireDefault(_keycode);
+
+	var _warning = __webpack_require__(334);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _transitions = __webpack_require__(256);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	var _FocusRipple = __webpack_require__(264);
+
+	var _FocusRipple2 = _interopRequireDefault(_FocusRipple);
+
+	var _deprecatedPropType = __webpack_require__(419);
+
+	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * Verifies min/max range.
+	 * @param   {Object} props         Properties of the React component.
+	 * @param   {String} propName      Name of the property to validate.
+	 * @param   {String} componentName Name of the component whose property is being validated.
+	 * @returns {Object} Returns an Error if min >= max otherwise null.
+	 */
+	var minMaxPropType = function minMaxPropType(props, propName, componentName) {
+	  for (var _len = arguments.length, rest = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+	    rest[_key - 3] = arguments[_key];
+	  }
+
+	  var error = _react.PropTypes.number.apply(_react.PropTypes, [props, propName, componentName].concat(rest));
+	  if (error !== null) {
+	    return error;
+	  }
+
+	  if (props.min >= props.max) {
+	    var errorMsg = propName === 'min' ? 'min should be less than max' : 'max should be greater than min';
+	    return new Error(errorMsg);
+	  }
+	};
+
+	/**
+	 * Verifies value is within the min/max range.
+	 * @param   {Object} props         Properties of the React component.
+	 * @param   {String} propName      Name of the property to validate.
+	 * @param   {String} componentName Name of the component whose property is being validated.
+	 * @returns {Object} Returns an Error if the value is not within the range otherwise null.
+	 */
+	var valueInRangePropType = function valueInRangePropType(props, propName, componentName) {
+	  for (var _len2 = arguments.length, rest = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+	    rest[_key2 - 3] = arguments[_key2];
+	  }
+
+	  var error = _react.PropTypes.number.apply(_react.PropTypes, [props, propName, componentName].concat(rest));
+	  if (error !== null) {
+	    return error;
+	  }
+
+	  var value = props[propName];
+	  if (value < props.min || props.max < value) {
+	    return new Error(propName + ' should be within the range specified by min and max');
+	  }
+	};
+
+	var crossAxisProperty = {
+	  x: 'height',
+	  'x-reverse': 'height',
+	  y: 'width',
+	  'y-reverse': 'width'
+	};
+
+	var crossAxisOffsetProperty = {
+	  x: 'top',
+	  'x-reverse': 'top',
+	  y: 'left',
+	  'y-reverse': 'left'
+	};
+
+	var mainAxisProperty = {
+	  x: 'width',
+	  'x-reverse': 'width',
+	  y: 'height',
+	  'y-reverse': 'height'
+	};
+
+	var mainAxisMarginFromEnd = {
+	  x: 'marginRight',
+	  'x-reverse': 'marginLeft',
+	  y: 'marginTop',
+	  'y-reverse': 'marginBottom'
+	};
+
+	var mainAxisMarginFromStart = {
+	  x: 'marginLeft',
+	  'x-reverse': 'marginRight',
+	  y: 'marginBottom',
+	  'y-reverse': 'marginTop'
+	};
+
+	var mainAxisOffsetProperty = {
+	  x: 'left',
+	  'x-reverse': 'right',
+	  y: 'bottom',
+	  'y-reverse': 'top'
+	};
+
+	var mainAxisClientProperty = {
+	  x: 'clientWidth',
+	  'x-reverse': 'clientWidth',
+	  y: 'clientHeight',
+	  'y-reverse': 'clientHeight'
+	};
+
+	var mainAxisClientOffsetProperty = {
+	  x: 'clientX',
+	  'x-reverse': 'clientX',
+	  y: 'clientY',
+	  'y-reverse': 'clientY'
+	};
+
+	var reverseMainAxisOffsetProperty = {
+	  x: 'right',
+	  'x-reverse': 'left',
+	  y: 'top',
+	  'y-reverse': 'bottom'
+	};
+
+	var isMouseControlInverted = function isMouseControlInverted(axis) {
+	  return axis === 'x-reverse' || axis === 'y';
+	};
+
+	function getPercent(value, min, max) {
+	  var percent = (value - min) / (max - min);
+	  if (isNaN(percent)) {
+	    percent = 0;
+	  }
+
+	  return percent;
+	}
+
+	var getStyles = function getStyles(props, context, state) {
+	  var _slider, _track, _filledAndRemaining, _handle, _objectAssign2, _objectAssign3;
+
+	  var axis = props.axis,
+	      disabled = props.disabled,
+	      max = props.max,
+	      min = props.min;
+	  var _context$muiTheme$sli = context.muiTheme.slider,
+	      handleColorZero = _context$muiTheme$sli.handleColorZero,
+	      handleFillColor = _context$muiTheme$sli.handleFillColor,
+	      handleSize = _context$muiTheme$sli.handleSize,
+	      handleSizeDisabled = _context$muiTheme$sli.handleSizeDisabled,
+	      handleSizeActive = _context$muiTheme$sli.handleSizeActive,
+	      trackSize = _context$muiTheme$sli.trackSize,
+	      trackColor = _context$muiTheme$sli.trackColor,
+	      trackColorSelected = _context$muiTheme$sli.trackColorSelected,
+	      rippleColor = _context$muiTheme$sli.rippleColor,
+	      selectionColor = _context$muiTheme$sli.selectionColor;
+
+
+	  var fillGutter = handleSize / 2;
+	  var disabledGutter = trackSize + handleSizeDisabled / 2;
+	  var calcDisabledSpacing = disabled ? ' - ' + disabledGutter + 'px' : '';
+	  var percent = getPercent(state.value, min, max);
+
+	  var styles = {
+	    slider: (_slider = {
+	      touchCallout: 'none',
+	      userSelect: 'none',
+	      cursor: 'default'
+	    }, (0, _defineProperty3.default)(_slider, crossAxisProperty[axis], handleSizeActive), (0, _defineProperty3.default)(_slider, mainAxisProperty[axis], '100%'), (0, _defineProperty3.default)(_slider, 'position', 'relative'), (0, _defineProperty3.default)(_slider, 'marginTop', 24), (0, _defineProperty3.default)(_slider, 'marginBottom', 48), _slider),
+	    track: (_track = {
+	      position: 'absolute'
+	    }, (0, _defineProperty3.default)(_track, crossAxisOffsetProperty[axis], (handleSizeActive - trackSize) / 2), (0, _defineProperty3.default)(_track, mainAxisOffsetProperty[axis], 0), (0, _defineProperty3.default)(_track, mainAxisProperty[axis], '100%'), (0, _defineProperty3.default)(_track, crossAxisProperty[axis], trackSize), _track),
+	    filledAndRemaining: (_filledAndRemaining = {
+	      position: 'absolute'
+	    }, (0, _defineProperty3.default)(_filledAndRemaining, crossAxisOffsetProperty, 0), (0, _defineProperty3.default)(_filledAndRemaining, crossAxisProperty[axis], '100%'), (0, _defineProperty3.default)(_filledAndRemaining, 'transition', _transitions2.default.easeOut(null, 'margin')), _filledAndRemaining),
+	    handle: (_handle = {
+	      boxSizing: 'border-box',
+	      position: 'absolute',
+	      cursor: 'pointer',
+	      pointerEvents: 'inherit'
+	    }, (0, _defineProperty3.default)(_handle, crossAxisOffsetProperty[axis], 0), (0, _defineProperty3.default)(_handle, mainAxisOffsetProperty[axis], percent === 0 ? '0%' : percent * 100 + '%'), (0, _defineProperty3.default)(_handle, 'zIndex', 1), (0, _defineProperty3.default)(_handle, 'margin', {
+	      x: trackSize / 2 + 'px 0 0 0',
+	      'x-reverse': trackSize / 2 + 'px 0 0 0',
+	      y: '0 0 0 ' + trackSize / 2 + 'px',
+	      'y-reverse': '0 0 0 ' + trackSize / 2 + 'px'
+	    }[axis]), (0, _defineProperty3.default)(_handle, 'width', handleSize), (0, _defineProperty3.default)(_handle, 'height', handleSize), (0, _defineProperty3.default)(_handle, 'backgroundColor', selectionColor), (0, _defineProperty3.default)(_handle, 'backgroundClip', 'padding-box'), (0, _defineProperty3.default)(_handle, 'border', '0px solid transparent'), (0, _defineProperty3.default)(_handle, 'borderRadius', '50%'), (0, _defineProperty3.default)(_handle, 'transform', {
+	      x: 'translate(-50%, -50%)',
+	      'x-reverse': 'translate(50%, -50%)',
+	      y: 'translate(-50%, 50%)',
+	      'y-reverse': 'translate(-50%, -50%)'
+	    }[axis]), (0, _defineProperty3.default)(_handle, 'transition', _transitions2.default.easeOut('450ms', 'background') + ', ' + _transitions2.default.easeOut('450ms', 'border-color') + ', ' + _transitions2.default.easeOut('450ms', 'width') + ', ' + _transitions2.default.easeOut('450ms', 'height')), (0, _defineProperty3.default)(_handle, 'overflow', 'visible'), (0, _defineProperty3.default)(_handle, 'outline', 'none'), _handle),
+	    handleWhenDisabled: {
+	      boxSizing: 'content-box',
+	      cursor: 'not-allowed',
+	      backgroundColor: trackColor,
+	      width: handleSizeDisabled,
+	      height: handleSizeDisabled,
+	      border: 'none'
+	    },
+	    handleWhenPercentZero: {
+	      border: trackSize + 'px solid ' + handleColorZero,
+	      backgroundColor: handleFillColor,
+	      boxShadow: 'none'
+	    },
+	    handleWhenPercentZeroAndDisabled: {
+	      cursor: 'not-allowed',
+	      width: handleSizeDisabled,
+	      height: handleSizeDisabled
+	    },
+	    handleWhenPercentZeroAndFocused: {
+	      border: trackSize + 'px solid ' + trackColorSelected
+	    },
+	    handleWhenActive: {
+	      width: handleSizeActive,
+	      height: handleSizeActive
+	    },
+	    ripple: {
+	      height: handleSize,
+	      width: handleSize,
+	      overflow: 'visible'
+	    },
+	    rippleWhenPercentZero: {
+	      top: -trackSize,
+	      left: -trackSize
+	    },
+	    rippleInner: {
+	      height: '300%',
+	      width: '300%',
+	      top: -handleSize,
+	      left: -handleSize
+	    },
+	    rippleColor: {
+	      fill: percent === 0 ? handleColorZero : rippleColor
+	    }
+	  };
+	  styles.filled = (0, _simpleAssign2.default)({}, styles.filledAndRemaining, (_objectAssign2 = {}, (0, _defineProperty3.default)(_objectAssign2, mainAxisOffsetProperty[axis], 0), (0, _defineProperty3.default)(_objectAssign2, 'backgroundColor', disabled ? trackColor : selectionColor), (0, _defineProperty3.default)(_objectAssign2, mainAxisMarginFromEnd[axis], fillGutter), (0, _defineProperty3.default)(_objectAssign2, mainAxisProperty[axis], 'calc(' + percent * 100 + '%' + calcDisabledSpacing + ')'), _objectAssign2));
+	  styles.remaining = (0, _simpleAssign2.default)({}, styles.filledAndRemaining, (_objectAssign3 = {}, (0, _defineProperty3.default)(_objectAssign3, reverseMainAxisOffsetProperty[axis], 0), (0, _defineProperty3.default)(_objectAssign3, 'backgroundColor', (state.hovered || state.focused) && !disabled ? trackColorSelected : trackColor), (0, _defineProperty3.default)(_objectAssign3, mainAxisMarginFromStart[axis], fillGutter), (0, _defineProperty3.default)(_objectAssign3, mainAxisProperty[axis], 'calc(' + (1 - percent) * 100 + '%' + calcDisabledSpacing + ')'), _objectAssign3));
+
+	  return styles;
+	};
+
+	var Slider = function (_Component) {
+	  (0, _inherits3.default)(Slider, _Component);
+
+	  function Slider() {
+	    var _ref;
+
+	    var _temp, _this, _ret;
+
+	    (0, _classCallCheck3.default)(this, Slider);
+
+	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      args[_key3] = arguments[_key3];
+	    }
+
+	    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = Slider.__proto__ || (0, _getPrototypeOf2.default)(Slider)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+	      active: false,
+	      dragging: false,
+	      focused: false,
+	      hovered: false,
+	      value: 0
+	    }, _this.track = null, _this.handle = null, _this.handleKeyDown = function (event) {
+	      var _this$props = _this.props,
+	          axis = _this$props.axis,
+	          min = _this$props.min,
+	          max = _this$props.max,
+	          step = _this$props.step;
+
+
+	      var action = void 0;
+
+	      switch ((0, _keycode2.default)(event)) {
+	        case 'page down':
+	        case 'down':
+	          if (axis === 'y-reverse') {
+	            action = 'increase';
+	          } else {
+	            action = 'decrease';
+	          }
+	          break;
+	        case 'left':
+	          if (axis === 'x-reverse') {
+	            action = 'increase';
+	          } else {
+	            action = 'decrease';
+	          }
+	          break;
+	        case 'page up':
+	        case 'up':
+	          if (axis === 'y-reverse') {
+	            action = 'decrease';
+	          } else {
+	            action = 'increase';
+	          }
+	          break;
+	        case 'right':
+	          if (axis === 'x-reverse') {
+	            action = 'decrease';
+	          } else {
+	            action = 'increase';
+	          }
+	          break;
+	        case 'home':
+	          action = 'min';
+	          break;
+	        case 'end':
+	          action = 'max';
+	          break;
+	      }
+
+	      if (action) {
+	        var newValue = void 0;
+
+	        // Cancel scroll
+	        event.preventDefault();
+
+	        switch (action) {
+	          case 'decrease':
+	            newValue = _this.state.value - step;
+	            break;
+	          case 'increase':
+	            newValue = _this.state.value + step;
+	            break;
+	          case 'min':
+	            newValue = min;
+	            break;
+	          case 'max':
+	            newValue = max;
+	            break;
+	        }
+
+	        // We need to use toFixed() because of float point errors.
+	        // For example, 0.01 + 0.06 = 0.06999999999999999
+	        newValue = parseFloat(newValue.toFixed(5));
+
+	        if (newValue > max) {
+	          newValue = max;
+	        } else if (newValue < min) {
+	          newValue = min;
+	        }
+
+	        if (_this.state.value !== newValue) {
+	          _this.setState({
+	            value: newValue
+	          });
+
+	          if (_this.props.onChange) {
+	            _this.props.onChange(event, newValue);
+	          }
+	        }
+	      }
+	    }, _this.handleDragMouseMove = function (event) {
+	      _this.onDragUpdate(event, 'mouse');
+	    }, _this.handleTouchMove = function (event) {
+	      _this.onDragUpdate(event, 'touch');
+	    }, _this.handleMouseEnd = function (event) {
+	      document.removeEventListener('mousemove', _this.handleDragMouseMove);
+	      document.removeEventListener('mouseup', _this.handleMouseEnd);
+
+	      _this.onDragStop(event);
+	    }, _this.handleTouchEnd = function (event) {
+	      document.removeEventListener('touchmove', _this.handleTouchMove);
+	      document.removeEventListener('touchup', _this.handleTouchEnd);
+	      document.removeEventListener('touchend', _this.handleTouchEnd);
+	      document.removeEventListener('touchcancel', _this.handleTouchEnd);
+
+	      _this.onDragStop(event);
+	    }, _this.handleTouchStart = function (event) {
+	      if (_this.props.disabled) {
+	        return;
+	      }
+
+	      var position = void 0;
+	      if (isMouseControlInverted(_this.props.axis)) {
+	        position = _this.getTrackOffset() - event.touches[0][mainAxisClientOffsetProperty[_this.props.axis]];
+	      } else {
+	        position = event.touches[0][mainAxisClientOffsetProperty[_this.props.axis]] - _this.getTrackOffset();
+	      }
+	      _this.setValueFromPosition(event, position);
+
+	      document.addEventListener('touchmove', _this.handleTouchMove);
+	      document.addEventListener('touchup', _this.handleTouchEnd);
+	      document.addEventListener('touchend', _this.handleTouchEnd);
+	      document.addEventListener('touchcancel', _this.handleTouchEnd);
+
+	      _this.onDragStart(event);
+
+	      // Cancel scroll and context menu
+	      event.preventDefault();
+	    }, _this.handleFocus = function (event) {
+	      _this.setState({
+	        focused: true
+	      });
+
+	      if (_this.props.onFocus) {
+	        _this.props.onFocus(event);
+	      }
+	    }, _this.handleBlur = function (event) {
+	      _this.setState({
+	        focused: false,
+	        active: false
+	      });
+
+	      if (_this.props.onBlur) {
+	        _this.props.onBlur(event);
+	      }
+	    }, _this.handleMouseDown = function (event) {
+	      if (_this.props.disabled) {
+	        return;
+	      }
+
+	      var position = void 0;
+	      if (isMouseControlInverted(_this.props.axis)) {
+	        position = _this.getTrackOffset() - event[mainAxisClientOffsetProperty[_this.props.axis]];
+	      } else {
+	        position = event[mainAxisClientOffsetProperty[_this.props.axis]] - _this.getTrackOffset();
+	      }
+	      _this.setValueFromPosition(event, position);
+
+	      document.addEventListener('mousemove', _this.handleDragMouseMove);
+	      document.addEventListener('mouseup', _this.handleMouseEnd);
+
+	      // Cancel text selection
+	      event.preventDefault();
+
+	      // Set focus manually since we called preventDefault()
+	      _this.handle.focus();
+
+	      _this.onDragStart(event);
+	    }, _this.handleMouseUp = function () {
+	      if (!_this.props.disabled) {
+	        _this.setState({
+	          active: false
+	        });
+	      }
+	    }, _this.handleMouseEnter = function () {
+	      _this.setState({
+	        hovered: true
+	      });
+	    }, _this.handleMouseLeave = function () {
+	      _this.setState({
+	        hovered: false
+	      });
+	    }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+	  }
+
+	  (0, _createClass3.default)(Slider, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _props = this.props,
+	          valueProp = _props.value,
+	          defaultValue = _props.defaultValue,
+	          min = _props.min,
+	          max = _props.max;
+
+
+	      var value = valueProp;
+	      if (value === undefined) {
+	        value = defaultValue !== undefined ? defaultValue : min;
+	      }
+
+	      if (value > max) {
+	        value = max;
+	      } else if (value < min) {
+	        value = min;
+	      }
+
+	      this.setState({
+	        value: value
+	      });
+	    }
+	  }, {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.value !== undefined && !this.state.dragging) {
+	        this.setState({
+	          value: nextProps.value
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'getValue',
+	    value: function getValue() {
+	      process.env.NODE_ENV !== "production" ? (0, _warning2.default)(false, 'Material-UI Slider: getValue() method is deprecated.\n      Use the onChange callbacks instead.\n      It will be removed with v0.17.0.') : void 0;
+
+	      return this.state.value;
+	    }
+	  }, {
+	    key: 'clearValue',
+	    value: function clearValue() {
+	      process.env.NODE_ENV !== "production" ? (0, _warning2.default)(false, 'Material-UI Slider: clearValue() method is deprecated.\n      Use the value property to control the component instead.\n      It will be removed with v0.17.0.') : void 0;
+
+	      this.setState({
+	        value: this.props.min
+	      });
+	    }
+	  }, {
+	    key: 'getTrackOffset',
+	    value: function getTrackOffset() {
+	      return this.track.getBoundingClientRect()[mainAxisOffsetProperty[this.props.axis]];
+	    }
+	  }, {
+	    key: 'onDragStart',
+	    value: function onDragStart(event) {
+	      this.setState({
+	        dragging: true,
+	        active: true
+	      });
+
+	      if (this.props.onDragStart) {
+	        this.props.onDragStart(event);
+	      }
+	    }
+	  }, {
+	    key: 'onDragUpdate',
+	    value: function onDragUpdate(event, type) {
+	      var _this2 = this;
+
+	      if (this.dragRunning) {
+	        return;
+	      }
+	      this.dragRunning = true;
+
+	      requestAnimationFrame(function () {
+	        _this2.dragRunning = false;
+
+	        var source = type === 'touch' ? event.touches[0] : event;
+
+	        var position = void 0;
+	        if (isMouseControlInverted(_this2.props.axis)) {
+	          position = _this2.getTrackOffset() - source[mainAxisClientOffsetProperty[_this2.props.axis]];
+	        } else {
+	          position = source[mainAxisClientOffsetProperty[_this2.props.axis]] - _this2.getTrackOffset();
+	        }
+
+	        if (!_this2.props.disabled) {
+	          _this2.setValueFromPosition(event, position);
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'onDragStop',
+	    value: function onDragStop(event) {
+	      this.setState({
+	        dragging: false,
+	        active: false
+	      });
+
+	      if (this.props.onDragStop) {
+	        this.props.onDragStop(event);
+	      }
+	    }
+	  }, {
+	    key: 'setValueFromPosition',
+	    value: function setValueFromPosition(event, position) {
+	      var positionMax = this.track[mainAxisClientProperty[this.props.axis]];
+	      if (position < 0) {
+	        position = 0;
+	      } else if (position > positionMax) {
+	        position = positionMax;
+	      }
+
+	      var _props2 = this.props,
+	          step = _props2.step,
+	          min = _props2.min,
+	          max = _props2.max;
+
+
+	      var value = void 0;
+	      value = position / positionMax * (max - min);
+	      value = Math.round(value / step) * step + min;
+	      value = parseFloat(value.toFixed(5));
+
+	      if (value > max) {
+	        value = max;
+	      } else if (value < min) {
+	        value = min;
+	      }
+
+	      if (this.state.value !== value) {
+	        this.setState({
+	          value: value
+	        });
+
+	        if (this.props.onChange) {
+	          this.props.onChange(event, value);
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
+
+	      var _props3 = this.props,
+	          axis = _props3.axis,
+	          description = _props3.description,
+	          disabled = _props3.disabled,
+	          disableFocusRipple = _props3.disableFocusRipple,
+	          error = _props3.error,
+	          max = _props3.max,
+	          min = _props3.min,
+	          name = _props3.name,
+	          onBlur = _props3.onBlur,
+	          onChange = _props3.onChange,
+	          onDragStart = _props3.onDragStart,
+	          onDragStop = _props3.onDragStop,
+	          onFocus = _props3.onFocus,
+	          required = _props3.required,
+	          sliderStyle = _props3.sliderStyle,
+	          step = _props3.step,
+	          style = _props3.style,
+	          other = (0, _objectWithoutProperties3.default)(_props3, ['axis', 'description', 'disabled', 'disableFocusRipple', 'error', 'max', 'min', 'name', 'onBlur', 'onChange', 'onDragStart', 'onDragStop', 'onFocus', 'required', 'sliderStyle', 'step', 'style']);
+	      var _state = this.state,
+	          active = _state.active,
+	          focused = _state.focused,
+	          hovered = _state.hovered,
+	          value = _state.value;
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context, this.state);
+	      var percent = getPercent(value, min, max);
+
+	      var handleStyles = {};
+	      if (percent === 0) {
+	        handleStyles = (0, _simpleAssign2.default)({}, styles.handle, styles.handleWhenPercentZero, active && styles.handleWhenActive, (hovered || focused) && !disabled && styles.handleWhenPercentZeroAndFocused, disabled && styles.handleWhenPercentZeroAndDisabled);
+	      } else {
+	        handleStyles = (0, _simpleAssign2.default)({}, styles.handle, active && styles.handleWhenActive, disabled && styles.handleWhenDisabled);
+	      }
+
+	      var rippleStyle = (0, _simpleAssign2.default)({}, styles.ripple, percent === 0 && styles.rippleWhenPercentZero);
+
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)({}, style)) }),
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          description
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          error
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          {
+	            style: prepareStyles((0, _simpleAssign2.default)({}, styles.slider, sliderStyle)),
+	            onFocus: this.handleFocus,
+	            onBlur: this.handleBlur,
+	            onMouseDown: this.handleMouseDown,
+	            onMouseEnter: this.handleMouseEnter,
+	            onMouseLeave: this.handleMouseLeave,
+	            onMouseUp: this.handleMouseUp,
+	            onTouchStart: this.handleTouchStart,
+	            onKeyDown: !disabled && this.handleKeyDown
+	          },
+	          _react2.default.createElement(
+	            'div',
+	            { ref: function ref(node) {
+	                return _this3.track = node;
+	              }, style: prepareStyles(styles.track) },
+	            _react2.default.createElement('div', { style: prepareStyles(styles.filled) }),
+	            _react2.default.createElement('div', { style: prepareStyles(styles.remaining) }),
+	            _react2.default.createElement(
+	              'div',
+	              {
+	                ref: function ref(node) {
+	                  return _this3.handle = node;
+	                },
+	                style: prepareStyles(handleStyles),
+	                tabIndex: 0
+	              },
+	              !disabled && !disableFocusRipple && _react2.default.createElement(_FocusRipple2.default, {
+	                style: rippleStyle,
+	                innerStyle: styles.rippleInner,
+	                show: (hovered || focused) && !active,
+	                color: styles.rippleColor.fill
+	              })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'hidden',
+	          name: name,
+	          value: value,
+	          required: required,
+	          min: min,
+	          max: max,
+	          step: step
+	        })
+	      );
+	    }
+	  }]);
+	  return Slider;
+	}(_react.Component);
+
+	Slider.defaultProps = {
+	  axis: 'x',
+	  disabled: false,
+	  disableFocusRipple: false,
+	  max: 1,
+	  min: 0,
+	  required: true,
+	  step: 0.01,
+	  style: {}
+	};
+	Slider.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? Slider.propTypes = {
+	  /**
+	   * The axis on which the slider will slide.
+	   */
+	  axis: _react.PropTypes.oneOf(['x', 'x-reverse', 'y', 'y-reverse']),
+	  /**
+	   * The default value of the slider.
+	   */
+	  defaultValue: valueInRangePropType,
+	  /**
+	   * Describe the slider.
+	   */
+	  description: (0, _deprecatedPropType2.default)(_react.PropTypes.node, 'Use a sibling node element instead. It will be removed with v0.17.0.'),
+	  /**
+	   * Disables focus ripple if set to true.
+	   */
+	  disableFocusRipple: _react.PropTypes.bool,
+	  /**
+	   * If true, the slider will not be interactable.
+	   */
+	  disabled: _react.PropTypes.bool,
+	  /**
+	   * An error message for the slider.
+	   */
+	  error: (0, _deprecatedPropType2.default)(_react.PropTypes.node, 'Use a sibling node element instead. It will be removed with v0.17.0.'),
+	  /**
+	   * The maximum value the slider can slide to on
+	   * a scale from 0 to 1 inclusive. Cannot be equal to min.
+	   */
+	  max: minMaxPropType,
+	  /**
+	   * The minimum value the slider can slide to on a scale
+	   * from 0 to 1 inclusive. Cannot be equal to max.
+	   */
+	  min: minMaxPropType,
+	  /**
+	   * The name of the slider. Behaves like the name attribute
+	   * of an input element.
+	   */
+	  name: _react.PropTypes.string,
+	  /** @ignore */
+	  onBlur: _react.PropTypes.func,
+	  /**
+	   * Callback function that is fired when the slider's value changed.
+	   *
+	   * @param {object} event KeyDown event targeting the slider.
+	   * @param {number} newValue The new value of the slider.
+	   */
+	  onChange: _react.PropTypes.func,
+	  /**
+	   * Callback function that is fired when the slider has begun to move.
+	   *
+	   * @param {object} event MouseDown or TouchStart event targeting the slider.
+	   */
+	  onDragStart: _react.PropTypes.func,
+	  /**
+	   * Callback function that is fired when the slide has stopped moving.
+	   *
+	   * @param {object} event MouseEnd or TouchEnd event targeting the slider.
+	   */
+	  onDragStop: _react.PropTypes.func,
+	  /** @ignore */
+	  onFocus: _react.PropTypes.func,
+	  /**
+	   * Whether or not the slider is required in a form.
+	   */
+	  required: _react.PropTypes.bool,
+	  /**
+	   * Override the inline-styles of the inner slider element.
+	   */
+	  sliderStyle: _react.PropTypes.object,
+	  /**
+	   * The granularity the slider can step through values.
+	   */
+	  step: _react.PropTypes.number,
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  /**
+	   * The value of the slider.
+	   */
+	  value: valueInRangePropType
+	} : void 0;
+	exports.default = Slider;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 418 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	exports.__esModule = true;
+
+	var _defineProperty = __webpack_require__(209);
+
+	var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (obj, key, value) {
+	  if (key in obj) {
+	    (0, _defineProperty2.default)(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+
+	  return obj;
+	};
+
+/***/ },
+/* 419 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = deprecated;
+
+	var _warning = __webpack_require__(334);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var warned = {}; /**
+	                  * This module is taken from https://github.com/react-bootstrap/react-prop-types.
+	                  * It's not a dependency to reduce build size / install time.
+	                  * It should be pretty stable.
+	                  */
+	function deprecated(validator, reason) {
+	  return function validate(props, propName, componentName, location, propFullName) {
+	    var componentNameSafe = componentName || '<<anonymous>>';
+	    var propFullNameSafe = propFullName || propName;
+
+	    if (props[propName] != null) {
+	      var messageKey = componentName + '.' + propName;
+
+	      process.env.NODE_ENV !== "production" ? (0, _warning2.default)(warned[messageKey], 'The ' + location + ' `' + propFullNameSafe + '` of ' + ('`' + componentNameSafe + '` is deprecated. ' + reason)) : void 0;
+
+	      warned[messageKey] = true;
+	    }
+
+	    for (var _len = arguments.length, args = Array(_len > 5 ? _len - 5 : 0), _key = 5; _key < _len; _key++) {
+	      args[_key - 5] = arguments[_key];
+	    }
+
+	    return validator.apply(undefined, [props, propName, componentName, location, propFullName].concat(args));
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 420 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Clock = function (_React$Component) {
+		_inherits(Clock, _React$Component);
+
+		function Clock(props) {
+			_classCallCheck(this, Clock);
+
+			var _this = _possibleConstructorReturn(this, (Clock.__proto__ || Object.getPrototypeOf(Clock)).call(this, props));
+
+			_this.tick = _this.tick.bind(_this);
+
+			_this.state = {
+				tenMinValue: _this.props.values.tenMinValue,
+				oneMinValue: _this.props.values.oneMinValue,
+				tenSecValue: _this.props.values.tenSecValue,
+				oneSecValue: _this.props.values.oneSecValue
+			};
+
+			//setInterval(this.tick, 1000);
+			return _this;
+		}
+
+		_createClass(Clock, [{
+			key: "tick",
+			value: function tick() {
+				if (!this.props.running) return;
+
+				console.log("timer tick");
+
+				var tenMin = this.state.tenMinValue;
+				var oneMin = this.state.oneMinValue;
+				var tenSec = this.state.tenSecValue;
+				var oneSec = this.state.oneSecValue;
+
+				var stillRunning;
+
+				oneSec--;
+
+				if (oneSec == -1 && tenSec >= 0) {
+					oneSec = 9;
+					tenSec--;
+				}
+
+				if (tenSec == -1 && oneMin >= 0) {
+					tenSec = 5;
+					oneMin--;
+				}
+
+				if (oneMin == -1 && tenMin >= 0) {
+					oneMin = 9;
+					tenMin--;
+				}
+
+				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) {
+					stillRunning = false;
+					this.props.onStop(); // calls function in ControlPanel to synchronize states
+				} else {
+					stillRunning = true;
+				}
+
+				this.setState({
+					tenMinValue: tenMin,
+					oneMinValue: oneMin,
+					tenSecValue: tenSec,
+					oneSecValue: oneSec
+				});
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				console.log(this.state);
+
+				var curTime = this.state.tenMinValue.toString() + this.state.oneMinValue.toString() + ":" + this.state.tenSecValue.toString() + this.state.oneSecValue.toString();
+
+				return _react2.default.createElement(
+					"div",
+					null,
+					curTime
+				);
+			}
+		}]);
+
+		return Clock;
+	}(_react2.default.Component);
+
+	exports.default = Clock;
+
+/***/ },
+/* 421 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StatsPanel = function (_React$Component) {
+		_inherits(StatsPanel, _React$Component);
+
+		function StatsPanel(props) {
+			_classCallCheck(this, StatsPanel);
+
+			return _possibleConstructorReturn(this, (StatsPanel.__proto__ || Object.getPrototypeOf(StatsPanel)).call(this, props));
+		}
+
+		_createClass(StatsPanel, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					"stats panel"
+				);
+			}
+		}]);
+
+		return StatsPanel;
+	}(_react2.default.Component);
+
+	exports.default = StatsPanel;
+
+/***/ },
+/* 422 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SettingsPanel = function (_React$Component) {
+		_inherits(SettingsPanel, _React$Component);
+
+		function SettingsPanel(props) {
+			_classCallCheck(this, SettingsPanel);
+
+			return _possibleConstructorReturn(this, (SettingsPanel.__proto__ || Object.getPrototypeOf(SettingsPanel)).call(this, props));
+		}
+
+		_createClass(SettingsPanel, [{
+			key: "render",
+			value: function render() {
+				return _react2.default.createElement(
+					"div",
+					null,
+					"SettingsPanel"
+				);
+			}
+		}]);
+
+		return SettingsPanel;
+	}(_react2.default.Component);
+
+	exports.default = SettingsPanel;
 
 /***/ }
 /******/ ]);

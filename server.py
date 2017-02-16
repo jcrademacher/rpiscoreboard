@@ -241,7 +241,7 @@ try:
 
 	print "ip: " #+ ip
 
-	server = HTTPServer(("10.0.0.248", 8000), myHandler)
+	server = HTTPServer(("192.168.1.116", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests

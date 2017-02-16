@@ -4,7 +4,8 @@ import Paper from 'material-ui/Paper';
 // icons for tabs
 import StatsIcon from 'material-ui/svg-icons/action/assessment';
 import ControlIcon from 'material-ui/svg-icons/action/build';
-import Panel from "./Panel.jsx"
+import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import Panel from "./Panel.jsx";
 
 const MainView = React.createClass({
 
@@ -21,12 +22,20 @@ const MainView = React.createClass({
 			}
 		};
 
-    if(this.state.tabIndex == 0) {
+		var i = this.state.tabIndex;
+
+    if(i == 0) {
       panel = "stats";
     }
-    else {
+    else if(i == 1){
       panel = "control";
     }
+		else if(i == 2) {
+			panel = "settings";
+		}
+		else {
+			panel = "control";
+		}
 
     return (<div style={{textAlign: "center"}}>
       <Paper zDepth={4} style={styles.paper}>
@@ -42,10 +51,15 @@ const MainView = React.createClass({
               icon={<ControlIcon/>}
               onClick={() => this.setState({tabIndex: 1})}
             />
+						<BottomNavigationItem
+              label="Settings"
+              icon={<SettingsIcon/>}
+              onClick={() => this.setState({tabIndex: 2})}
+            />
           </BottomNavigation>
         </div>
         <div>
-          <Panel selectedPanel={panel}/>
+          <Panel selectedIndex={panel}/>
         </div>
       </Paper>
     </div>);
