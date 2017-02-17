@@ -31384,13 +31384,86 @@
 		function Panel(props) {
 			_classCallCheck(this, Panel);
 
-			return _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (Panel.__proto__ || Object.getPrototypeOf(Panel)).call(this, props));
+
+			_this.getTimerValues = _this.getTimerValues.bind(_this);
+			_this.runBackgroundTimer = _this.runBackgroundTimer.bind(_this);
+
+			_this.timer = null;
+			_this.clockMode = "clock";
+			_this.running = false;
+			return _this;
 		}
 
+		// gets timer values when BottomNavigation tab has changed
+
+
 		_createClass(Panel, [{
+			key: "getTimerValues",
+			value: function getTimerValues(values, clockMode, running) {
+				this.timerValues = values;
+				this.clockMode = clockMode; // gets mode clock was in when ControlPanel was tabbed out of
+				this.running = running;
+
+				if (this.clockMode == "timer" && running) this.timer = setInterval(this.runBackgroundTimer, 1000);
+			}
+
+			// runs timer in background
+
+		}, {
+			key: "runBackgroundTimer",
+			value: function runBackgroundTimer() {
+				var tenMin = this.timerValues.tenMinValue;
+				var oneMin = this.timerValues.oneMinValue;
+				var tenSec = this.timerValues.tenSecValue;
+				var oneSec = this.timerValues.oneSecValue;
+
+				console.log("background timer running");
+
+				oneSec--;
+
+				if (oneSec == -1 && tenSec >= 0) {
+					oneSec = 9;
+					tenSec--;
+				}
+
+				if (tenSec == -1 && oneMin >= 0) {
+					tenSec = 5;
+					oneMin--;
+				}
+
+				if (oneMin == -1 && tenMin >= 0) {
+					oneMin = 9;
+					tenMin--;
+				}
+
+				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) clearInterval(this.timer); // stops timer if values have reached 0
+
+				// sets timerValues instance variable to newly created timer values
+				this.timerValues = {
+					tenMinValue: tenMin,
+					oneMinValue: oneMin,
+					tenSecValue: tenSec,
+					oneSecValue: oneSec
+				};
+
+				console.log(this.timerValues);
+			}
+		}, {
 			key: "render",
 			value: function render() {
-				if (this.props.selectedIndex == "control") return _react2.default.createElement(_ControlPanel2.default, null);else if (this.props.selectedIndex == "stats") return _react2.default.createElement(_StatsPanel2.default, null);else if (this.props.selectedIndex == "settings") return _react2.default.createElement(_SettingsPanel2.default, null);
+				if (this.props.selectedIndex == "control") {
+					if (this.timer != null) {
+						clearInterval(this.timer);
+					}
+
+					return _react2.default.createElement(_ControlPanel2.default, {
+						onDeselect: this.getTimerValues,
+						clockMode: this.clockMode,
+						values: this.timerValues,
+						running: this.running
+					});
+				} else if (this.props.selectedIndex == "stats") return _react2.default.createElement(_StatsPanel2.default, null);else if (this.props.selectedIndex == "settings") return _react2.default.createElement(_SettingsPanel2.default, null);
 			}
 		}]);
 
@@ -31478,14 +31551,19 @@
 			_this.handleTimerChange = _this.handleTimerChange.bind(_this);
 			_this.syncTimer = _this.syncTimer.bind(_this);
 
-			_this.state = {
-				clockMode: "clock",
-				timerRunning: false,
+			var cmode = _this.props.clockMode == "clock";
 
-				tenMinValue: parseInt(_this.formatTime().charAt(0)),
-				oneMinValue: parseInt(_this.formatTime().charAt(1)),
-				tenSecValue: parseInt(_this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
-				oneSecValue: parseInt(_this.formatTime().charAt(4)),
+			_this.state = {
+				clockMode: _this.props.clockMode,
+				timerRunning: _this.props.running,
+
+				// ternary operator checks if clockMode is in clock mode
+				// if so, format new time, if not, display passed timer values as props
+				tenMinValue: cmode ? parseInt(_this.formatTime().charAt(0)) : _this.props.values.tenMinValue,
+				oneMinValue: cmode ? parseInt(_this.formatTime().charAt(1)) : _this.props.values.oneMinValue,
+				// skip over 2 because index 2 is a colon
+				tenSecValue: cmode ? parseInt(_this.formatTime().charAt(3)) : _this.props.values.tenSecValue,
+				oneSecValue: cmode ? parseInt(_this.formatTime().charAt(4)) : _this.props.values.oneSecValue,
 
 				homeScore: 0,
 				awayScore: 0
@@ -31632,7 +31710,9 @@
 				this.setState({
 					tenMinValue: parseInt(e.target.value.charAt(0)),
 					oneMinValue: parseInt(e.target.value.charAt(1)),
-					tenSecValue: parseInt(e.target.value.charAt(3)),
+					// ternary operator checks if tenSecValue is greater than five
+					// if so, set value to 5, if not, leave original value
+					tenSecValue: parseInt(e.target.value.charAt(3)) > 5 ? 5 : parseInt(e.target.value.charAt(3)),
 					oneSecValue: parseInt(e.target.value.charAt(4))
 				});
 			}
@@ -31642,9 +31722,12 @@
 				var btn = this.refs.timer;
 
 				if (btn.props.label == "Start Timer") {
-					this.setState({
-						timerRunning: true
-					});
+					if (!(this.state.tenMinValue == 0 && this.state.oneMinValue == 0 && // if timer is not at 0
+					this.state.tenSecValue == 0 && this.state.oneSecValue == 0)) {
+						this.setState({
+							timerRunning: true
+						});
+					}
 				} else {
 					this.setState({
 						timerRunning: false
@@ -31660,12 +31743,16 @@
 			value: function syncTimer(values) {
 				console.log("sync timer");
 
-				this.setState({
-					tenMinValue: values.tenMinValue,
-					oneMinValue: values.oneMinValue,
-					tenSecValue: values.tenSecValue,
-					oneSecValue: values.oneSecValue
-				});
+				if (this.state.clockMode != "clock") {
+					this.setState({
+						timerRunning: false,
+
+						tenMinValue: values.tenMinValue,
+						oneMinValue: values.oneMinValue,
+						tenSecValue: values.tenSecValue,
+						oneSecValue: values.oneSecValue
+					});
+				}
 			}
 		}, {
 			key: "textOnFocus",
@@ -31681,8 +31768,6 @@
 			key: "render",
 			value: function render() {
 				var _this2 = this;
-
-				console.log(this.state);
 
 				var styles = {
 					clock: {
@@ -31753,8 +31838,6 @@
 					oneSecValue: this.state.oneSecValue
 				};
 
-				console.log("clock values: " + clockValues.tenMinValue);
-
 				return _react2.default.createElement(
 					"div",
 					null,
@@ -31793,8 +31876,9 @@
 									_react2.default.createElement(_Clock2.default, {
 										running: this.state.timerRunning,
 										values: clockValues,
-										mode: this.state.clockMode,
-										onStop: this.syncTimer
+										clockMode: this.state.clockMode,
+										onStop: this.syncTimer,
+										onDeselect: this.props.onDeselect
 									})
 								),
 								_react2.default.createElement(
@@ -41873,11 +41957,36 @@
 				oneSecValue: _this.props.values.oneSecValue
 			};
 
-			//setInterval(this.tick, 1000);
+			_this.timer = setInterval(_this.tick, 1000);
 			return _this;
 		}
 
+		// method called before component receives new props,
+		// sets state to new values in order to provide correct values for re render
+
+
 		_createClass(Clock, [{
+			key: "componentWillReceiveProps",
+			value: function componentWillReceiveProps(nextProps) {
+				this.setState({
+					tenMinValue: nextProps.values.tenMinValue,
+					oneMinValue: nextProps.values.oneMinValue,
+					tenSecValue: nextProps.values.tenSecValue,
+					oneSecValue: nextProps.values.oneSecValue
+				});
+
+				// if nextProps specify that the timer should not be running, and if the timer is currently running,
+				// then call function to sync state with ControlPanel
+				if (!nextProps.running && this.props.running) this.props.onStop(this.state);
+			}
+		}, {
+			key: "componentWillUnmount",
+			value: function componentWillUnmount() {
+				clearInterval(this.timer); // clears instance variable timer from ticking
+
+				this.props.onDeselect(this.state, this.props.clockMode, this.props.running);
+			}
+		}, {
 			key: "tick",
 			value: function tick() {
 				if (!this.props.running) return;
@@ -41888,8 +41997,6 @@
 				var oneMin = this.state.oneMinValue;
 				var tenSec = this.state.tenSecValue;
 				var oneSec = this.state.oneSecValue;
-
-				var stillRunning;
 
 				oneSec--;
 
@@ -41908,25 +42015,18 @@
 					tenMin--;
 				}
 
-				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) {
-					stillRunning = false;
-					this.props.onStop(); // calls function in ControlPanel to synchronize states
-				} else {
-					stillRunning = true;
-				}
-
 				this.setState({
 					tenMinValue: tenMin,
 					oneMinValue: oneMin,
 					tenSecValue: tenSec,
 					oneSecValue: oneSec
 				});
+
+				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) this.props.onStop(this.state); // calls function in ControlPanel to synchronize states
 			}
 		}, {
 			key: "render",
 			value: function render() {
-				console.log(this.state);
-
 				var curTime = this.state.tenMinValue.toString() + this.state.oneMinValue.toString() + ":" + this.state.tenSecValue.toString() + this.state.oneSecValue.toString();
 
 				return _react2.default.createElement(
