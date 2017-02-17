@@ -233,6 +233,8 @@ class myHandler(BaseHTTPRequestHandler):
 		if self.path == "/control/away-down":
 			awayMinusHandler();
 
+		self.send_response(200)
+
 
 try:
 	#Create a web server and define the handler to manage the
@@ -241,7 +243,7 @@ try:
 
 	print "ip: " #+ ip
 
-	server = HTTPServer(("192.168.1.116", 8000), myHandler)
+	server = HTTPServer(("10.0.0.248", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests

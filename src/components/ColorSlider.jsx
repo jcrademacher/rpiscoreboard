@@ -15,8 +15,8 @@ export default class ColorSlider extends React.Component {
 
 		return (
 			<div>
-				<Slider style={style} axis="y" min={0} max={235} defaultValue={235}/>
-				<p>{this.props.label}</p>
+				<Slider onDragStop={this.props.onDragStop} style={style} axis="y" min={0} max={235} defaultValue={235}/>
+				<p style={this.props.labelStyle}>{this.props.label}</p>
 			</div>
 			);
 	}
