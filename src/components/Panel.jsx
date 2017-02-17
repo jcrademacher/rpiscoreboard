@@ -2,6 +2,7 @@ import React from 'react';
 import ControlPanel from "./ControlPanel.jsx";
 import StatsPanel from "./StatsPanel.jsx";
 import SettingsPanel from "./SettingsPanel.jsx";
+import DisplaysPanel from "./DisplaysPanel.jsx"
 
 class Panel extends React.Component {
 	constructor(props) {
@@ -82,6 +83,8 @@ class Panel extends React.Component {
 			return <StatsPanel/>;
 		else if(this.props.selectedIndex == "settings")
 			return <SettingsPanel/>;
+		else if(this.props.selectedIndex == "displays")
+			return <DisplaysPanel/>;
 	}
 }
 

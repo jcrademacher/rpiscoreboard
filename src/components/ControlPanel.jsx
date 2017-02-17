@@ -7,7 +7,6 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
-import Slider from 'material-ui/Slider';
 import Clock from './Clock.jsx';
 
 class ControlPanel extends React.Component {

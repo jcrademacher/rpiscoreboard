@@ -5,6 +5,7 @@ import Paper from 'material-ui/Paper';
 import StatsIcon from 'material-ui/svg-icons/action/assessment';
 import ControlIcon from 'material-ui/svg-icons/action/build';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
+import DisplaysIcon from 'material-ui/svg-icons/av/video-label';
 import Panel from "./Panel.jsx";
 
 const MainView = React.createClass({
@@ -31,7 +32,10 @@ const MainView = React.createClass({
       panel = "control";
     }
 		else if(i == 2) {
-			panel = "settings";
+			panel = "displays";
+		}
+		else if(i == 3) {
+			panel = "settings"
 		}
 		else {
 			panel = "control";
@@ -52,9 +56,14 @@ const MainView = React.createClass({
               onClick={() => this.setState({tabIndex: 1})}
             />
 						<BottomNavigationItem
+							label="Displays"
+							icon={<DisplaysIcon/>}
+							onClick={() => this.setState({tabIndex: 2})}
+						/>
+						<BottomNavigationItem
               label="Settings"
               icon={<SettingsIcon/>}
-              onClick={() => this.setState({tabIndex: 2})}
+              onClick={() => this.setState({tabIndex: 3})}
             />
           </BottomNavigation>
         </div>
