@@ -30459,8 +30459,13 @@
 
 	var _Panel2 = _interopRequireDefault(_Panel);
 
+	var _LinearProgress = __webpack_require__(427);
+
+	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	// icons for tabs
 	var MainView = _react2.default.createClass({
 	  displayName: 'MainView',
 
@@ -30545,7 +30550,7 @@
 	    );
 	  }
 	});
-	// icons for tabs
+
 	exports.default = MainView;
 
 /***/ },
@@ -31423,6 +31428,10 @@
 
 	var _DisplaysPanel2 = _interopRequireDefault(_DisplaysPanel);
 
+	var _ProgressBar = __webpack_require__(426);
+
+	var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31510,13 +31519,39 @@
 						clearInterval(this.timer);
 					}
 
-					return _react2.default.createElement(_ControlPanel2.default, {
-						onDeselect: this.getTimerValues,
-						clockMode: this.clockMode,
-						values: this.timerValues,
-						running: this.running
-					});
-				} else if (this.props.selectedIndex == "stats") return _react2.default.createElement(_StatsPanel2.default, null);else if (this.props.selectedIndex == "settings") return _react2.default.createElement(_SettingsPanel2.default, null);else if (this.props.selectedIndex == "displays") return _react2.default.createElement(_DisplaysPanel2.default, null);
+					return _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(_ProgressBar2.default, null),
+						_react2.default.createElement(_ControlPanel2.default, {
+							onDeselect: this.getTimerValues,
+							clockMode: this.clockMode,
+							values: this.timerValues,
+							running: this.running
+						})
+					);
+				} else if (this.props.selectedIndex == "stats") {
+					return _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(_ProgressBar2.default, null),
+						_react2.default.createElement(_StatsPanel2.default, null)
+					);
+				} else if (this.props.selectedIndex == "settings") {
+					return _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(_ProgressBar2.default, null),
+						_react2.default.createElement(_SettingsPanel2.default, null)
+					);
+				} else if (this.props.selectedIndex == "displays") {
+					return _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(_ProgressBar2.default, null),
+						_react2.default.createElement(_DisplaysPanel2.default, null)
+					);
+				}
 			}
 		}]);
 
@@ -41259,11 +41294,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _LinearProgress = __webpack_require__(421);
-
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
-
-	var _ColorSlider = __webpack_require__(423);
+	var _ColorSlider = __webpack_require__(421);
 
 	var _ColorSlider2 = _interopRequireDefault(_ColorSlider);
 
@@ -41352,22 +41383,17 @@
 
 				return _react2.default.createElement(
 					"div",
-					null,
-					_react2.default.createElement(_LinearProgress2.default, { mode: "determinate", value: this.state.progress }),
-					_react2.default.createElement(
-						"div",
-						{ style: divStyle },
-						_react2.default.createElement("br", null),
-						_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
-								return _this3.handleDragStop(e, "red");
-							}, label: "Red", margin: "50", height: 300, labelStyle: { fontSize: 20 } }),
-						_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
-								return _this3.handleDragStop(e, "green");
-							}, label: "Green", margin: "50", height: 300, labelStyle: { fontSize: 20 } }),
-						_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
-								return _this3.handleDragStop(e, "blue");
-							}, label: "Blue", margin: "50", height: 300, labelStyle: { fontSize: 20 } })
-					)
+					{ style: divStyle },
+					_react2.default.createElement("br", null),
+					_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
+							return _this3.handleDragStop(e, "red");
+						}, label: "Red", margin: "50", height: 300, labelStyle: { fontSize: 20 } }),
+					_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
+							return _this3.handleDragStop(e, "green");
+						}, label: "Green", margin: "50", height: 300, labelStyle: { fontSize: 20 } }),
+					_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
+							return _this3.handleDragStop(e, "blue");
+						}, label: "Blue", margin: "50", height: 300, labelStyle: { fontSize: 20 } })
 				);
 			}
 		}]);
@@ -41384,256 +41410,6 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = undefined;
-
-	var _LinearProgress = __webpack_require__(422);
-
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _LinearProgress2.default;
-
-/***/ },
-/* 422 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _extends2 = __webpack_require__(163);
-
-	var _extends3 = _interopRequireDefault(_extends2);
-
-	var _objectWithoutProperties2 = __webpack_require__(201);
-
-	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
-
-	var _getPrototypeOf = __webpack_require__(202);
-
-	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
-
-	var _classCallCheck2 = __webpack_require__(207);
-
-	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-	var _createClass2 = __webpack_require__(208);
-
-	var _createClass3 = _interopRequireDefault(_createClass2);
-
-	var _possibleConstructorReturn2 = __webpack_require__(212);
-
-	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
-
-	var _inherits2 = __webpack_require__(247);
-
-	var _inherits3 = _interopRequireDefault(_inherits2);
-
-	var _simpleAssign = __webpack_require__(255);
-
-	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _transitions = __webpack_require__(256);
-
-	var _transitions2 = _interopRequireDefault(_transitions);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function getRelativeValue(value, min, max) {
-	  var clampedValue = Math.min(Math.max(min, value), max);
-	  var rangeValue = max - min;
-	  var relValue = Math.round((clampedValue - min) / rangeValue * 10000) / 10000;
-	  return relValue * 100;
-	}
-
-	function getStyles(props, context) {
-	  var max = props.max,
-	      min = props.min,
-	      value = props.value;
-	  var palette = context.muiTheme.baseTheme.palette;
-
-
-	  var styles = {
-	    root: {
-	      position: 'relative',
-	      height: 4,
-	      display: 'block',
-	      width: '100%',
-	      backgroundColor: palette.primary3Color,
-	      borderRadius: 2,
-	      margin: 0,
-	      overflow: 'hidden'
-	    },
-	    bar: {
-	      height: '100%'
-	    },
-	    barFragment1: {},
-	    barFragment2: {}
-	  };
-
-	  if (props.mode === 'indeterminate') {
-	    styles.barFragment1 = {
-	      position: 'absolute',
-	      backgroundColor: props.color || palette.primary1Color,
-	      top: 0,
-	      left: 0,
-	      bottom: 0,
-	      transition: _transitions2.default.create('all', '840ms', null, 'cubic-bezier(0.650, 0.815, 0.735, 0.395)')
-	    };
-
-	    styles.barFragment2 = {
-	      position: 'absolute',
-	      backgroundColor: props.color || palette.primary1Color,
-	      top: 0,
-	      left: 0,
-	      bottom: 0,
-	      transition: _transitions2.default.create('all', '840ms', null, 'cubic-bezier(0.165, 0.840, 0.440, 1.000)')
-	    };
-	  } else {
-	    styles.bar.backgroundColor = props.color || palette.primary1Color;
-	    styles.bar.transition = _transitions2.default.create('width', '.3s', null, 'linear');
-	    styles.bar.width = getRelativeValue(value, min, max) + '%';
-	  }
-
-	  return styles;
-	}
-
-	var LinearProgress = function (_Component) {
-	  (0, _inherits3.default)(LinearProgress, _Component);
-
-	  function LinearProgress() {
-	    (0, _classCallCheck3.default)(this, LinearProgress);
-	    return (0, _possibleConstructorReturn3.default)(this, (LinearProgress.__proto__ || (0, _getPrototypeOf2.default)(LinearProgress)).apply(this, arguments));
-	  }
-
-	  (0, _createClass3.default)(LinearProgress, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-
-	      this.timers = {};
-
-	      this.timers.bar1 = this.barUpdate('bar1', 0, this.refs.bar1, [[-35, 100], [100, -90]]);
-
-	      this.timers.bar2 = setTimeout(function () {
-	        _this2.barUpdate('bar2', 0, _this2.refs.bar2, [[-200, 100], [107, -8]]);
-	      }, 850);
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      clearTimeout(this.timers.bar1);
-	      clearTimeout(this.timers.bar2);
-	    }
-	  }, {
-	    key: 'barUpdate',
-	    value: function barUpdate(id, step, barElement, stepValues) {
-	      var _this3 = this;
-
-	      if (this.props.mode !== 'indeterminate') return;
-
-	      step = step || 0;
-	      step %= 4;
-
-	      var right = this.context.muiTheme.isRtl ? 'left' : 'right';
-	      var left = this.context.muiTheme.isRtl ? 'right' : 'left';
-
-	      if (step === 0) {
-	        barElement.style[left] = stepValues[0][0] + '%';
-	        barElement.style[right] = stepValues[0][1] + '%';
-	      } else if (step === 1) {
-	        barElement.style.transitionDuration = '840ms';
-	      } else if (step === 2) {
-	        barElement.style[left] = stepValues[1][0] + '%';
-	        barElement.style[right] = stepValues[1][1] + '%';
-	      } else if (step === 3) {
-	        barElement.style.transitionDuration = '0ms';
-	      }
-	      this.timers[id] = setTimeout(function () {
-	        return _this3.barUpdate(id, step + 1, barElement, stepValues);
-	      }, 420);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _props = this.props,
-	          style = _props.style,
-	          other = (0, _objectWithoutProperties3.default)(_props, ['style']);
-	      var prepareStyles = this.context.muiTheme.prepareStyles;
-
-	      var styles = getStyles(this.props, this.context);
-
-	      return _react2.default.createElement(
-	        'div',
-	        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
-	        _react2.default.createElement(
-	          'div',
-	          { style: prepareStyles(styles.bar) },
-	          _react2.default.createElement('div', { ref: 'bar1', style: prepareStyles(styles.barFragment1) }),
-	          _react2.default.createElement('div', { ref: 'bar2', style: prepareStyles(styles.barFragment2) })
-	        )
-	      );
-	    }
-	  }]);
-	  return LinearProgress;
-	}(_react.Component);
-
-	LinearProgress.defaultProps = {
-	  mode: 'indeterminate',
-	  value: 0,
-	  min: 0,
-	  max: 100
-	};
-	LinearProgress.contextTypes = {
-	  muiTheme: _react.PropTypes.object.isRequired
-	};
-	process.env.NODE_ENV !== "production" ? LinearProgress.propTypes = {
-	  /**
-	   * The color of the progress bar, defaults to
-	   * primary color of theme.
-	   */
-	  color: _react.PropTypes.string,
-	  /**
-	   * The max value of progress, only works in determinate mode.
-	   */
-	  max: _react.PropTypes.number,
-	  /**
-	   * The min value of progress, only works in determinate mode.
-	   */
-	  min: _react.PropTypes.number,
-	  /**
-	   * The mode of show your progress, indeterminate for when
-	   * there is no value for progress.
-	   */
-	  mode: _react.PropTypes.oneOf(['determinate', 'indeterminate']),
-	  /**
-	   * Override the inline-styles of the root element.
-	   */
-	  style: _react.PropTypes.object,
-	  /**
-	   * The value of progress, only works in determinate mode.
-	   */
-	  value: _react.PropTypes.number
-	} : void 0;
-	exports.default = LinearProgress;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
-
-/***/ },
-/* 423 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
@@ -41643,7 +41419,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Slider = __webpack_require__(424);
+	var _Slider = __webpack_require__(422);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
@@ -41692,7 +41468,7 @@
 	exports.default = ColorSlider;
 
 /***/ },
-/* 424 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41702,7 +41478,7 @@
 	});
 	exports.default = undefined;
 
-	var _Slider = __webpack_require__(425);
+	var _Slider = __webpack_require__(423);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
@@ -41711,7 +41487,7 @@
 	exports.default = _Slider2.default;
 
 /***/ },
-/* 425 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -41748,7 +41524,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _defineProperty2 = __webpack_require__(426);
+	var _defineProperty2 = __webpack_require__(424);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -41776,7 +41552,7 @@
 
 	var _FocusRipple2 = _interopRequireDefault(_FocusRipple);
 
-	var _deprecatedPropType = __webpack_require__(427);
+	var _deprecatedPropType = __webpack_require__(425);
 
 	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
 
@@ -42565,7 +42341,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 426 */
+/* 424 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42594,7 +42370,7 @@
 	};
 
 /***/ },
-/* 427 */
+/* 425 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42635,6 +42411,282 @@
 	    return validator.apply(undefined, [props, propName, componentName, location, propFullName].concat(args));
 	  };
 	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+
+/***/ },
+/* 426 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _LinearProgress = __webpack_require__(427);
+
+	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ProgressBar = function ProgressBar(props) {
+		return _react2.default.createElement(_LinearProgress2.default, { mode: "determinate" });
+	};
+
+	exports.default = ProgressBar;
+
+/***/ },
+/* 427 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = undefined;
+
+	var _LinearProgress = __webpack_require__(428);
+
+	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _LinearProgress2.default;
+
+/***/ },
+/* 428 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends2 = __webpack_require__(163);
+
+	var _extends3 = _interopRequireDefault(_extends2);
+
+	var _objectWithoutProperties2 = __webpack_require__(201);
+
+	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+	var _getPrototypeOf = __webpack_require__(202);
+
+	var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+	var _classCallCheck2 = __webpack_require__(207);
+
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+	var _createClass2 = __webpack_require__(208);
+
+	var _createClass3 = _interopRequireDefault(_createClass2);
+
+	var _possibleConstructorReturn2 = __webpack_require__(212);
+
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+	var _inherits2 = __webpack_require__(247);
+
+	var _inherits3 = _interopRequireDefault(_inherits2);
+
+	var _simpleAssign = __webpack_require__(255);
+
+	var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _transitions = __webpack_require__(256);
+
+	var _transitions2 = _interopRequireDefault(_transitions);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function getRelativeValue(value, min, max) {
+	  var clampedValue = Math.min(Math.max(min, value), max);
+	  var rangeValue = max - min;
+	  var relValue = Math.round((clampedValue - min) / rangeValue * 10000) / 10000;
+	  return relValue * 100;
+	}
+
+	function getStyles(props, context) {
+	  var max = props.max,
+	      min = props.min,
+	      value = props.value;
+	  var palette = context.muiTheme.baseTheme.palette;
+
+
+	  var styles = {
+	    root: {
+	      position: 'relative',
+	      height: 4,
+	      display: 'block',
+	      width: '100%',
+	      backgroundColor: palette.primary3Color,
+	      borderRadius: 2,
+	      margin: 0,
+	      overflow: 'hidden'
+	    },
+	    bar: {
+	      height: '100%'
+	    },
+	    barFragment1: {},
+	    barFragment2: {}
+	  };
+
+	  if (props.mode === 'indeterminate') {
+	    styles.barFragment1 = {
+	      position: 'absolute',
+	      backgroundColor: props.color || palette.primary1Color,
+	      top: 0,
+	      left: 0,
+	      bottom: 0,
+	      transition: _transitions2.default.create('all', '840ms', null, 'cubic-bezier(0.650, 0.815, 0.735, 0.395)')
+	    };
+
+	    styles.barFragment2 = {
+	      position: 'absolute',
+	      backgroundColor: props.color || palette.primary1Color,
+	      top: 0,
+	      left: 0,
+	      bottom: 0,
+	      transition: _transitions2.default.create('all', '840ms', null, 'cubic-bezier(0.165, 0.840, 0.440, 1.000)')
+	    };
+	  } else {
+	    styles.bar.backgroundColor = props.color || palette.primary1Color;
+	    styles.bar.transition = _transitions2.default.create('width', '.3s', null, 'linear');
+	    styles.bar.width = getRelativeValue(value, min, max) + '%';
+	  }
+
+	  return styles;
+	}
+
+	var LinearProgress = function (_Component) {
+	  (0, _inherits3.default)(LinearProgress, _Component);
+
+	  function LinearProgress() {
+	    (0, _classCallCheck3.default)(this, LinearProgress);
+	    return (0, _possibleConstructorReturn3.default)(this, (LinearProgress.__proto__ || (0, _getPrototypeOf2.default)(LinearProgress)).apply(this, arguments));
+	  }
+
+	  (0, _createClass3.default)(LinearProgress, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
+
+	      this.timers = {};
+
+	      this.timers.bar1 = this.barUpdate('bar1', 0, this.refs.bar1, [[-35, 100], [100, -90]]);
+
+	      this.timers.bar2 = setTimeout(function () {
+	        _this2.barUpdate('bar2', 0, _this2.refs.bar2, [[-200, 100], [107, -8]]);
+	      }, 850);
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearTimeout(this.timers.bar1);
+	      clearTimeout(this.timers.bar2);
+	    }
+	  }, {
+	    key: 'barUpdate',
+	    value: function barUpdate(id, step, barElement, stepValues) {
+	      var _this3 = this;
+
+	      if (this.props.mode !== 'indeterminate') return;
+
+	      step = step || 0;
+	      step %= 4;
+
+	      var right = this.context.muiTheme.isRtl ? 'left' : 'right';
+	      var left = this.context.muiTheme.isRtl ? 'right' : 'left';
+
+	      if (step === 0) {
+	        barElement.style[left] = stepValues[0][0] + '%';
+	        barElement.style[right] = stepValues[0][1] + '%';
+	      } else if (step === 1) {
+	        barElement.style.transitionDuration = '840ms';
+	      } else if (step === 2) {
+	        barElement.style[left] = stepValues[1][0] + '%';
+	        barElement.style[right] = stepValues[1][1] + '%';
+	      } else if (step === 3) {
+	        barElement.style.transitionDuration = '0ms';
+	      }
+	      this.timers[id] = setTimeout(function () {
+	        return _this3.barUpdate(id, step + 1, barElement, stepValues);
+	      }, 420);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          style = _props.style,
+	          other = (0, _objectWithoutProperties3.default)(_props, ['style']);
+	      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+	      var styles = getStyles(this.props, this.context);
+
+	      return _react2.default.createElement(
+	        'div',
+	        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+	        _react2.default.createElement(
+	          'div',
+	          { style: prepareStyles(styles.bar) },
+	          _react2.default.createElement('div', { ref: 'bar1', style: prepareStyles(styles.barFragment1) }),
+	          _react2.default.createElement('div', { ref: 'bar2', style: prepareStyles(styles.barFragment2) })
+	        )
+	      );
+	    }
+	  }]);
+	  return LinearProgress;
+	}(_react.Component);
+
+	LinearProgress.defaultProps = {
+	  mode: 'indeterminate',
+	  value: 0,
+	  min: 0,
+	  max: 100
+	};
+	LinearProgress.contextTypes = {
+	  muiTheme: _react.PropTypes.object.isRequired
+	};
+	process.env.NODE_ENV !== "production" ? LinearProgress.propTypes = {
+	  /**
+	   * The color of the progress bar, defaults to
+	   * primary color of theme.
+	   */
+	  color: _react.PropTypes.string,
+	  /**
+	   * The max value of progress, only works in determinate mode.
+	   */
+	  max: _react.PropTypes.number,
+	  /**
+	   * The min value of progress, only works in determinate mode.
+	   */
+	  min: _react.PropTypes.number,
+	  /**
+	   * The mode of show your progress, indeterminate for when
+	   * there is no value for progress.
+	   */
+	  mode: _react.PropTypes.oneOf(['determinate', 'indeterminate']),
+	  /**
+	   * Override the inline-styles of the root element.
+	   */
+	  style: _react.PropTypes.object,
+	  /**
+	   * The value of progress, only works in determinate mode.
+	   */
+	  value: _react.PropTypes.number
+	} : void 0;
+	exports.default = LinearProgress;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }

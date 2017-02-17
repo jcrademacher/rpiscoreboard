@@ -7,6 +7,7 @@ import ControlIcon from 'material-ui/svg-icons/action/build';
 import SettingsIcon from 'material-ui/svg-icons/action/settings';
 import DisplaysIcon from 'material-ui/svg-icons/av/video-label';
 import Panel from "./Panel.jsx";
+import LinearProgress from "material-ui/LinearProgress";
 
 const MainView = React.createClass({
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import LinearProgress from "material-ui/LinearProgress";
 import ColorSlider from "./ColorSlider.jsx";
 
 export default class DisplaysPanel extends React.Component {
@@ -64,14 +63,11 @@ export default class DisplaysPanel extends React.Component {
 		};
 
 		return (
-			<div>
-				<LinearProgress mode="determinate" value={this.state.progress}/>
-				<div style={divStyle}>
-					<br/>
-					<ColorSlider onDragStop={(e) => this.handleDragStop(e,"red")} label="Red" margin="50" height={300} labelStyle={{fontSize: 20}}/>
-					<ColorSlider onDragStop={(e) => this.handleDragStop(e,"green")} label="Green" margin="50" height={300} labelStyle={{fontSize: 20}}/>
-					<ColorSlider onDragStop={(e) => this.handleDragStop(e,"blue")} label="Blue" margin="50" height={300} labelStyle={{fontSize: 20}}/>
-				</div>
+			<div style={divStyle}>
+				<br/>
+				<ColorSlider onDragStop={(e) => this.handleDragStop(e,"red")} label="Red" margin="50" height={300} labelStyle={{fontSize: 20}}/>
+				<ColorSlider onDragStop={(e) => this.handleDragStop(e,"green")} label="Green" margin="50" height={300} labelStyle={{fontSize: 20}}/>
+				<ColorSlider onDragStop={(e) => this.handleDragStop(e,"blue")} label="Blue" margin="50" height={300} labelStyle={{fontSize: 20}}/>
 			</div>
 		);
 	}

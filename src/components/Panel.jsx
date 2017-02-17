@@ -2,7 +2,8 @@ import React from 'react';
 import ControlPanel from "./ControlPanel.jsx";
 import StatsPanel from "./StatsPanel.jsx";
 import SettingsPanel from "./SettingsPanel.jsx";
-import DisplaysPanel from "./DisplaysPanel.jsx"
+import DisplaysPanel from "./DisplaysPanel.jsx";
+import ProgressBar from "./ProgressBar.jsx";
 
 class Panel extends React.Component {
 	constructor(props) {
@@ -71,20 +72,41 @@ class Panel extends React.Component {
 			if(this.timer != null) { clearInterval(this.timer); }
 
 			return (
-				<ControlPanel
-					onDeselect={this.getTimerValues}
-					clockMode={this.clockMode}
-					values={this.timerValues}
-					running={this.running}
-				/>
+				<div>
+					<ProgressBar/>
+					<ControlPanel
+						onDeselect={this.getTimerValues}
+						clockMode={this.clockMode}
+						values={this.timerValues}
+						running={this.running}
+					/>
+				</div>
 			);
 		}
-		else if(this.props.selectedIndex == "stats")
-			return <StatsPanel/>;
-		else if(this.props.selectedIndex == "settings")
-			return <SettingsPanel/>;
-		else if(this.props.selectedIndex == "displays")
-			return <DisplaysPanel/>;
+		else if(this.props.selectedIndex == "stats") {
+			return (
+				<div>
+					<ProgressBar/>
+					<StatsPanel/>
+				</div>
+			);
+		}
+		else if(this.props.selectedIndex == "settings") {
+			return (
+				<div>
+					<ProgressBar/>
+					<SettingsPanel/>
+				</div>
+			);
+		}
+		else if(this.props.selectedIndex == "displays") {
+			return (
+				<div>
+					<ProgressBar/>
+					<DisplaysPanel/>
+				</div>
+			);
+		}
 	}
 }
 
