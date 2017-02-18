@@ -46,6 +46,8 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -76,22 +78,43 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var muiTheme = (0, _getMuiTheme2.default)({
-	  fontFamily: "Raleway, Roboto, sans-serif"
+		fontFamily: "Raleway, Roboto, sans-serif"
 	});
 
-	var App = function App() {
-	  return _react2.default.createElement(
-	    _MuiThemeProvider2.default,
-	    { muiTheme: muiTheme },
-	    _react2.default.createElement(
-	      _Content2.default,
-	      null,
-	      _react2.default.createElement(_Title2.default, null),
-	      _react2.default.createElement(_MainView2.default, null)
-	    )
-	  );
-	};
+	var App = function (_React$Component) {
+		_inherits(App, _React$Component);
+
+		function App() {
+			_classCallCheck(this, App);
+
+			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+		}
+
+		_createClass(App, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					_MuiThemeProvider2.default,
+					{ muiTheme: muiTheme },
+					_react2.default.createElement(
+						_Content2.default,
+						null,
+						_react2.default.createElement(_Title2.default, null),
+						_react2.default.createElement(_MainView2.default, null)
+					)
+				);
+			}
+		}]);
+
+		return App;
+	}(_react2.default.Component);
 
 	_reactDom2.default.render(_react2.default.createElement(App, null), document.getElementById('app'));
 
@@ -30426,8 +30449,10 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -30459,97 +30484,164 @@
 
 	var _Panel2 = _interopRequireDefault(_Panel);
 
-	var _LinearProgress = __webpack_require__(427);
+	var _LinearProgress = __webpack_require__(426);
 
 	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	// icons for tabs
-	var MainView = _react2.default.createClass({
-	  displayName: 'MainView',
 
 
-	  getInitialState: function getInitialState() {
-	    return { tabIndex: 1 };
-	  },
+	var MainView = function (_React$Component) {
+		_inherits(MainView, _React$Component);
 
-	  render: function render() {
-	    var _this = this;
+		function MainView(props) {
+			_classCallCheck(this, MainView);
 
-	    var panel;
+			var _this = _possibleConstructorReturn(this, (MainView.__proto__ || Object.getPrototypeOf(MainView)).call(this, props));
 
-	    var styles = {
-	      paper: {
-	        backgroundColor: "#f5fafa"
-	      }
-	    };
+			_this.sendHTTPRequest = _this.sendHTTPRequest.bind(_this);
 
-	    var i = this.state.tabIndex;
+			_this.state = {
+				progress: 0,
+				tabIndex: 1
+			};
+			return _this;
+		}
 
-	    if (i == 0) {
-	      panel = "stats";
-	    } else if (i == 1) {
-	      panel = "control";
-	    } else if (i == 2) {
-	      panel = "displays";
-	    } else if (i == 3) {
-	      panel = "settings";
-	    } else {
-	      panel = "control";
-	    }
+		// method available to all panels for sending http requests
 
-	    return _react2.default.createElement(
-	      'div',
-	      { style: { textAlign: "center" } },
-	      _react2.default.createElement(
-	        _Paper2.default,
-	        { zDepth: 4, style: styles.paper },
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            _BottomNavigation.BottomNavigation,
-	            { style: { backgroundColor: "#e5e5e5" }, selectedIndex: this.state.tabIndex },
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: 'View Stats',
-	              icon: _react2.default.createElement(_assessment2.default, null),
-	              onClick: function onClick() {
-	                return _this.setState({ tabIndex: 0 });
-	              }
-	            }),
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: 'Control Board',
-	              icon: _react2.default.createElement(_build2.default, null),
-	              onClick: function onClick() {
-	                return _this.setState({ tabIndex: 1 });
-	              }
-	            }),
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: 'Displays',
-	              icon: _react2.default.createElement(_videoLabel2.default, null),
-	              onClick: function onClick() {
-	                return _this.setState({ tabIndex: 2 });
-	              }
-	            }),
-	            _react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
-	              label: 'Settings',
-	              icon: _react2.default.createElement(_settings2.default, null),
-	              onClick: function onClick() {
-	                return _this.setState({ tabIndex: 3 });
-	              }
-	            })
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_Panel2.default, { selectedIndex: panel })
-	        )
-	      )
-	    );
-	  }
-	});
+
+		_createClass(MainView, [{
+			key: 'sendHTTPRequest',
+			value: function sendHTTPRequest(method, url, data) {
+				var _this2 = this;
+
+				var xhr = new XMLHttpRequest();
+
+				xhr.onreadystatechange = function (e) {
+					var p;
+
+					// running through all readyState possibilities, updating progress bar as such
+					switch (xhr.readyState) {
+						case 1:
+							p = 25;
+							break;
+						case 2:
+							p = 50;
+							break;
+						case 3:
+							p = 75;
+							break;
+						case 4:
+							p = 100;
+							break;
+					}
+
+					// not found
+					if (xhr.status != 200) p = 0;
+
+					_this2.setState({ progress: p }); // sets value for progress bar defined in main.js
+
+					if (xhr.readyState == 4) {
+						setTimeout(function () {
+							return _this2.setState({ progress: 0 });
+						}, 2000); // reset progress to 0 after 2 seconds
+					}
+				};
+
+				xhr.open(method, url, true);
+				xhr.send(data);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this3 = this;
+
+				var panel;
+
+				var styles = {
+					paper: {
+						backgroundColor: "#f5fafa"
+					}
+				};
+
+				var i = this.state.tabIndex;
+
+				if (i == 0) {
+					panel = "stats";
+				} else if (i == 1) {
+					panel = "control";
+				} else if (i == 2) {
+					panel = "displays";
+				} else if (i == 3) {
+					panel = "settings";
+				} else {
+					panel = "control";
+				}
+
+				return _react2.default.createElement(
+					'div',
+					{ style: { textAlign: "center" } },
+					_react2.default.createElement(
+						_Paper2.default,
+						{ zDepth: 4, style: styles.paper },
+						_react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement(
+								_BottomNavigation.BottomNavigation,
+								{ style: { backgroundColor: "#e5e5e5" }, selectedIndex: this.state.tabIndex },
+								_react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+									label: 'View Stats',
+									icon: _react2.default.createElement(_assessment2.default, null),
+									onClick: function onClick() {
+										return _this3.setState({ tabIndex: 0 });
+									}
+								}),
+								_react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+									label: 'Control Board',
+									icon: _react2.default.createElement(_build2.default, null),
+									onClick: function onClick() {
+										return _this3.setState({ tabIndex: 1 });
+									}
+								}),
+								_react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+									label: 'Displays',
+									icon: _react2.default.createElement(_videoLabel2.default, null),
+									onClick: function onClick() {
+										return _this3.setState({ tabIndex: 2 });
+									}
+								}),
+								_react2.default.createElement(_BottomNavigation.BottomNavigationItem, {
+									label: 'Settings',
+									icon: _react2.default.createElement(_settings2.default, null),
+									onClick: function onClick() {
+										return _this3.setState({ tabIndex: 3 });
+									}
+								})
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement(_LinearProgress2.default, { mode: 'determinate', value: this.state.progress }),
+							' ',
+							_react2.default.createElement(_Panel2.default, { selectedIndex: panel, httpCallback: this.sendHTTPRequest })
+						)
+					)
+				);
+			}
+		}]);
+
+		return MainView;
+	}(_react2.default.Component);
 
 	exports.default = MainView;
 
@@ -31428,10 +31520,6 @@
 
 	var _DisplaysPanel2 = _interopRequireDefault(_DisplaysPanel);
 
-	var _ProgressBar = __webpack_require__(426);
-
-	var _ProgressBar2 = _interopRequireDefault(_ProgressBar);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31522,34 +31610,37 @@
 					return _react2.default.createElement(
 						"div",
 						null,
-						_react2.default.createElement(_ProgressBar2.default, null),
 						_react2.default.createElement(_ControlPanel2.default, {
 							onDeselect: this.getTimerValues,
 							clockMode: this.clockMode,
 							values: this.timerValues,
-							running: this.running
+							running: this.running,
+							httpCallback: this.props.httpCallback
 						})
 					);
 				} else if (this.props.selectedIndex == "stats") {
 					return _react2.default.createElement(
 						"div",
 						null,
-						_react2.default.createElement(_ProgressBar2.default, null),
-						_react2.default.createElement(_StatsPanel2.default, null)
+						_react2.default.createElement(_StatsPanel2.default, {
+							httpCallback: this.props.httpCallback
+						})
 					);
 				} else if (this.props.selectedIndex == "settings") {
 					return _react2.default.createElement(
 						"div",
 						null,
-						_react2.default.createElement(_ProgressBar2.default, null),
-						_react2.default.createElement(_SettingsPanel2.default, null)
+						_react2.default.createElement(_SettingsPanel2.default, {
+							httpCallback: this.props.httpCallback
+						})
 					);
 				} else if (this.props.selectedIndex == "displays") {
 					return _react2.default.createElement(
 						"div",
 						null,
-						_react2.default.createElement(_ProgressBar2.default, null),
-						_react2.default.createElement(_DisplaysPanel2.default, null)
+						_react2.default.createElement(_DisplaysPanel2.default, {
+							httpCallback: this.props.httpCallback
+						})
 					);
 				}
 			}
@@ -31741,6 +31832,8 @@
 						oneSecValue: 0
 					});
 				}
+
+				this.props.httpCallback("POST", "control/mode/" + value, null);
 			}
 		}, {
 			key: "handleScoreChange",
@@ -41315,10 +41408,6 @@
 			var _this = _possibleConstructorReturn(this, (DisplaysPanel.__proto__ || Object.getPrototypeOf(DisplaysPanel)).call(this, props));
 
 			_this.handleDragStop = _this.handleDragStop.bind(_this);
-
-			_this.state = {
-				progress: 0
-			};
 			return _this;
 		}
 
@@ -41327,53 +41416,14 @@
 
 		_createClass(DisplaysPanel, [{
 			key: "handleDragStop",
-			value: function handleDragStop(event, source) {
-				var _this2 = this;
-
-				var xhr = new XMLHttpRequest();
-
-				this.setState({ progress: 0 });
-
-				xhr.onreadystatechange = function (e) {
-					var p;
-
-					// running through all readyState possibilities, updating progress bar as such
-					switch (xhr.readyState) {
-						case 1:
-							p = 25;
-							break;
-						case 2:
-							p = 50;
-							break;
-						case 3:
-							p = 75;
-							break;
-						case 4:
-							p = 100;
-							break;
-					}
-
-					// not found
-					if (xhr.status != 200) p = 0;
-
-					_this2.setState({
-						progress: p
-					});
-
-					if (xhr.readyState == 4) {
-						setTimeout(function () {
-							return _this2.setState({ progress: 0 });
-						}, 2000); // reset progress to 0 after 2 seconds
-					}
-				};
-
-				xhr.open("POST", "control/colors/" + source + "/" + event.target.value, true);
-				xhr.send();
+			value: function handleDragStop(event, value, source) {
+				// url is in form of "control/sliderColor/value"
+				this.props.httpCallback("POST", "control/" + source + "/" + value, null);
 			}
 		}, {
 			key: "render",
 			value: function render() {
-				var _this3 = this;
+				var _this2 = this;
 
 				var divStyle = {
 					display: 'flex',
@@ -41385,15 +41435,33 @@
 					"div",
 					{ style: divStyle },
 					_react2.default.createElement("br", null),
-					_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
-							return _this3.handleDragStop(e, "red");
-						}, label: "Red", margin: "50", height: 300, labelStyle: { fontSize: 20 } }),
-					_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
-							return _this3.handleDragStop(e, "green");
-						}, label: "Green", margin: "50", height: 300, labelStyle: { fontSize: 20 } }),
-					_react2.default.createElement(_ColorSlider2.default, { onDragStop: function onDragStop(e) {
-							return _this3.handleDragStop(e, "blue");
-						}, label: "Blue", margin: "50", height: 300, labelStyle: { fontSize: 20 } })
+					_react2.default.createElement(_ColorSlider2.default, {
+						onDragStop: function onDragStop(e, val) {
+							return _this2.handleDragStop(e, val, "red");
+						},
+						label: "Red",
+						margin: "50",
+						height: 300,
+						labelStyle: { fontSize: 20 }
+					}),
+					_react2.default.createElement(_ColorSlider2.default, {
+						onDragStop: function onDragStop(e, val) {
+							return _this2.handleDragStop(e, val, "green");
+						},
+						label: "Green",
+						margin: "50",
+						height: 300,
+						labelStyle: { fontSize: 20 }
+					}),
+					_react2.default.createElement(_ColorSlider2.default, {
+						onDragStop: function onDragStop(e, val) {
+							return _this2.handleDragStop(e, val, "blue");
+						},
+						label: "Blue",
+						margin: "50",
+						height: 300,
+						labelStyle: { fontSize: 20 }
+					})
 				);
 			}
 		}]);
@@ -41437,12 +41505,24 @@
 		function ColorSlider(props) {
 			_classCallCheck(this, ColorSlider);
 
-			return _possibleConstructorReturn(this, (ColorSlider.__proto__ || Object.getPrototypeOf(ColorSlider)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (ColorSlider.__proto__ || Object.getPrototypeOf(ColorSlider)).call(this, props));
+
+			_this.handleChange = _this.handleChange.bind(_this);
+
+			_this.value = 235;
+			return _this;
 		}
 
 		_createClass(ColorSlider, [{
+			key: 'handleChange',
+			value: function handleChange(event, newVal) {
+				this.value = newVal; // value holds current value of slider
+			}
+		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				var style = {
 					height: this.props.height,
 					marginLeft: this.props.margin,
@@ -41452,7 +41532,18 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_Slider2.default, { onDragStop: this.props.onDragStop, style: style, axis: 'y', min: 0, max: 235, defaultValue: 235 }),
+					_react2.default.createElement(_Slider2.default, {
+						onDragStop: function onDragStop(event) {
+							return _this2.props.onDragStop(event, _this2.value);
+						},
+						onChange: this.handleChange,
+						style: style,
+						axis: 'y',
+						min: 0,
+						max: 235,
+						defaultValue: 235,
+						step: 1
+					}),
 					_react2.default.createElement(
 						'p',
 						{ style: this.props.labelStyle },
@@ -42417,32 +42508,6 @@
 /* 426 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _LinearProgress = __webpack_require__(427);
-
-	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var ProgressBar = function ProgressBar(props) {
-		return _react2.default.createElement(_LinearProgress2.default, { mode: "determinate" });
-	};
-
-	exports.default = ProgressBar;
-
-/***/ },
-/* 427 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -42450,7 +42515,7 @@
 	});
 	exports.default = undefined;
 
-	var _LinearProgress = __webpack_require__(428);
+	var _LinearProgress = __webpack_require__(427);
 
 	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
 
@@ -42459,7 +42524,7 @@
 	exports.default = _LinearProgress2.default;
 
 /***/ },
-/* 428 */
+/* 427 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';

@@ -1,23 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Content from "./components/Content.jsx";
-import Title from './components/Title.jsx';
+import Content from "./components/presentational/Content.jsx";
+import Title from './components/presentational/Title.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MainView from './components/MainView.jsx';
+import MainView from './components/presentational/MainView.jsx';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const muiTheme = getMuiTheme({
 	fontFamily: "Raleway, Roboto, sans-serif",
 });
 
-const App = () => (
-  <MuiThemeProvider muiTheme={muiTheme}>
-    <Content>
-      <Title/>
-      <MainView/>
-    </Content>
-  </MuiThemeProvider>
-);
+class App extends React.Component {
+
+	render() {
+		return (
+		  <MuiThemeProvider muiTheme={muiTheme}>
+		    <Content>
+		      <Title/>
+		      <MainView/>
+		    </Content>
+		  </MuiThemeProvider>
+		);
+	}
+}
 
 ReactDOM.render(
   <App />,
