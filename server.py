@@ -198,14 +198,23 @@ def fancyFlash():
 
 '''
 
+# list holding all clients
+clients = []
+
 #This class will handles any incoming request from
 #the browser
 class myHandler(BaseHTTPRequestHandler):
 
 	#Handler for the GET requests
 	def do_GET(self):
+		if clients.count(self.client_address[0]) == 0:
+			clients.append(self.client_address[0])
+
 		if self.path=="/":
 			self.path="/index.html"
+
+		if self.path == "/favicon.ico":
+			return
 
 		if self.path.endswith(".html"):
 			mimetype = 'text/html'
@@ -219,9 +228,11 @@ class myHandler(BaseHTTPRequestHandler):
 		# Send the html message
 		self.wfile.write(f.read())
 		f.close()
-		return
 
 	def do_POST(self):
+		if clients.count(self.client_address[0]) == 0:
+			clients.append(self.client_address[0])
+
 		print self.path
 
 		if self.path == "/control/home-up":
@@ -239,11 +250,8 @@ class myHandler(BaseHTTPRequestHandler):
 try:
 	#Create a web server and define the handler to manage the
 	#incoming request
-	#ip = socket.gethostbyname(socket.gethostname())
 
-	print "ip: " #+ ip
-
-	server = HTTPServer(("172.16.45.94", 8000), myHandler)
+	server = HTTPServer(("10.0.0.248", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
