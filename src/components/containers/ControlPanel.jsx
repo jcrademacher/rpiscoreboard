@@ -78,7 +78,6 @@ class ControlPanel extends React.Component {
 				return "Stop Timer";
 			else return "Start Timer";
 		}
-
 	}
 
 	getTimerModificationState() {
@@ -102,6 +101,11 @@ class ControlPanel extends React.Component {
 				oneSecValue: parseInt(time.charAt(4))
 			});
 		}
+
+		// gets rid of colon, and adds 0 in front of 500
+		time = time == "5:00" ? "0500" : time.replace(":","");
+
+		this.props.httpCallback("POST", "control/time/" + time, null);
 	}
 
   handleRadioButton(e, value) {
@@ -136,12 +140,6 @@ class ControlPanel extends React.Component {
   }
 
 	handleScoreChange(method) {
-		var xhr = new XMLHttpRequest();
-
-		// sends http request over network to server to handle score change
-		xhr.open("POST", "control/" + method, true);
-		xhr.send();
-
 		var newScore;
 
 		if(method == "home-up") {
@@ -175,6 +173,8 @@ class ControlPanel extends React.Component {
 
 			this.setState({awayScore: newScore});
 		}
+
+		this.props.httpCallback("POST", "control/score/" + method, null);
 	}
 
 	handleTextFieldChange(e, newVal) {
@@ -206,12 +206,20 @@ class ControlPanel extends React.Component {
 			tenSecValue: parseInt(e.target.value.charAt(3)) > 5 ? 5 : parseInt(e.target.value.charAt(3)),
 			oneSecValue: parseInt(e.target.value.charAt(4))
 		});
+
+		if(parseInt(str.charAt(2)) > 5)
+			str = str.substring(0,2) + "5" + str.substring(3);
+
+		// sends http POST and removes colon from time
+		this.props.httpCallback("POST", "control/time/" + str, null);
 	}
 
 	handleTimerChange(e) {
 		var btn = this.refs.timer;
 
-		if(btn.props.label == "Start Timer") {
+		var start = btn.props.label == "Start Timer";
+
+		if(start) {
 			if (!(this.state.tenMinValue == 0 &&
 					this.state.oneMinValue == 0 && // if timer is not at 0
 					this.state.tenSecValue == 0 &&
@@ -226,6 +234,8 @@ class ControlPanel extends React.Component {
 				timerRunning: false
 			});
 		}
+
+		this.props.httpCallback("POST", "control/timer/" + start ? "start" : "stop", null);
 	}
 
 	// callback for Clock components

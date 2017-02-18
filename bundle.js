@@ -31803,6 +31803,11 @@
 						oneSecValue: parseInt(time.charAt(4))
 					});
 				}
+
+				// gets rid of colon, and adds 0 in front of 500
+				time = time == "5:00" ? "0500" : time.replace(":", "");
+
+				this.props.httpCallback("POST", "control/time/" + time, null);
 			}
 		}, {
 			key: "handleRadioButton",
@@ -31838,12 +31843,6 @@
 		}, {
 			key: "handleScoreChange",
 			value: function handleScoreChange(method) {
-				var xhr = new XMLHttpRequest();
-
-				// sends http request over network to server to handle score change
-				xhr.open("POST", "control/" + method, true);
-				xhr.send();
-
 				var newScore;
 
 				if (method == "home-up") {
@@ -31863,6 +31862,8 @@
 
 					this.setState({ awayScore: newScore });
 				}
+
+				this.props.httpCallback("POST", "control/score/" + method, null);
 			}
 		}, {
 			key: "handleTextFieldChange",
@@ -31892,13 +31893,20 @@
 					tenSecValue: parseInt(e.target.value.charAt(3)) > 5 ? 5 : parseInt(e.target.value.charAt(3)),
 					oneSecValue: parseInt(e.target.value.charAt(4))
 				});
+
+				if (parseInt(str.charAt(2)) > 5) str = str.substring(0, 2) + "5" + str.substring(3);
+
+				// sends http POST and removes colon from time
+				this.props.httpCallback("POST", "control/time/" + str, null);
 			}
 		}, {
 			key: "handleTimerChange",
 			value: function handleTimerChange(e) {
 				var btn = this.refs.timer;
 
-				if (btn.props.label == "Start Timer") {
+				var start = btn.props.label == "Start Timer";
+
+				if (start) {
 					if (!(this.state.tenMinValue == 0 && this.state.oneMinValue == 0 && // if timer is not at 0
 					this.state.tenSecValue == 0 && this.state.oneSecValue == 0)) {
 						this.setState({
@@ -31910,6 +31918,8 @@
 						timerRunning: false
 					});
 				}
+
+				this.props.httpCallback("POST",  true ? "start" : "stop", null);
 			}
 
 			// callback for Clock components
