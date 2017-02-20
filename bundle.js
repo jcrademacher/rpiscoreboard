@@ -100,6 +100,7 @@
 		_createClass(App, [{
 			key: 'render',
 			value: function render() {
+
 				return _react2.default.createElement(
 					_MuiThemeProvider2.default,
 					{ muiTheme: muiTheme },
@@ -30484,7 +30485,7 @@
 
 	var _Panel2 = _interopRequireDefault(_Panel);
 
-	var _LinearProgress = __webpack_require__(426);
+	var _LinearProgress = __webpack_require__(427);
 
 	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
 
@@ -30510,7 +30511,8 @@
 
 			_this.state = {
 				progress: 0,
-				tabIndex: 1
+				tabIndex: 2,
+				status: "Connected"
 			};
 			return _this;
 		}
@@ -30540,12 +30542,16 @@
 							p = 75;
 							break;
 						case 4:
+							_this2.setState({ status: "Connected" });
 							p = 100;
 							break;
 					}
 
 					// not found
-					if (xhr.status != 200) p = 0;
+					if (xhr.status >= 400) {
+						p = 0;
+						_this2.setState({ status: "Disconnected" });
+					}
 
 					_this2.setState({ progress: p }); // sets value for progress bar defined in main.js
 
@@ -30569,6 +30575,17 @@
 				var styles = {
 					paper: {
 						backgroundColor: "#f5fafa"
+					},
+
+					connect: {
+						textAlign: "left",
+						fontSize: 14
+					},
+
+					connectColor: {
+						textAlign: "left",
+						fontSize: 14,
+						color: this.state.status == "Connected" ? "green" : "red"
 					}
 				};
 
@@ -30589,6 +30606,16 @@
 				return _react2.default.createElement(
 					'div',
 					{ style: { textAlign: "center" } },
+					_react2.default.createElement(
+						'p',
+						{ style: styles.connect },
+						'Status: ',
+						_react2.default.createElement(
+							'span',
+							{ style: styles.connectColor },
+							this.state.status
+						)
+					),
 					_react2.default.createElement(
 						_Paper2.default,
 						{ zDepth: 4, style: styles.paper },
@@ -41401,6 +41428,14 @@
 
 	var _ColorSlider2 = _interopRequireDefault(_ColorSlider);
 
+	var _RaisedButton = __webpack_require__(161);
+
+	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+	var _ButtonArray = __webpack_require__(426);
+
+	var _ButtonArray2 = _interopRequireDefault(_ButtonArray);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41418,17 +41453,24 @@
 			var _this = _possibleConstructorReturn(this, (DisplaysPanel.__proto__ || Object.getPrototypeOf(DisplaysPanel)).call(this, props));
 
 			_this.handleDragStop = _this.handleDragStop.bind(_this);
+			_this.handleButtonArray = _this.handleButtonArray.bind(_this);
 			return _this;
 		}
 
-		// when slider stops moving send data to server
-
-
 		_createClass(DisplaysPanel, [{
+			key: "handleButtonArray",
+			value: function handleButtonArray(source) {
+				console.log(source);
+				this.props.httpCallback("POST", "display/" + source, null);
+			}
+
+			// when slider stops moving send data to server
+
+		}, {
 			key: "handleDragStop",
 			value: function handleDragStop(event, value, source) {
 				// url is in form of "control/sliderColor/value"
-				this.props.httpCallback("POST", "control/" + source + "/" + value, null);
+				this.props.httpCallback("POST", "display/" + source + "/" + value, null);
 			}
 		}, {
 			key: "render",
@@ -41438,40 +41480,54 @@
 				var divStyle = {
 					display: 'flex',
 					flexDirection: 'row',
-					justifyContent: 'center'
+					justifyContent: 'center',
+					height: "100%"
 				};
 
 				return _react2.default.createElement(
 					"div",
-					{ style: divStyle },
+					null,
+					_react2.default.createElement(
+						"div",
+						{ style: divStyle },
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(_ColorSlider2.default, {
+							onDragStop: function onDragStop(e, val) {
+								return _this2.handleDragStop(e, val, "red");
+							},
+							label: "Red",
+							margin: "50",
+							height: 300,
+							labelStyle: { fontSize: 20 }
+						}),
+						_react2.default.createElement(_ColorSlider2.default, {
+							onDragStop: function onDragStop(e, val) {
+								return _this2.handleDragStop(e, val, "green");
+							},
+							label: "Green",
+							margin: "50",
+							height: 300,
+							labelStyle: { fontSize: 20 }
+						}),
+						_react2.default.createElement(_ColorSlider2.default, {
+							onDragStop: function onDragStop(e, val) {
+								return _this2.handleDragStop(e, val, "blue");
+							},
+							label: "Blue",
+							margin: "50",
+							height: 300,
+							labelStyle: { fontSize: 20 }
+						})
+					),
 					_react2.default.createElement("br", null),
-					_react2.default.createElement(_ColorSlider2.default, {
-						onDragStop: function onDragStop(e, val) {
-							return _this2.handleDragStop(e, val, "red");
-						},
-						label: "Red",
-						margin: "50",
-						height: 300,
-						labelStyle: { fontSize: 20 }
-					}),
-					_react2.default.createElement(_ColorSlider2.default, {
-						onDragStop: function onDragStop(e, val) {
-							return _this2.handleDragStop(e, val, "green");
-						},
-						label: "Green",
-						margin: "50",
-						height: 300,
-						labelStyle: { fontSize: 20 }
-					}),
-					_react2.default.createElement(_ColorSlider2.default, {
-						onDragStop: function onDragStop(e, val) {
-							return _this2.handleDragStop(e, val, "blue");
-						},
-						label: "Blue",
-						margin: "50",
-						height: 300,
-						labelStyle: { fontSize: 20 }
-					})
+					_react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement(_ButtonArray2.default, {
+							onButtonClick: this.handleButtonArray
+						})
+					),
+					_react2.default.createElement("br", null)
 				);
 			}
 		}]);
@@ -42518,6 +42574,168 @@
 /* 426 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _FlatButton = __webpack_require__(363);
+
+	var _FlatButton2 = _interopRequireDefault(_FlatButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ButtonArray = function (_React$Component) {
+		_inherits(ButtonArray, _React$Component);
+
+		function ButtonArray(props) {
+			_classCallCheck(this, ButtonArray);
+
+			return _possibleConstructorReturn(this, (ButtonArray.__proto__ || Object.getPrototypeOf(ButtonArray)).call(this, props));
+		}
+
+		_createClass(ButtonArray, [{
+			key: "handleButtonClick",
+			value: function handleButtonClick(source) {
+				this.props.onButtonClick(source);
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var _this2 = this;
+
+				var styles = {
+					button: {
+						height: 100,
+						width: 100,
+						margin: 4
+					},
+
+					labelStyle: {
+						fontSize: 20
+					}
+				};
+
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "ff",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("ff");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "goal",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("goal");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "jrad",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("jrad");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "adam",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("adam");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "ff2",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("ff2");
+						}
+					}),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "rt",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("rt");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "c1",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("c1");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "c2",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("c2");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "c3",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("c3");
+						}
+					}),
+					_react2.default.createElement(_FlatButton2.default, {
+						label: "sn",
+						backgroundColor: "#E8D0A9",
+						style: styles.button,
+						labelStyle: styles.labelStyle,
+						onClick: function onClick() {
+							return _this2.handleButtonClick("sn");
+						}
+					})
+				);
+			}
+		}]);
+
+		return ButtonArray;
+	}(_react2.default.Component);
+
+	exports.default = ButtonArray;
+
+/***/ },
+/* 427 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -42525,7 +42743,7 @@
 	});
 	exports.default = undefined;
 
-	var _LinearProgress = __webpack_require__(427);
+	var _LinearProgress = __webpack_require__(428);
 
 	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
 
@@ -42534,7 +42752,7 @@
 	exports.default = _LinearProgress2.default;
 
 /***/ },
-/* 427 */
+/* 428 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
