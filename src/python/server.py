@@ -269,26 +269,27 @@ class myHandler(BaseHTTPRequestHandler):
 		self.send_response(200)
 
 def updateClock():
-	x = 0
-	prevH = 0
-	prevM = 0
-
 	while True:
-		server.handle_request()
+		x = 0
+		prevH = 0
+		prevM = 0
 
-		h = time.localtime()[3]
-		m = time.localtime()[4]
+		while True:
+			server.handle_request()
 
-		if h > 12:
-			h -= 12
+			h = time.localtime()[3]
+			m = time.localtime()[4]
 
-		x += 1
-		if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
-			b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
-			prevH = h
-			prevM = m
+			if h > 12:
+				h -= 12
 
-		time.sleep(1)
+			x += 1
+			if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
+				b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
+				prevH = h
+				prevM = m
+
+			time.sleep(1)
 
 try:
 	#Create a web server and define the handler to manage the
