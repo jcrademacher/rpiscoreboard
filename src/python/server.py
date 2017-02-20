@@ -283,8 +283,6 @@ try:
 	prevM = 0
 
 	while True:
-		server.handle_request()
-
 		h = time.localtime()[3]
 		m = time.localtime()[4]
 
