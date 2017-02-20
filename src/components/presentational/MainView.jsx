@@ -18,7 +18,8 @@ export default class MainView extends React.Component {
 
 		this.state = {
 			progress: 0,
-			tabIndex: 1
+			tabIndex: 1,
+			status: "Connected"
 		};
 	}
 
@@ -41,18 +42,21 @@ export default class MainView extends React.Component {
 					p = 75;
 					break;
 				case 4:
+					this.setState({ status: "Connected" });
 					p = 100;
 					break;
 			}
 
 			// not found
-			if(xhr.status != 200)
+			if(xhr.status >= 400) {
 				p = 0;
+				this.setState({ status: "Disconnected" });
+			}
 
 			this.setState({ progress: p }); // sets value for progress bar defined in main.js
 
 			if(xhr.readyState == 4) {
-				setTimeout(() => this.setState({ progress: 0 }), 2000); // reset progress to 0 after 2 seconds
+				setTimeout(() => this.setState({ progress: 0 }), 1000); // reset progress to 0 after 2 seconds
 			}
 		};
 
@@ -66,6 +70,17 @@ export default class MainView extends React.Component {
 		var styles = {
 			paper: {
 				backgroundColor: "#f5fafa"
+			},
+
+			connect: {
+				textAlign: "left",
+				fontSize: 14
+			},
+
+			connectColor: {
+				textAlign: "left",
+				fontSize: 14,
+				color: this.state.status == "Connected" ? "green" : "red"
 			}
 		};
 
@@ -88,6 +103,7 @@ export default class MainView extends React.Component {
 		}
 
     return (<div style={{textAlign: "center"}}>
+			<p style={styles.connect}>Status: <span style={styles.connectColor}>{this.state.status}</span></p>
       <Paper zDepth={4} style={styles.paper}>
         <div>
           <BottomNavigation style={{backgroundColor: "#e5e5e5"}} selectedIndex={this.state.tabIndex}>

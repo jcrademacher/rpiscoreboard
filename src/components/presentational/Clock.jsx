@@ -29,20 +29,19 @@ export default class Clock extends React.Component {
 		// if nextProps specify that the timer should not be running, and if the timer is currently running,
 		// then call function to sync state with ControlPanel
 		if(!nextProps.running && this.props.running)
-			this.props.onStop(this.state);
+			this.props.sync(this.state, true);
 	}
 
 	componentWillUnmount() {
 		clearInterval(this.timer); // clears instance variable timer from ticking
 
+		// when BottomNavigation is tabbed out of, start timer
 		this.props.onDeselect(this.state, this.props.clockMode, this.props.running);
 	}
 
 	tick() {
 		if(!this.props.running)
 			return;
-
-		console.log("timer tick");
 
 		var tenMin = this.state.tenMinValue;
 		var oneMin = this.state.oneMinValue;
@@ -73,8 +72,10 @@ export default class Clock extends React.Component {
 			oneSecValue: oneSec,
 		});
 
+		this.props.sync(this.state, false);
+
 		if(tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0)
-			this.props.onStop(this.state); // calls function in ControlPanel to synchronize states
+			this.props.sync(this.state, true); // calls function in ControlPanel to synchronize states
 	}
 
 	render() {
