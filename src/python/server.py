@@ -210,10 +210,12 @@ class myHandler(BaseHTTPRequestHandler):
 		if clients.count(self.client_address[0]) == 0:
 			clients.append(self.client_address[0])
 
-		if self.path=="/":
-			self.path="/index.html"
+		self.path = "./pages" + self.path
 
-		if self.path == "/favicon.ico":
+		if self.path=="./pages/":
+			self.path="./pages/index.html"
+
+		if self.path == "./pages/favicon.ico":
 			return
 
 		if self.path.endswith(".html"):
@@ -251,7 +253,7 @@ try:
 	#Create a web server and define the handler to manage the
 	#incoming request
 
-	server = HTTPServer(("10.0.0.248", 8000), myHandler)
+	server = HTTPServer(("localhost", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
