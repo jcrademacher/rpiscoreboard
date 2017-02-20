@@ -256,13 +256,13 @@ class myHandler(BaseHTTPRequestHandler):
 
 		print postvars
 
-		if self.path == "/control/home-up":
+		if self.path == "/control/score/home-up":
 			homeAddHandler();
-		if self.path == "/control/home-down":
+		if self.path == "/control/score/home-down":
 			homeMinusHandler();
-		if self.path == "/control/away-up":
+		if self.path == "/control/score/away-up":
 			awayAddHandler();
-		if self.path == "/control/away-down":
+		if self.path == "/control/score/away-down":
 			awayMinusHandler();
 
 		self.send_response(200)
@@ -277,6 +277,25 @@ try:
 
 	#Wait forever for incoming htto requests
 	server.serve_forever()
+
+	x = 0
+	prevH = 0
+	prevM = 0
+
+	while True:
+		server.handle_request()
+
+		h = time.localtime()[3]
+		m = time.localtime()[4]
+
+		if h > 12:
+		h -= 12
+
+		x += 1
+		if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
+			b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
+			prevH = h
+			prevM = m
 
 except KeyboardInterrupt:
 	print '^C received, shutting down the web server'
