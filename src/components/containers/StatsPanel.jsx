@@ -1,4 +1,5 @@
 import React from "react";
+import Login from "./Login.jsx"
 
 export default class StatsPanel extends React.Component {
 	constructor(props) {
@@ -6,6 +7,10 @@ export default class StatsPanel extends React.Component {
 	}
 
 	render() {
-		return (<div>stats panel</div>);
+		return (
+			<div>
+				<Login/>
+			</div>
+		);
 	}
 }
