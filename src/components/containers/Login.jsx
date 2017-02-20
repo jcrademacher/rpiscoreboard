@@ -8,6 +8,10 @@ export default class Login extends React.Component {
 		super(props);
 	}
 
+	createNewAccount() {
+
+	}
+
 	signIn() {
 		console.log(this);
 	}
@@ -62,7 +66,7 @@ export default class Login extends React.Component {
 							label="Sign in"
 							labelStyle={{fontSize: 20}}
 							style={styles.buttons}
-							onClick={this.signIn()}
+							onClick={() => this.signIn()}
 						/>
 						<br/>
 						<FlatButton
@@ -70,6 +74,7 @@ export default class Login extends React.Component {
 							backgroundColor="#E8D0A9"
 							labelStyle={{fontSize: 15}}
 							style={styles.buttons}
+							href="account.html"
 						/>
 					</form>
 				</Paper>

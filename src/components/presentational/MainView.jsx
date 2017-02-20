@@ -27,6 +27,11 @@ export default class MainView extends React.Component {
 	sendHTTPRequest(method, url, data) {
 		var xhr = new XMLHttpRequest();
 
+		xhr.open(method, url, true);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+		xhr.send(data);
+
 		xhr.onreadystatechange = (e) => {
 			var p;
 
@@ -42,13 +47,18 @@ export default class MainView extends React.Component {
 					p = 75;
 					break;
 				case 4:
-					this.setState({ status: "Connected" });
-					p = 100;
+					p = 90;
 					break;
 			}
 
+			console.log(xhr.status);
+
+			if(xhr.status <= 200 && xhr.status > 0) {
+				p = 100;
+				this.setState({ status: "Connected" });
+			}
 			// not found
-			if(xhr.status >= 400) {
+			else {
 				p = 0;
 				this.setState({ status: "Disconnected" });
 			}
@@ -59,9 +69,6 @@ export default class MainView extends React.Component {
 				setTimeout(() => this.setState({ progress: 0 }), 1000); // reset progress to 0 after 2 seconds
 			}
 		};
-
-		xhr.open(method, url, true);
-		xhr.send(data);
 	}
 
   render() {

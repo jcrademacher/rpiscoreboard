@@ -5,6 +5,15 @@ from time import sleep
 import time
 import types
 import os
+from cgi import parse_header, parse_multipart
+from sys import version as python_version
+
+if python_version.startswith('3'):
+    from urllib.parse import parse_qs
+    from http.server import BaseHTTPRequestHandler
+else:
+    from urlparse import parse_qs
+    from BaseHTTPServer import BaseHTTPRequestHandler
 
 '''
 import serial
@@ -141,13 +150,13 @@ def setTimerMode():
 
 #FADERS
 #################################################################################
-def redHandler(path, tags, args, source):
+def redHandler():
     b.redVal=int(args[0])
 
-def greenHandler(path, tags, args, source):
+def greenHandler():
     b.greenVal=int(args[0])
 
-def blueHandler(path, tags, args, source):
+def blueHandler():
     b.blueVal=int(args[0])
 
 
@@ -237,6 +246,18 @@ class myHandler(BaseHTTPRequestHandler):
 
 		print self.path
 
+		#dont ask me how this code works
+		ctype, pdict = parse_header(self.headers['content-type'])
+		if ctype == 'multipart/form-data':
+			postvars = parse_multipart(self.rfile, pdict)
+		elif ctype == 'application/x-www-form-urlencoded':
+			length = int(self.headers['content-length'])
+			postvars = parse_qs(self.rfile.read(length),keep_blank_values=1)
+		else:
+			postvars = {}
+
+		print postvars
+
 		if self.path == "/control/home-up":
 			homeAddHandler();
 		if self.path == "/control/home-down":
@@ -253,7 +274,7 @@ try:
 	#Create a web server and define the handler to manage the
 	#incoming request
 
-	server = HTTPServer(("localhost", 8000), myHandler)
+	server = HTTPServer(("10.0.0.248", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
