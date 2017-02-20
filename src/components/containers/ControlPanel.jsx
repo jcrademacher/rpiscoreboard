@@ -29,6 +29,11 @@ class ControlPanel extends React.Component {
       clockMode: this.props.clockMode,
 			timerRunning: this.props.running,
 
+			homeScore: 0,
+			awayScore: 0
+		};
+
+		this.values = {
 			// ternary operator checks if clockMode is in clock mode
 			// if so, format new time, if not, display passed timer values as props
 			tenMinValue: cmode ? parseInt(this.formatTime().charAt(0)) : this.props.values.tenMinValue,
@@ -36,9 +41,6 @@ class ControlPanel extends React.Component {
 			// skip over 2 because index 2 is a colon
 			tenSecValue: cmode ? parseInt(this.formatTime().charAt(3)) : this.props.values.tenSecValue,
 			oneSecValue: cmode ? parseInt(this.formatTime().charAt(4)) : this.props.values.oneSecValue,
-
-			homeScore: 0,
-			awayScore: 0
 		};
 	}
 
@@ -86,20 +88,20 @@ class ControlPanel extends React.Component {
 
 	handlePresetTime(time, event) {
 		if(time == "5:00") {
-			this.setState({
+			this.values = {
 				tenMinValue: 0,
 				oneMinValue: parseInt(time.charAt(0)),
 				tenSecValue: parseInt(time.charAt(2)), // skip over 1 for the colon in "5:00"
 				oneSecValue: parseInt(time.charAt(3))
-			});
+			};
 		}
 		else {
-			this.setState({
+			this.values = {
 				tenMinValue: parseInt(time.charAt(0)),
 				oneMinValue: parseInt(time.charAt(1)), // skip over 2 for the colon
 				tenSecValue: parseInt(time.charAt(3)),
 				oneSecValue: parseInt(time.charAt(4))
-			});
+			};
 		}
 
 		// gets rid of colon, and adds 0 in front of 500
@@ -116,24 +118,28 @@ class ControlPanel extends React.Component {
 				timerRunning: false,
 
 				clockMode: value,
+			});
 
+			this.values = {
 				tenMinValue: parseInt(this.formatTime().charAt(0)),
 				oneMinValue: parseInt(this.formatTime().charAt(1)),
 				tenSecValue: parseInt(this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
 				oneSecValue: parseInt(this.formatTime().charAt(4))
-			});
+			};
 		}
 		else {
 			this.setState({
 				timerRunning: false,
 
 				clockMode: value,
+			});
 
+			this.values = {
 				tenMinValue: 0,
 				oneMinValue: 0,
 				tenSecValue: 0,
 				oneSecValue: 0
-			});
+			};
 		}
 
 		this.props.httpCallback("POST", "control/mode/" + value, null);
@@ -198,14 +204,14 @@ class ControlPanel extends React.Component {
 
 		e.target.value = str.substr(0,2) + ":" + str.substring(2);
 
-		this.setState({
+		this.values = {
 			tenMinValue: parseInt(e.target.value.charAt(0)),
 			oneMinValue: parseInt(e.target.value.charAt(1)),
 			// ternary operator checks if tenSecValue is greater than five
 			// if so, set value to 5, if not, leave original value
 			tenSecValue: parseInt(e.target.value.charAt(3)) > 5 ? 5 : parseInt(e.target.value.charAt(3)),
 			oneSecValue: parseInt(e.target.value.charAt(4))
-		});
+		};
 
 		if(parseInt(str.charAt(2)) > 5)
 			str = str.substring(0,2) + "5" + str.substring(3);
@@ -220,10 +226,10 @@ class ControlPanel extends React.Component {
 		var start = btn.props.label == "Start Timer";
 
 		if(start) {
-			if (!(this.state.tenMinValue == 0 &&
-					this.state.oneMinValue == 0 && // if timer is not at 0
-					this.state.tenSecValue == 0 &&
-					this.state.oneSecValue == 0)) {
+			if (!(this.values.tenMinValue == 0 &&
+					this.values.oneMinValue == 0 && // if timer is not at 0
+					this.values.tenSecValue == 0 &&
+					this.values.oneSecValue == 0)) {
 				this.setState({
 					timerRunning: true
 				});
@@ -240,17 +246,13 @@ class ControlPanel extends React.Component {
 
 	// callback for Clock components
 	// called when timer stops, syncs clock values in this.state
-	syncTimer(values) {
-		console.log("sync timer");
+	syncTimer(values, shouldStop) {
+		// syncs values with ControlPanel
+		this.values = values;
 
-		if(this.state.clockMode != "clock") {
+		if(this.state.clockMode == "timer" && shouldStop) {
 			this.setState({
 				timerRunning: false,
-
-				tenMinValue: values.tenMinValue,
-				oneMinValue: values.oneMinValue,
-				tenSecValue: values.tenSecValue,
-				oneSecValue: values.oneSecValue
 			});
 		}
 	}
@@ -315,24 +317,6 @@ class ControlPanel extends React.Component {
 				height: 70,
 				margin: 10
 			},
-
-			redSlider: {
-				marginLeft: "33%",
-				height: 200
-			},
-
-			greenSlider: {
-
-			},
-
-			blueSlider: {}
-		};
-
-		var clockValues = {
-			tenMinValue: this.state.tenMinValue,
-			oneMinValue: this.state.oneMinValue,
-			tenSecValue: this.state.tenSecValue,
-			oneSecValue: this.state.oneSecValue
 		};
 
 		return (
@@ -357,9 +341,9 @@ class ControlPanel extends React.Component {
 							<td>
 								<Clock
 									running={this.state.timerRunning}
-									values={clockValues}
+									values={this.values}
 									clockMode={this.state.clockMode}
-									onStop={this.syncTimer}
+									sync={this.syncTimer}
 									onDeselect={this.props.onDeselect}
 								/>
 							</td>
@@ -415,7 +399,7 @@ class ControlPanel extends React.Component {
 								<RaisedButton
 									style={styles.scoreButton}
 									icon={<Arrow style={styles.upStyle} color="white"/>}
-									onClick={() => {this.handleScoreChange("home-up")}}
+									onClick={() => this.handleScoreChange("home-up")}
 									backgroundColor="#acd1e9"
 								/>
 								<br/><br/>

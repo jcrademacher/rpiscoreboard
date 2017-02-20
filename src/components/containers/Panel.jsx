@@ -22,9 +22,12 @@ class Panel extends React.Component {
 		this.clockMode = clockMode; // gets mode clock was in when ControlPanel was tabbed out of
 		this.running = running;
 
+		if(running)
+			this.runBackgroundTimer(); // subtracts a second, needed to account for
+															   // latency when starting/stopping
 		if(this.clockMode == "timer" && running)
 			this.timer = setInterval(this.runBackgroundTimer, 1000);
-		}
+	}
 
 	// runs timer in background
 	runBackgroundTimer() {
@@ -52,7 +55,7 @@ class Panel extends React.Component {
 	    tenMin--;
 	  }
 
-		if(tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0)
+		if(tenMin <= 0 && oneMin <= 0 && tenSec <= 0 && oneSec <= 0)
 			clearInterval(this.timer); // stops timer if values have reached 0
 
 		// sets timerValues instance variable to newly created timer values
