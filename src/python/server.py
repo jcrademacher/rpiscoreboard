@@ -280,25 +280,21 @@ try:
 	prevM = 0
 
 	while True:
+		server.handle_request()
+
 		h = time.localtime()[3]
 		m = time.localtime()[4]
 
 		if h > 12:
 			h -= 12
 
-		if x == 0:
-			#Wait forever for incoming htto requests
-			server.serve_forever()
-		
-		time.sleep(2)
-		
-		print "this code works"
-		
 		x += 1
 		if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
 			b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
 			prevH = h
 			prevM = m
+
+		time.sleep(1)
 
 except KeyboardInterrupt:
 	print '^C received, shutting down the web server'
