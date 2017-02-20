@@ -275,9 +275,6 @@ try:
 	server = HTTPServer(("10.0.1.83", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
-	#Wait forever for incoming htto requests
-	server.serve_forever()
-
 	x = 0
 	prevH = 0
 	prevM = 0
@@ -288,6 +285,10 @@ try:
 
 		if h > 12:
 			h -= 12
+
+		if x == 0:
+			#Wait forever for incoming htto requests
+			server.serve_forever()
 
 		x += 1
 		if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
