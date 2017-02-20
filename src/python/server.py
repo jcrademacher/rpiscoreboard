@@ -17,6 +17,7 @@ else:
 
 import serial
 import require
+import thread
 
 board = require("./board.py")
 
@@ -267,14 +268,7 @@ class myHandler(BaseHTTPRequestHandler):
 
 		self.send_response(200)
 
-
-try:
-	#Create a web server and define the handler to manage the
-	#incoming request
-
-	server = HTTPServer(("10.0.1.83", 8000), myHandler)
-	print 'Started httpserver on port ' , 8000
-
+def updateClock():
 	x = 0
 	prevH = 0
 	prevM = 0
@@ -295,6 +289,18 @@ try:
 			prevM = m
 
 		time.sleep(1)
+
+try:
+	#Create a web server and define the handler to manage the
+	#incoming request
+
+	server = HTTPServer(("10.0.1.83", 8000), myHandler)
+	print 'Started httpserver on port ' , 8000
+
+	thread.start_new_thread(updateClock, ())
+
+	server.serve_forever()
+
 
 except KeyboardInterrupt:
 	print '^C received, shutting down the web server'
