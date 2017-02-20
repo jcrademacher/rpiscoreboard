@@ -30485,7 +30485,7 @@
 
 	var _Panel2 = _interopRequireDefault(_Panel);
 
-	var _LinearProgress = __webpack_require__(427);
+	var _LinearProgress = __webpack_require__(428);
 
 	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
 
@@ -30511,7 +30511,7 @@
 
 			_this.state = {
 				progress: 0,
-				tabIndex: 2,
+				tabIndex: 1,
 				status: "Connected"
 			};
 			return _this;
@@ -30558,7 +30558,7 @@
 					if (xhr.readyState == 4) {
 						setTimeout(function () {
 							return _this2.setState({ progress: 0 });
-						}, 2000); // reset progress to 0 after 2 seconds
+						}, 1000); // reset progress to 0 after 2 seconds
 					}
 				};
 
@@ -31539,11 +31539,11 @@
 
 	var _StatsPanel2 = _interopRequireDefault(_StatsPanel);
 
-	var _SettingsPanel = __webpack_require__(419);
+	var _SettingsPanel = __webpack_require__(420);
 
 	var _SettingsPanel2 = _interopRequireDefault(_SettingsPanel);
 
-	var _DisplaysPanel = __webpack_require__(420);
+	var _DisplaysPanel = __webpack_require__(421);
 
 	var _DisplaysPanel2 = _interopRequireDefault(_DisplaysPanel);
 
@@ -31582,6 +31582,8 @@
 				this.clockMode = clockMode; // gets mode clock was in when ControlPanel was tabbed out of
 				this.running = running;
 
+				if (running) this.runBackgroundTimer(); // subtracts a second, needed to account for
+				// latency when starting/stopping
 				if (this.clockMode == "timer" && running) this.timer = setInterval(this.runBackgroundTimer, 1000);
 			}
 
@@ -31614,7 +31616,7 @@
 					tenMin--;
 				}
 
-				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) clearInterval(this.timer); // stops timer if values have reached 0
+				if (tenMin <= 0 && oneMin <= 0 && tenSec <= 0 && oneSec <= 0) clearInterval(this.timer); // stops timer if values have reached 0
 
 				// sets timerValues instance variable to newly created timer values
 				this.timerValues = {
@@ -31759,16 +31761,18 @@
 				clockMode: _this.props.clockMode,
 				timerRunning: _this.props.running,
 
+				homeScore: 0,
+				awayScore: 0
+			};
+
+			_this.values = {
 				// ternary operator checks if clockMode is in clock mode
 				// if so, format new time, if not, display passed timer values as props
 				tenMinValue: cmode ? parseInt(_this.formatTime().charAt(0)) : _this.props.values.tenMinValue,
 				oneMinValue: cmode ? parseInt(_this.formatTime().charAt(1)) : _this.props.values.oneMinValue,
 				// skip over 2 because index 2 is a colon
 				tenSecValue: cmode ? parseInt(_this.formatTime().charAt(3)) : _this.props.values.tenSecValue,
-				oneSecValue: cmode ? parseInt(_this.formatTime().charAt(4)) : _this.props.values.oneSecValue,
-
-				homeScore: 0,
-				awayScore: 0
+				oneSecValue: cmode ? parseInt(_this.formatTime().charAt(4)) : _this.props.values.oneSecValue
 			};
 			return _this;
 		}
@@ -31816,19 +31820,19 @@
 			key: "handlePresetTime",
 			value: function handlePresetTime(time, event) {
 				if (time == "5:00") {
-					this.setState({
+					this.values = {
 						tenMinValue: 0,
 						oneMinValue: parseInt(time.charAt(0)),
 						tenSecValue: parseInt(time.charAt(2)), // skip over 1 for the colon in "5:00"
 						oneSecValue: parseInt(time.charAt(3))
-					});
+					};
 				} else {
-					this.setState({
+					this.values = {
 						tenMinValue: parseInt(time.charAt(0)),
 						oneMinValue: parseInt(time.charAt(1)), // skip over 2 for the colon
 						tenSecValue: parseInt(time.charAt(3)),
 						oneSecValue: parseInt(time.charAt(4))
-					});
+					};
 				}
 
 				// gets rid of colon, and adds 0 in front of 500
@@ -31845,24 +31849,28 @@
 					this.setState({
 						timerRunning: false,
 
-						clockMode: value,
+						clockMode: value
+					});
 
+					this.values = {
 						tenMinValue: parseInt(this.formatTime().charAt(0)),
 						oneMinValue: parseInt(this.formatTime().charAt(1)),
 						tenSecValue: parseInt(this.formatTime().charAt(3)), // skip over 2 because index 2 is a colon
 						oneSecValue: parseInt(this.formatTime().charAt(4))
-					});
+					};
 				} else {
 					this.setState({
 						timerRunning: false,
 
-						clockMode: value,
+						clockMode: value
+					});
 
+					this.values = {
 						tenMinValue: 0,
 						oneMinValue: 0,
 						tenSecValue: 0,
 						oneSecValue: 0
-					});
+					};
 				}
 
 				this.props.httpCallback("POST", "control/mode/" + value, null);
@@ -31912,14 +31920,14 @@
 
 				e.target.value = str.substr(0, 2) + ":" + str.substring(2);
 
-				this.setState({
+				this.values = {
 					tenMinValue: parseInt(e.target.value.charAt(0)),
 					oneMinValue: parseInt(e.target.value.charAt(1)),
 					// ternary operator checks if tenSecValue is greater than five
 					// if so, set value to 5, if not, leave original value
 					tenSecValue: parseInt(e.target.value.charAt(3)) > 5 ? 5 : parseInt(e.target.value.charAt(3)),
 					oneSecValue: parseInt(e.target.value.charAt(4))
-				});
+				};
 
 				if (parseInt(str.charAt(2)) > 5) str = str.substring(0, 2) + "5" + str.substring(3);
 
@@ -31934,8 +31942,8 @@
 				var start = btn.props.label == "Start Timer";
 
 				if (start) {
-					if (!(this.state.tenMinValue == 0 && this.state.oneMinValue == 0 && // if timer is not at 0
-					this.state.tenSecValue == 0 && this.state.oneSecValue == 0)) {
+					if (!(this.values.tenMinValue == 0 && this.values.oneMinValue == 0 && // if timer is not at 0
+					this.values.tenSecValue == 0 && this.values.oneSecValue == 0)) {
 						this.setState({
 							timerRunning: true
 						});
@@ -31954,17 +31962,13 @@
 
 		}, {
 			key: "syncTimer",
-			value: function syncTimer(values) {
-				console.log("sync timer");
+			value: function syncTimer(values, shouldStop) {
+				// syncs values with ControlPanel
+				this.values = values;
 
-				if (this.state.clockMode != "clock") {
+				if (this.state.clockMode == "timer" && shouldStop) {
 					this.setState({
-						timerRunning: false,
-
-						tenMinValue: values.tenMinValue,
-						oneMinValue: values.oneMinValue,
-						tenSecValue: values.tenSecValue,
-						oneSecValue: values.oneSecValue
+						timerRunning: false
 					});
 				}
 			}
@@ -32033,23 +32037,7 @@
 						width: 250,
 						height: 70,
 						margin: 10
-					},
-
-					redSlider: {
-						marginLeft: "33%",
-						height: 200
-					},
-
-					greenSlider: {},
-
-					blueSlider: {}
-				};
-
-				var clockValues = {
-					tenMinValue: this.state.tenMinValue,
-					oneMinValue: this.state.oneMinValue,
-					tenSecValue: this.state.tenSecValue,
-					oneSecValue: this.state.oneSecValue
+					}
 				};
 
 				return _react2.default.createElement(
@@ -32089,9 +32077,9 @@
 									null,
 									_react2.default.createElement(_Clock2.default, {
 										running: this.state.timerRunning,
-										values: clockValues,
+										values: this.values,
 										clockMode: this.state.clockMode,
-										onStop: this.syncTimer,
+										sync: this.syncTimer,
 										onDeselect: this.props.onDeselect
 									})
 								),
@@ -32166,7 +32154,7 @@
 										style: styles.scoreButton,
 										icon: _react2.default.createElement(_navigation2.default, { style: styles.upStyle, color: "white" }),
 										onClick: function onClick() {
-											_this2.handleScoreChange("home-up");
+											return _this2.handleScoreChange("home-up");
 										},
 										backgroundColor: "#acd1e9"
 									}),
@@ -41245,21 +41233,20 @@
 
 				// if nextProps specify that the timer should not be running, and if the timer is currently running,
 				// then call function to sync state with ControlPanel
-				if (!nextProps.running && this.props.running) this.props.onStop(this.state);
+				if (!nextProps.running && this.props.running) this.props.sync(this.state, true);
 			}
 		}, {
 			key: "componentWillUnmount",
 			value: function componentWillUnmount() {
 				clearInterval(this.timer); // clears instance variable timer from ticking
 
+				// when BottomNavigation is tabbed out of, start timer
 				this.props.onDeselect(this.state, this.props.clockMode, this.props.running);
 			}
 		}, {
 			key: "tick",
 			value: function tick() {
 				if (!this.props.running) return;
-
-				console.log("timer tick");
 
 				var tenMin = this.state.tenMinValue;
 				var oneMin = this.state.oneMinValue;
@@ -41290,7 +41277,9 @@
 					oneSecValue: oneSec
 				});
 
-				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) this.props.onStop(this.state); // calls function in ControlPanel to synchronize states
+				this.props.sync(this.state, false);
+
+				if (tenMin == 0 && oneMin == 0 && tenSec == 0 && oneSec == 0) this.props.sync(this.state, true); // calls function in ControlPanel to synchronize states
 			}
 		}, {
 			key: "render",
@@ -41326,6 +41315,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Login = __webpack_require__(419);
+
+	var _Login2 = _interopRequireDefault(_Login);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41349,7 +41342,7 @@
 				return _react2.default.createElement(
 					"div",
 					null,
-					"stats panel"
+					_react2.default.createElement(_Login2.default, null)
 				);
 			}
 		}]);
@@ -41361,6 +41354,148 @@
 
 /***/ },
 /* 419 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _Paper = __webpack_require__(287);
+
+	var _Paper2 = _interopRequireDefault(_Paper);
+
+	var _TextField = __webpack_require__(380);
+
+	var _TextField2 = _interopRequireDefault(_TextField);
+
+	var _FlatButton = __webpack_require__(363);
+
+	var _FlatButton2 = _interopRequireDefault(_FlatButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Login = function (_React$Component) {
+		_inherits(Login, _React$Component);
+
+		function Login(props) {
+			_classCallCheck(this, Login);
+
+			return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+		}
+
+		_createClass(Login, [{
+			key: "signIn",
+			value: function signIn() {
+				console.log(this);
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var styles = {
+					paper: {
+						backgroundColor: "#eaeaea",
+						height: "400",
+						width: "400",
+						margin: "auto"
+					},
+
+					username: {
+						fontSize: 20
+					},
+
+					textField: {
+						width: "320"
+					},
+
+					buttons: {
+						width: "320",
+						height: "45",
+						margin: 10
+					}
+				};
+
+				return _react2.default.createElement(
+					"div",
+					null,
+					_react2.default.createElement(
+						"p",
+						{ style: { fontSize: 60, margin: 40 } },
+						"Sign in"
+					),
+					_react2.default.createElement(
+						_Paper2.default,
+						{ style: styles.paper },
+						_react2.default.createElement("br", null),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement("br", null),
+						_react2.default.createElement(
+							"form",
+							null,
+							_react2.default.createElement(_TextField2.default, {
+								hintText: "Username...",
+								hintStyle: styles.username,
+								inputStyle: styles.username,
+								style: styles.textField
+							}),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement(_TextField2.default, {
+								hintText: "Password...",
+								hintStyle: styles.username,
+								inputStyle: styles.username,
+								style: styles.textField,
+								type: "password"
+							}),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement(_FlatButton2.default, {
+								backgroundColor: "#c1dad6",
+								label: "Sign in",
+								labelStyle: { fontSize: 20 },
+								style: styles.buttons,
+								onClick: this.signIn()
+							}),
+							_react2.default.createElement("br", null),
+							_react2.default.createElement(_FlatButton2.default, {
+								label: "Create new account",
+								backgroundColor: "#E8D0A9",
+								labelStyle: { fontSize: 15 },
+								style: styles.buttons
+							})
+						)
+					),
+					_react2.default.createElement("br", null),
+					_react2.default.createElement("br", null)
+				);
+			}
+		}]);
+
+		return Login;
+	}(_react2.default.Component);
+
+	exports.default = Login;
+
+
+	var CenterView = function CenterView() {};
+
+/***/ },
+/* 420 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41409,7 +41544,7 @@
 	exports.default = SettingsPanel;
 
 /***/ },
-/* 420 */
+/* 421 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -41424,7 +41559,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ColorSlider = __webpack_require__(421);
+	var _ColorSlider = __webpack_require__(422);
 
 	var _ColorSlider2 = _interopRequireDefault(_ColorSlider);
 
@@ -41432,7 +41567,7 @@
 
 	var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
 
-	var _ButtonArray = __webpack_require__(426);
+	var _ButtonArray = __webpack_require__(427);
 
 	var _ButtonArray2 = _interopRequireDefault(_ButtonArray);
 
@@ -41538,7 +41673,7 @@
 	exports.default = DisplaysPanel;
 
 /***/ },
-/* 421 */
+/* 422 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41553,7 +41688,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Slider = __webpack_require__(422);
+	var _Slider = __webpack_require__(423);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
@@ -41625,7 +41760,7 @@
 	exports.default = ColorSlider;
 
 /***/ },
-/* 422 */
+/* 423 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41635,7 +41770,7 @@
 	});
 	exports.default = undefined;
 
-	var _Slider = __webpack_require__(423);
+	var _Slider = __webpack_require__(424);
 
 	var _Slider2 = _interopRequireDefault(_Slider);
 
@@ -41644,7 +41779,7 @@
 	exports.default = _Slider2.default;
 
 /***/ },
-/* 423 */
+/* 424 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -41681,7 +41816,7 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _defineProperty2 = __webpack_require__(424);
+	var _defineProperty2 = __webpack_require__(425);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
@@ -41709,7 +41844,7 @@
 
 	var _FocusRipple2 = _interopRequireDefault(_FocusRipple);
 
-	var _deprecatedPropType = __webpack_require__(425);
+	var _deprecatedPropType = __webpack_require__(426);
 
 	var _deprecatedPropType2 = _interopRequireDefault(_deprecatedPropType);
 
@@ -42498,7 +42633,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 424 */
+/* 425 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42527,7 +42662,7 @@
 	};
 
 /***/ },
-/* 425 */
+/* 426 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -42571,7 +42706,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 426 */
+/* 427 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42733,7 +42868,7 @@
 	exports.default = ButtonArray;
 
 /***/ },
-/* 427 */
+/* 428 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42743,7 +42878,7 @@
 	});
 	exports.default = undefined;
 
-	var _LinearProgress = __webpack_require__(428);
+	var _LinearProgress = __webpack_require__(429);
 
 	var _LinearProgress2 = _interopRequireDefault(_LinearProgress);
 
@@ -42752,7 +42887,7 @@
 	exports.default = _LinearProgress2.default;
 
 /***/ },
-/* 428 */
+/* 429 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';

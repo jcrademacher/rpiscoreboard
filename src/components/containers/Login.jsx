@@ -8,6 +8,10 @@ export default class Login extends React.Component {
 		super(props);
 	}
 
+	signIn() {
+		console.log(this);
+	}
+
 	render() {
 		var styles = {
 			paper: {
@@ -58,6 +62,7 @@ export default class Login extends React.Component {
 							label="Sign in"
 							labelStyle={{fontSize: 20}}
 							style={styles.buttons}
+							onClick={this.signIn()}
 						/>
 						<br/>
 						<FlatButton
