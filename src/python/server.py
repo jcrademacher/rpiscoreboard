@@ -15,11 +15,10 @@ else:
     from urlparse import parse_qs
     from BaseHTTPServer import BaseHTTPRequestHandler
 
-'''
 import serial
 import require
 
-board = require("./src/python/board.py")
+board = require("./board.py")
 
 b = board.Board(0,0)
 
@@ -205,7 +204,6 @@ def fancyFlash():
 	b.showNum(b.homeScore, 0)
 	b.showNum(b.awayScore, 1)
 
-'''
 
 # list holding all clients
 clients = []
@@ -274,7 +272,7 @@ try:
 	#Create a web server and define the handler to manage the
 	#incoming request
 
-	server = HTTPServer(("10.0.0.248", 8000), myHandler)
+	server = HTTPServer(("10.0.1.83", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#Wait forever for incoming htto requests
