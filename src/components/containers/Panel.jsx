@@ -55,8 +55,10 @@ class Panel extends React.Component {
 	    tenMin--;
 	  }
 
-		if(tenMin <= 0 && oneMin <= 0 && tenSec <= 0 && oneSec <= 0)
+		if(tenMin <= 0 && oneMin <= 0 && tenSec <= 0 && oneSec <= 0) {
 			clearInterval(this.timer); // stops timer if values have reached 0
+			this.running = false;
+		}
 
 		// sets timerValues instance variable to newly created timer values
 		this.timerValues = {

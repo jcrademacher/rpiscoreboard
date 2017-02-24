@@ -3,8 +3,8 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-		main: './src/pages/main.js',
-		account: './src/pages/account.js'
+		main: './src/js/main.js',
+		account: './src/js/account.js'
 	},
   output: { path: "./src/pages", filename: '[name].bundle.js' },
   module: {

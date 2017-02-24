@@ -18,12 +18,14 @@
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "react-mfb": "^0.4.1",
+    "react-redux": "^5.0.2",
     "react-tap-event-plugin": "^1.0.0",
+    "redux": "^3.6.0",
     "webpack": "^1.14.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --colors"
+    "dev": "webpack-dev-server --progress --colors --content-base ./src/pages"
   },
   "repository": {
     "type": "git",

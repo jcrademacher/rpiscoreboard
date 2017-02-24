@@ -233,15 +233,17 @@ class ControlPanel extends React.Component {
 				this.setState({
 					timerRunning: true
 				});
+
+				this.props.httpCallback("POST", "control/timer/start", null);
 			}
 		}
 		else {
 			this.setState({
 				timerRunning: false
 			});
-		}
 
-		this.props.httpCallback("POST", "control/timer/" + start ? "start" : "stop", null);
+			this.props.httpCallback("POST", "control/timer/stop", null);
+		}
 	}
 
 	// callback for Clock components
@@ -318,7 +320,6 @@ class ControlPanel extends React.Component {
 				margin: 10
 			},
 		};
-
 		return (
       <div>
         <span>
@@ -326,6 +327,7 @@ class ControlPanel extends React.Component {
             defaultSelected={this.state.clockMode == "clock" ? "clock" : "timer"}
             style={{textAlign: "left", padding: 8, fontSize: 14}}
             onChange={this.handleRadioButton}
+						name="clock/timer"
           >
             <RadioButton label="Clock Mode" value="clock"/>
             <RadioButton label="Timer Mode" value="timer"/>

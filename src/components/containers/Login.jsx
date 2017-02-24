@@ -2,6 +2,8 @@ import React from "react";
 import Paper from "material-ui/Paper";
 import TextField from "material-ui/TextField";
 import FlatButton from "material-ui/FlatButton";
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 export default class Login extends React.Component {
 	constructor(props) {
@@ -61,7 +63,7 @@ export default class Login extends React.Component {
 							type="password"
 						/>
 						<br/><br/><br/>
-						<FlatButton
+						<RaisedButton
 							backgroundColor="#c1dad6"
 							label="Sign in"
 							labelStyle={{fontSize: 20}}
@@ -74,7 +76,7 @@ export default class Login extends React.Component {
 							backgroundColor="#E8D0A9"
 							labelStyle={{fontSize: 15}}
 							style={styles.buttons}
-							href="account.html"
+							onClick={() => window.location = "./account.html"}
 						/>
 					</form>
 				</Paper>

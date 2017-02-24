@@ -37,21 +37,16 @@ export default class MainView extends React.Component {
 
 			// running through all readyState possibilities, updating progress bar as such
 			switch(xhr.readyState) {
-				case 1:
-					p = 25;
-					break;
-				case 2:
-					p = 50;
-					break;
 				case 3:
 					p = 75;
 					break;
 				case 4:
 					p = 90;
 					break;
+				default:
+					p = 25;
+					break;
 			}
-
-			console.log(xhr.status);
 
 			if(xhr.status <= 200 && xhr.status > 0) {
 				p = 100;

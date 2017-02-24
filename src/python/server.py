@@ -15,9 +15,11 @@ else:
     from urlparse import parse_qs
     from BaseHTTPServer import BaseHTTPRequestHandler
 
+'''
 import serial
 import require
 import thread
+
 
 board = require("./board.py")
 
@@ -205,7 +207,7 @@ def fancyFlash():
 	b.showNum(b.homeScore, 0)
 	b.showNum(b.awayScore, 1)
 
-
+'''
 # list holding all clients
 clients = []
 
@@ -246,6 +248,7 @@ class myHandler(BaseHTTPRequestHandler):
 		print self.path
 
 		#dont ask me how this code works
+		'''
 		ctype, pdict = parse_header(self.headers['content-type'])
 		if ctype == 'multipart/form-data':
 			postvars = parse_multipart(self.rfile, pdict)
@@ -255,16 +258,19 @@ class myHandler(BaseHTTPRequestHandler):
 		else:
 			postvars = {}
 
-		print postvars
+		print postvars'''
 
-		if self.path == "/control/score/home-up":
-			homeAddHandler();
-		if self.path == "/control/score/home-down":
-			homeMinusHandler();
-		if self.path == "/control/score/away-up":
-			awayAddHandler();
-		if self.path == "/control/score/away-down":
-			awayMinusHandler();
+		try:
+			if self.path == "/control/score/home-up":
+				homeAddHandler();
+			if self.path == "/control/score/home-down":
+				homeMinusHandler();
+			if self.path == "/control/score/away-up":
+				awayAddHandler();
+			if self.path == "/control/score/away-down":
+				awayMinusHandler();
+		except NameError:
+			print 'function not defined'
 
 		self.send_response(200)
 
@@ -307,10 +313,10 @@ try:
 	#Create a web server and define the handler to manage the
 	#incoming request
 
-	server = HTTPServer(("10.0.1.83", 8000), myHandler)
+	server = HTTPServer(("172.16.45.94", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
-	thread.start_new_thread(updateClock, ())
+	#thread.start_new_thread(updateClock, ())
 
 	server.serve_forever()
 

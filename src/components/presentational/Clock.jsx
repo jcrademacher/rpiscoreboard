@@ -34,7 +34,6 @@ export default class Clock extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.timer); // clears instance variable timer from ticking
-
 		// when BottomNavigation is tabbed out of, start timer
 		this.props.onDeselect(this.state, this.props.clockMode, this.props.running);
 	}
