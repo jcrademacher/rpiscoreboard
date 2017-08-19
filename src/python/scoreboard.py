@@ -162,10 +162,16 @@ def setTimerMode(path,tags,args,source):
 #FADERS
 #################################################################################
 def redHandler(path, tags, args, source):
-    b.redVal=int(args[0])
+    if(args[0] > 200): #preserving the white color for LEDS (power issue)
+        b.redVal=200
+    else:
+        b.redVal=int(args[0])
 
 def greenHandler(path, tags, args, source):
-    b.greenVal=int(args[0])
+    if(args[0] > 200):  #preserving the white color for LEDS (power issue)
+        b.greenVal=200
+    else:
+        b.greenVal=int(args[0])
 
 def blueHandler(path, tags, args, source):
     b.blueVal=int(args[0])
