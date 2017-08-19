@@ -16,8 +16,8 @@ Adafruit_NeoPixel num3 = Adafruit_NeoPixel(35, PIN_3, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel num4 = Adafruit_NeoPixel(35, PIN_4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel pins = Adafruit_NeoPixel(2, PIN_5, NEO_GRB + NEO_KHZ800);
 
-int red = 235;
-int green = 235;
+int red = 200;
+int green = 200;
 int blue = 235;
 
 int oneSecVal = 0;
