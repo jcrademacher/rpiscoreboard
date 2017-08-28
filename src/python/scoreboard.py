@@ -16,7 +16,7 @@ b.awayOff()
 b.showNum(0,0)
 b.showNum(0,1)
 
-serverAddr = ("10.0.1.83",8000)
+serverAddr = ("192.168.86.41",8000)
 #This has to be the IP of the RaspberryPi on the network
 server = OSCServer(serverAddr)
 

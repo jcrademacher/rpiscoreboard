@@ -15,7 +15,6 @@ else:
     from urlparse import parse_qs
     from BaseHTTPServer import BaseHTTPRequestHandler
 
-'''
 import serial
 import require
 import thread
@@ -207,7 +206,6 @@ def fancyFlash():
 	b.showNum(b.homeScore, 0)
 	b.showNum(b.awayScore, 1)
 
-'''
 # list holding all clients
 clients = []
 
@@ -313,7 +311,7 @@ try:
 	#Create a web server and define the handler to manage the
 	#incoming request
 
-	server = HTTPServer(("172.16.45.94", 8000), myHandler)
+	server = HTTPServer(("192.168.86.41", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
 	#thread.start_new_thread(updateClock, ())
