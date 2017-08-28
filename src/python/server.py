@@ -245,19 +245,6 @@ class myHandler(BaseHTTPRequestHandler):
 
 		print self.path
 
-		#dont ask me how this code works
-		'''
-		ctype, pdict = parse_header(self.headers['content-type'])
-		if ctype == 'multipart/form-data':
-			postvars = parse_multipart(self.rfile, pdict)
-		elif ctype == 'application/x-www-form-urlencoded':
-			length = int(self.headers['content-length'])
-			postvars = parse_qs(self.rfile.read(length),keep_blank_values=1)
-		else:
-			postvars = {}
-
-		print postvars'''
-
 		try:
 			if self.path == "/control/score/home-up":
 				homeAddHandler();
@@ -279,33 +266,16 @@ def updateClock():
 
 	while True:
 		h = time.localtime()[3]
-		m = time.localtime()[4]
+        m = time.localtime()[4]
 
-		if h > 12:
-			h -= 12
+        if h > 12:
+    	h -= 12
 
-		x += 1
-		if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
-			b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
-			prevH = h
-			prevM = m
-
-		time.sleep(1)
-
-	while True:
-		h = time.localtime()[3]
-		m = time.localtime()[4]
-
-		if h > 12:
-			h -= 12
-
-		x += 1
-		if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
-			b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
-			prevH = h
-			prevM = m
-
-		time.sleep(1)
+        x += 1
+        if x == 0 or x % 5 == 0 and b.clockMode == "clock" and m != prevM:
+            b.serialWrite('H',chr(h),'M',chr(m),'S',chr(0))
+            prevH = h
+            prevM = m
 
 try:
 	#Create a web server and define the handler to manage the
