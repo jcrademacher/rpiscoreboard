@@ -328,21 +328,22 @@ void allOn(uint32_t c, Adafruit_NeoPixel &strip) {
 }
 
 void showGo() {
-  int initRed = 235;
-  int initBlue = 235;
 
-  for(int x = 0; x < initRed; x++) {
+  for(int x = 0; x < 235; x++) {
     /*** fades in "G" ***/
     for(int i = 0; i < 35; i++) {
-      if(i < 20 || (i >= 25 && i < 30) || (i >= 30 && i < 33))
+      if(i < 15 || (i >= 20 && i < 30) || i >= 33)
         num2.setPixelColor(i,num2.Color(x,x,0));
 
       if(i < 30)
         num3.setPixelColor(i,num3.Color(x,x,0));
 
-      num2.show();
-      num3.show();
     }
+    
+    num2.show();
+    num3.show();
+
+    delay(10);
   }
 }
 
@@ -350,7 +351,7 @@ void initLEDS() {
 
   for(int i = 0; i < 10; i++) {
     showGo();
-    showBlue();
+    //showBlue();
   }
 
 

@@ -314,7 +314,7 @@ try:
 	server = HTTPServer(("192.168.86.41", 8000), myHandler)
 	print 'Started httpserver on port ' , 8000
 
-	#thread.start_new_thread(updateClock, ())
+	thread.start_new_thread(updateClock, ())
 
 	server.serve_forever()
 
