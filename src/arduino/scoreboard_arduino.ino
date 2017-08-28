@@ -343,6 +343,8 @@ void showGo() {
     num2.show();
     num3.show();
   }
+  
+  delay(5);
 
   for(int x = 235; x > 0; x--) {
     /*** fades out "GO" ***/
@@ -365,7 +367,7 @@ void showBlue() {
   for(int x = 0; x < 235; x++) {
     /*** fades in "BLUE" ***/
     for(int i = 0; i < 35; i++) {
-      if(i < 15 || (i >= 25 && i < 30)) {
+      if(i < 10 || (i >= 25 && i < 30)) {
         num1.setPixelColor(i,num1.Color(0,0,x));
         num2.setPixelColor(i,num2.Color(0,0,x));
         num3.setPixelColor(i,num3.Color(0,0,x));
@@ -378,7 +380,7 @@ void showBlue() {
       if(i >= 30 || (i >= 10 && i < 15))
         num4.setPixelColor(i,num4.Color(0,0,x));
 
-      if(i >= 15 && i < 19 || i >= 21 && i < 25 || i >= 30 && i < 34)
+      if(i >= 10 && i < 19 || i >= 21 && i < 25 || i >= 30 && i < 34)
         num1.setPixelColor(i,num1.Color(0,0,x));
     }
 
@@ -388,10 +390,10 @@ void showBlue() {
     num4.show();
   }
 
-  for(int x = 235; x > 0; x-- {
+  for(int x = 235; x > 0; x--) {
     /*** fades out "BLUE" ***/
     for(int i = 0; i < 35; i++) {
-      if(i < 15 || (i >= 25 && i < 30)) {
+      if(i < 10 || (i >= 25 && i < 30)) {
         num1.setPixelColor(i,num1.Color(0,0,x));
         num2.setPixelColor(i,num2.Color(0,0,x));
         num3.setPixelColor(i,num3.Color(0,0,x));
@@ -404,7 +406,7 @@ void showBlue() {
       if(i >= 30 || (i >= 10 && i < 15))
         num4.setPixelColor(i,num4.Color(0,0,x));
 
-      if(i >= 15 && i < 19 || i >= 21 && i < 25 || i >= 30 && i < 34)
+      if(i >= 10 && i < 19 || i >= 21 && i < 25 || i >= 30 && i < 34)
         num1.setPixelColor(i,num1.Color(0,0,x));
     }
 
@@ -417,9 +419,9 @@ void showBlue() {
 
 void initLEDS() {
 
-  for(int i = 0; i < 10; i++) {
+  for(int i = 0; i < 2; i++) {
     showGo();
-    //showBlue();
+    showBlue();
   }
 
 
