@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-onsenui';
 
-const Splash = ({ connecting, error, onTryAgain, proceedAnyway }) => {
+const Splash = ({ connecting, errorMsg, onTryAgain, proceedAnyway }) => {
   const styles = {
     container: {
       display: "flex",
@@ -15,8 +15,6 @@ const Splash = ({ connecting, error, onTryAgain, proceedAnyway }) => {
     }
   }
 
-  console.log(error);
-
   return (
     <div style={styles.container}>
       {
@@ -26,7 +24,7 @@ const Splash = ({ connecting, error, onTryAgain, proceedAnyway }) => {
       :
       (
         <div style={{ textAlign: "center" }}>
-          <h2>Could not connect</h2>
+          <h2>{errorMsg}</h2>
           <Button
             onClick={onTryAgain}
             style={styles.buttonPad}

@@ -4,7 +4,7 @@ export const init = () => {
     var ws;
 
     try {
-      ws = new WebSocket("ws://localhost:8888/ws");
+      ws = new WebSocket("ws://192.168.86.41:8888/ws");
     }
     catch(e) {
       console.log("catch err:",e);

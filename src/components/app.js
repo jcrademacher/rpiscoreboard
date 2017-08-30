@@ -3,6 +3,8 @@ import React from 'react';
 import { Page } from 'react-onsenui';
 
 import Splash from './pages/splash';
+import Navigator from './pages/navigator';
+import PrimaryControls from './pages/controls/primary'
 import * as socket from '../socket';
 
 export default class App extends React.Component {
@@ -10,11 +12,11 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      error: "",
       connecting: true,
       isConnected: false,
       proceedAnyway: false,
-      socket: null
+      socket: null,
+      errorMsg: ""
     }
   }
 
@@ -22,12 +24,28 @@ export default class App extends React.Component {
     this.openSocket();
   }
 
+  timeout() {
+    const {
+      connecting,
+      isConnected
+    } = this.state;
+
+    if(connecting && !isConnected) {
+      this.setState({
+        connecting: false,
+        isConnected: false,
+        errorMsg: "Connection timeout"
+      });
+    }
+  }
+
   openSocket() {
+    setTimeout(this.timeout.bind(this), 5000);
+
     this.setState({
       socket: null,
       connecting: true,
-      isConnected: false,
-      error: ""
+      isConnected: false
     })
 
     socket.init()
@@ -38,25 +56,26 @@ export default class App extends React.Component {
         isConnected: true
       });
 
-      socket.addEventListener("error", this.setError.bind(this));
+      socket.addEventListener("close", () => this.setError("Connection closed"));
+      socket.addEventListener("error", () => this.setError("Something went wrong"));
     })
-    .catch((error) => {
-      this.setError(error);
+    .catch(() => {
+      this.setError("Connection refused");
     });
   }
 
-  setError(error) {
+  setError(msg) {
     this.setState({
       socket: null,
-      error: error,
       connecting: false,
-      isConnected: false
+      isConnected: false,
+      errorMsg: msg
     });
   }
 
 	render() {
     const {
-      error,
+      errorMsg,
       isConnected,
       connecting,
       socket,
@@ -67,10 +86,17 @@ export default class App extends React.Component {
       <Page>
         {
         isConnected && socket || proceedAnyway ?
-          <h2>Connected!</h2>
+          <Navigator
+            isConnected={isConnected}
+          >
+            <PrimaryControls
+              socket={socket}
+            />
+            <h3>Coming soon...</h3>
+          </Navigator>
         :
           <Splash
-            error={error}
+            errorMsg={errorMsg}
             connecting={connecting}
             onTryAgain={() => this.openSocket()}
             proceedAnyway={() => this.setState({ proceedAnyway: true })}
