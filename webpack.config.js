@@ -5,7 +5,10 @@ module.exports = {
   entry: {
 		main: './src/static/main.js'
 	},
-  output: { path: path.resolve(__dirname, "./build/"), filename: 'main.bundle.js' },
+  output: { path: path.resolve(__dirname, "./build/"), filename: '[name].bundle.js' },
+  // externals: {
+  //   'settings': require("./build/settings.json")
+  // },
   module: {
     loaders: [
       {

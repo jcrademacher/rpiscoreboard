@@ -27,7 +27,7 @@ const StatusBar = ({ isConnected, index }) => {
     }
   }
 
-  const titles = ["RadCinus Scoreboard", "About"];
+  const titles = ["Controls", "About"];
 
   const title = titles[index];
   const connectedStyle = isConnected ? styles.connected : styles.disconnected;
