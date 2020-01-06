@@ -2,23 +2,24 @@
   "name": "react-scoreboard",
   "version": "1.0.0",
   "devDependencies": {
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-env": "^1.1.8",
-    "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.16.0",
-    "onsenui": "^2.5.3",
-    "react": "^15.6.1",
-    "react-dom": "^15.5.3",
-    "react-onsenui": "^1.5.0",
-    "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.7.1"
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "onsenui": "^2.10.10",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-onsenui": "^1.11.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   },
   "description": "\"web-app made using ReactJS for a homemade wireless backyard LED-powered ice rink scoreboard\"",
   "main": "src/main.js",
   "dependencies": {
-    "react-mfb": "^0.4.1",
-    "react-tap-event-plugin": "^1.0.0"
+    "css-loader": "^3.4.1",
+    "react-tap-event-plugin": "^3.0.3",
+    "style-loader": "^1.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

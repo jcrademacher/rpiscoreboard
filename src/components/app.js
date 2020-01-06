@@ -4,7 +4,9 @@ import { Page } from 'react-onsenui';
 
 import Splash from './pages/splash';
 import Navigator from './pages/navigator';
-import PrimaryControls from './pages/controls/primary'
+import PrimaryControls from './pages/controls/primary';
+import ColorControls from './pages/controls/colors'
+import About from './pages/about';
 import * as socket from '../socket';
 
 export default class App extends React.Component {
@@ -92,7 +94,10 @@ export default class App extends React.Component {
             <PrimaryControls
               socket={socket}
             />
-            <h3>Coming soon...</h3>
+            <ColorControls
+              socket={socket}
+            />
+            <About/>
           </Navigator>
         :
           <Splash

@@ -1,0 +1,11 @@
+.red-slider > input {
+    background-image: linear-gradient(red,red) !important;
+}  
+
+.blue-slider > input {
+    background-image: linear-gradient(blue,blue) !important;
+}
+
+.green-slider > input {
+    background-image: linear-gradient(green,green) !important;
+}

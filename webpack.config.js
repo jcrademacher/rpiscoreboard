@@ -10,14 +10,25 @@ module.exports = {
   //   'settings': require("./build/settings.json")
   // },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /jsx?$/,
-        loader: 'babel-loader',
+        test: /\.css$/i,
         exclude: /(node_modules|resources)/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: "babel-loader"
+        },
+        exclude: /(node_modules|resources)/
       }
     ]
   },

@@ -27,7 +27,7 @@ const StatusBar = ({ isConnected, index }) => {
     }
   }
 
-  const titles = ["Controls", "About"];
+  const titles = ["Controls", "Color Editor", "About"];
 
   const title = titles[index];
   const connectedStyle = isConnected ? styles.connected : styles.disconnected;

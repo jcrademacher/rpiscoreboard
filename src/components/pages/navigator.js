@@ -9,7 +9,7 @@ export default class Navigator extends Component {
     super(props);
 
     this.state = {
-      tabIndex: 0
+      tabIndex: 1
     }
   }
 
@@ -34,7 +34,11 @@ export default class Navigator extends Component {
       },
       {
         content: pageWrapper(this.props.children[1]),
-        tab: tab("About", "md-info-outline")
+        tab: tab("Colors", "md-invert-colors")
+      },
+      {
+        content: pageWrapper(this.props.children[2]),
+        tab: tab("About", "md-info")
       }
     ];
   }
