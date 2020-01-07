@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Range } from 'react-onsenui'
+import { Range, Button } from 'react-onsenui'
 
 export default class ColorControls extends Component {
   constructor(props) {
@@ -11,6 +11,22 @@ export default class ColorControls extends Component {
       green: 100,
       blue: 100
     };
+  }
+  
+  changeColors() {
+    var toSend = "setColor/"
+
+    // var redColor = parseInt(this.state.red / this.maxSliderVal * this.maxColorVal);
+    // var greenColor = parseInt(this.state.green / this.maxSliderVal * this.maxColorVal);
+    // var blueColor = parseInt(this.state.blue / this.maxSliderVal * this.maxColorVal);
+
+    toSend += String.fromCharCode(this.state.red)
+    toSend += String.fromCharCode(this.state.green)
+    toSend += String.fromCharCode(this.state.blue)
+
+    console.log(toSend)
+
+    this.props.socket.send(toSend)
   }
 
   render() {
@@ -41,11 +57,18 @@ export default class ColorControls extends Component {
         width: "100%",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-evenly",
+        justifyContent: "space-around",
         height: "100%"
       },
       presetContainer: {
         height: "30%"
+      },
+      updateColorContainer: {
+        
+      },
+      updateColorButton: {
+        width: "100%",
+        textAlign: "center"
       }
     }
 
@@ -88,6 +111,12 @@ export default class ColorControls extends Component {
               className="blue-slider"
             />
           </div>
+          <Button
+            style={styles.updateColorButton}
+            onClick={() => this.changeColors()}
+          >
+            Update Color
+          </Button>
         </div>
       </div>
     );

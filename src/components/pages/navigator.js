@@ -9,7 +9,7 @@ export default class Navigator extends Component {
     super(props);
 
     this.state = {
-      tabIndex: 1
+      tabIndex: 0
     }
   }
 
