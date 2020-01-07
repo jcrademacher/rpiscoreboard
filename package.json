@@ -17,6 +17,7 @@
   "description": "\"web-app made using ReactJS for a homemade wireless backyard LED-powered ice rink scoreboard\"",
   "main": "src/main.js",
   "dependencies": {
+    "core-js": "^3.6.2",
     "css-loader": "^3.4.1",
     "react-tap-event-plugin": "^3.0.3",
     "style-loader": "^1.1.2"
