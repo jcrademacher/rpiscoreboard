@@ -11,7 +11,7 @@
     "react-dom": "^16.4.0",
     "react-onsenui": "^1.11.2",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.10.1"
   },
   "description": "\"web-app made using ReactJS for a homemade wireless backyard LED-powered ice rink scoreboard\"",
